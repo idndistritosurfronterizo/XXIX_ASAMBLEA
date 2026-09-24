@@ -149,7 +149,6 @@
                             <div class="w-full glass-card p-8 rounded-3xl glow-effect space-y-6 text-center">
                                 <h3 class="font-heading font-bold text-sm tracking-widest text-amber-300 uppercase">Convenciones</h3>
                                 <div class="grid grid-cols-1 gap-4">
-                                    <!-- DNI Convencion Button -->
                                     <button onclick="openConvention('dni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
@@ -163,7 +162,6 @@
                                         <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
                                     </button>
 
-                                    <!-- MNI Convencion Button -->
                                     <button onclick="openConvention('mni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
@@ -177,7 +175,6 @@
                                         <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
                                     </button>
 
-                                    <!-- JNI Convencion Button -->
                                     <button onclick="openConvention('jni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
@@ -262,15 +259,15 @@
                         </div>
                     </div>
 
-                    <!-- Convencion Reports & Upload -->
+                    <!-- Convencion Reports & Upload (Google Drive integration) -->
                     <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-6 space-y-6">
                         <div class="flex items-center justify-between">
                             <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
                                 <i class="fa-solid fa-file-arrow-down text-indigo-400"></i>
-                                <span>Informes y Descargas</span>
+                                <span>Informes y Descargas (Drive)</span>
                             </h3>
                             <button onclick="openUploadModal('convencion')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-all flex items-center space-x-1">
-                                <i class="fa-solid fa-upload"></i> <span>Subir Archivo</span>
+                                <i class="fa-solid fa-plus"></i> <span>Agregar Enlace PDF</span>
                             </button>
                         </div>
                         <div id="conv-reports-list" class="space-y-3">
@@ -290,7 +287,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Day 1 Card -->
                 <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                         <div class="flex items-center space-x-3">
@@ -330,7 +326,6 @@
                     </div>
                 </div>
 
-                <!-- Day 2 Card -->
                 <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
                     <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
                         <div class="flex items-center space-x-3">
@@ -372,64 +367,21 @@
             </div>
         </div>
 
-        <!-- VIEW: INFORMES PDF -->
+        <!-- VIEW: INFORMES PDF (Google Drive Integration) -->
         <div id="view-informes" class="page-view hidden space-y-8 max-w-4xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
                 <div>
                     <span class="text-indigo-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
                     <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Informes Descargables</h2>
-                    <p class="text-slate-400 text-sm">Descarga los informes financieros, reportes de superintendencia y guías.</p>
+                    <p class="text-slate-400 text-sm">Accede y descarga los informes financieros y ministeriales compartidos en Google Drive.</p>
                 </div>
                 <button onclick="openUploadModal('informes')" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-upload"></i> <span>Subir Nuevo Informe</span>
+                    <i class="fa-solid fa-plus"></i> <span>Agregar Enlace de Drive</span>
                 </button>
             </div>
 
             <div id="informes-list-container" class="grid grid-cols-1 gap-4">
-                <a href="#" onclick="showDownloadAlert('Informe Financiero Anual 2026.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Informe Financiero 2026</span>
-                            <span class="text-xs text-slate-400">PDF • Tesorería Distrital</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
-
-                <a href="#" onclick="showDownloadAlert('Informe de Superintendencia.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Informe del Superintendente Distrital</span>
-                            <span class="text-xs text-slate-400">PDF • Reporte Ministerial</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
-
-                <a href="#" onclick="showDownloadAlert('Programa Oficial Impresion.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Cuadernillo de Programa Oficial</span>
-                            <span class="text-xs text-slate-400">PDF • Guía de Delegados</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
+                <!-- Se cargará dinámicamente desde JavaScript / localStorage -->
             </div>
         </div>
 
@@ -460,73 +412,46 @@
                     <p class="text-slate-400 text-sm">Documentos oficiales, acuerdos y nombramientos aprobados durante la asamblea distrital.</p>
                 </div>
                 <button onclick="openUploadModal('resoluciones')" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-upload"></i> <span>Subir Resolución</span>
+                    <i class="fa-solid fa-plus"></i> <span>Agregar Resolución</span>
                 </button>
             </div>
 
             <div id="resoluciones-list-container" class="grid grid-cols-1 gap-4">
-                <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">Acuerdos y Resoluciones 2026</span>
-                            <span class="text-xs text-slate-400">PDF • Aprobado por la Asamblea</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('Acuerdos y Resoluciones 2026.pdf'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                </div>
-
-                <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">Actas Oficiales Distritales</span>
-                            <span class="text-xs text-slate-400">PDF • Registro Oficial</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('Actas Oficiales Distritales.pdf'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                </div>
+                <!-- Se cargará dinámicamente -->
             </div>
         </div>
 
     </main>
 
-    <!-- Generic Document Upload Modal -->
+    <!-- Modal para Agregar Enlace de Google Drive -->
     <div id="upload-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
         <div class="bg-slate-900 border border-amber-500/50 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6">
             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                    <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i>
-                    <span id="upload-modal-title">Subir Documento</span>
+                    <i class="fa-brands fa-google-drive text-amber-400"></i>
+                    <span id="upload-modal-title">Vincular Documento de Google Drive</span>
                 </h3>
                 <button onclick="closeUploadModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
-            <form id="upload-form" onsubmit="handleUploadDocument(event)" class="space-y-4">
+            <form id="upload-form" onsubmit="handleSaveDriveLink(event)" class="space-y-4">
                 <input type="hidden" id="upload-category" value="informes">
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Título del Documento</label>
-                    <input type="text" id="upload-doc-title" placeholder="Ej. Informe de Tesorería 2026" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                    <input type="text" id="upload-doc-title" placeholder="Ej. Informe Financiero 2026" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Descripción Breve o Categoría</label>
-                    <input type="text" id="upload-doc-desc" placeholder="Ej. PDF • Reporte Financiero" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Descripción corta (ej. Departamento / Tipo)</label>
+                    <input type="text" id="upload-doc-desc" placeholder="Ej. PDF • Tesorería Distrital" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Seleccionar Archivo (PDF)</label>
-                    <input type="file" id="upload-doc-file" accept=".pdf" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-400 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 focus:outline-none">
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Enlace Compartido de Google Drive</label>
+                    <input type="url" id="upload-doc-url" placeholder="https://drive.google.com/file/d/.../view?usp=sharing" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
+                    <p class="text-[11px] text-slate-400 mt-1">Asegúrate de que el archivo en Google Drive tenga permisos de "Cualquier persona con el enlace puede ver".</p>
                 </div>
                 <div class="flex justify-end space-x-3 pt-2">
                     <button type="button" onclick="closeUploadModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-medium transition-colors">Cancelar</button>
-                    <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-sm font-bold transition-colors">Subir y Guardar</button>
+                    <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-sm font-bold transition-colors">Guardar Enlace</button>
                 </div>
             </form>
         </div>
@@ -549,6 +474,133 @@
     </footer>
 
     <script>
+        // Data storage initialization (using localStorage so items persist)
+        let appData = JSON.parse(localStorage.getItem('nazareno_asamblea_data')) || {
+            informes: [
+                { title: "Informe Financiero 2026", desc: "PDF • Tesorería Distrital", url: "https://drive.google.com" },
+                { title: "Informe del Superintendente Distrital", desc: "PDF • Reporte Ministerial", url: "https://drive.google.com" }
+            ],
+            resoluciones: [
+                { title: "Acuerdos y Resoluciones 2026", desc: "PDF • Aprobado por la Asamblea", url: "https://drive.google.com" }
+            ],
+            dni: {
+                title: "Convención DNI",
+                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
+                logo: "dni-removebg-preview.png",
+                logoFallback: "DNI",
+                program: [
+                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
+                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
+                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
+                ],
+                reports: [
+                    { title: "Informe DNI 2026", desc: "PDF • 1.4 MB", url: "https://drive.google.com" }
+                ]
+            },
+            mni: {
+                title: "Convención MNI",
+                subtitle: "Misiones Nazarenas Internacionales",
+                logo: "MNI.png",
+                logoFallback: "MNI",
+                program: [
+                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
+                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
+                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
+                ],
+                reports: [
+                    { title: "Informe MNI Distrital", desc: "PDF • 2.1 MB", url: "https://drive.google.com" }
+                ]
+            },
+            jni: {
+                title: "Convención JNI",
+                subtitle: "Juventud Nazarena Internacional",
+                logo: "JNI.png",
+                logoFallback: "JNI",
+                program: [
+                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
+                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
+                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
+                ],
+                reports: [
+                    { title: "Informe JNI 2026", desc: "PDF • 1.8 MB", url: "https://drive.google.com" }
+                ]
+            }
+        };
+
+        function saveAppData() {
+            localStorage.setItem('nazareno_asamblea_data', JSON.stringify(appData));
+        }
+
+        // Render general lists on load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderInformes();
+            renderResoluciones();
+        });
+
+        function renderInformes() {
+            const container = document.getElementById('informes-list-container');
+            if(!container) return;
+            
+            if(appData.informes.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay informes disponibles todavía. Usa el botón superior para agregar uno.</div>`;
+                return;
+            }
+
+            container.innerHTML = appData.informes.map((item, index) => `
+                <div class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">${item.title}</span>
+                            <span class="text-xs text-slate-400">${item.desc}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <a href="${item.url}" target="_blank" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-colors flex items-center space-x-1 shadow-md">
+                            <i class="fa-solid fa-eye mr-1"></i> Ver / Descargar
+                        </a>
+                        <button onclick="deleteItem('informes', ${index})" class="p-2 text-slate-500 hover:text-red-400 transition-colors" title="Eliminar informe">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderResoluciones() {
+            const container = document.getElementById('resoluciones-list-container');
+            if(!container) return;
+
+            if(appData.resoluciones.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay resoluciones registradas.</div>`;
+                return;
+            }
+
+            container.innerHTML = appData.resoluciones.map((item, index) => `
+                <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between group">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">${item.title}</span>
+                            <span class="text-xs text-slate-400">${item.desc}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <a href="${item.url}" target="_blank" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-colors flex items-center space-x-1 shadow-md">
+                            <i class="fa-solid fa-eye mr-1"></i> Ver / Descargar
+                        </a>
+                        <button onclick="deleteItem('resoluciones', ${index})" class="p-2 text-slate-500 hover:text-red-400 transition-colors" title="Eliminar resolución">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Navigation View Switcher
         function switchPage(pageId) {
             document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
@@ -558,7 +610,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
-            // Update nav link highlights
             document.querySelectorAll('.nav-link').forEach(btn => {
                 if(btn.dataset.target === pageId) {
                     btn.classList.add('text-amber-300', 'font-semibold');
@@ -582,59 +633,11 @@
             if(mobileMenu) mobileMenu.classList.add('hidden');
         }
 
-        // Convention Data and Views
         let currentActiveConventionKey = 'dni';
-        const conventionData = {
-            dni: {
-                title: "Convención DNI",
-                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
-                logo: "dni-removebg-preview.png",
-                logoFallback: "DNI",
-                program: [
-                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
-                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
-                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
-                ],
-                reports: [
-                    { name: "Informe DNI 2026.pdf", size: "PDF • 1.4 MB" },
-                    { name: "Proyectos y Metas DNI.pdf", size: "PDF • 850 KB" }
-                ]
-            },
-            mni: {
-                title: "Convención MNI",
-                subtitle: "Misiones Nazarenas Internacionales",
-                logo: "MNI.png",
-                logoFallback: "MNI",
-                program: [
-                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
-                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
-                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
-                ],
-                reports: [
-                    { name: "Informe MNI Distrital.pdf", size: "PDF • 2.1 MB" },
-                    { name: "Guia Ofrendas MNI.pdf", size: "PDF • 950 KB" }
-                ]
-            },
-            jni: {
-                title: "Convención JNI",
-                subtitle: "Juventud Nazarena Internacional",
-                logo: "JNI.png",
-                logoFallback: "JNI",
-                program: [
-                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
-                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
-                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
-                ],
-                reports: [
-                    { name: "Informe JNI 2026.pdf", size: "PDF • 1.8 MB" },
-                    { name: "Plan de Trabajo JNI.pdf", size: "PDF • 1.2 MB" }
-                ]
-            }
-        };
 
         function openConvention(key) {
             currentActiveConventionKey = key;
-            const data = conventionData[key];
+            const data = appData[key];
             if(!data) return;
 
             document.getElementById('conv-title').innerText = data.title;
@@ -645,7 +648,6 @@
 
             renderConventionReports(key);
 
-            // Render program
             const progList = document.getElementById('conv-program-list');
             progList.innerHTML = data.program.map(item => `
                 <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
@@ -663,33 +665,46 @@
         }
 
         function renderConventionReports(key) {
-            const data = conventionData[key];
+            const data = appData[key];
             const repList = document.getElementById('conv-reports-list');
             if(!repList) return;
-            repList.innerHTML = data.reports.map(rep => `
-                <a href="#" onclick="showDownloadAlert('${rep.name}'); return false;" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 transition-all group">
+
+            if(!data.reports || data.reports.length === 0) {
+                repList.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">No hay informes agregados para esta convención.</p>`;
+                return;
+            }
+
+            repList.innerHTML = data.reports.map((rep, index) => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 transition-all group">
                     <div class="flex items-center space-x-3">
                         <i class="fa-solid fa-file-pdf text-red-400 text-lg"></i>
                         <div class="text-left">
-                            <span class="block text-sm font-semibold text-white group-hover:text-amber-300 transition-colors">${rep.name}</span>
-                            <span class="text-xs text-slate-400">${rep.size}</span>
+                            <span class="block text-sm font-semibold text-white group-hover:text-amber-300 transition-colors">${rep.title}</span>
+                            <span class="text-xs text-slate-400">${rep.desc}</span>
                         </div>
                     </div>
-                    <i class="fa-solid fa-download text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                </a>
+                    <div class="flex items-center space-x-2">
+                        <a href="${rep.url}" target="_blank" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-bold transition-colors flex items-center space-x-1">
+                            <i class="fa-solid fa-eye mr-1"></i> Ver
+                        </a>
+                        <button onclick="deleteConventionReport('${key}', ${index})" class="p-1.5 text-slate-500 hover:text-red-400 transition-colors" title="Eliminar">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                </div>
             `).join('');
         }
 
-        // Document Upload Modal Management
+        // Upload Modal Management
         function openUploadModal(category) {
             const modal = document.getElementById('upload-modal');
             const catInput = document.getElementById('upload-category');
             const titleEl = document.getElementById('upload-modal-title');
             if(modal && catInput) {
                 catInput.value = category;
-                if(category === 'informes') titleEl.innerText = 'Subir Nuevo Informe de Asamblea';
-                else if(category === 'resoluciones') titleEl.innerText = 'Subir Nueva Resolución Oficial';
-                else if(category === 'convencion') titleEl.innerText = `Subir Archivo para ${conventionData[currentActiveConventionKey].title}`;
+                if(category === 'informes') titleEl.innerText = 'Vincular Informe desde Google Drive';
+                else if(category === 'resoluciones') titleEl.innerText = 'Vincular Resolución desde Google Drive';
+                else if(category === 'convencion') titleEl.innerText = `Agregar Enlace a ${appData[currentActiveConventionKey].title}`;
                 modal.classList.remove('hidden');
             }
         }
@@ -702,71 +717,51 @@
             }
         }
 
-        function handleUploadDocument(event) {
+        function handleSaveDriveLink(event) {
             event.preventDefault();
             const category = document.getElementById('upload-category').value;
             const docTitle = document.getElementById('upload-doc-title').value;
             const docDesc = document.getElementById('upload-doc-desc').value;
-            const fileInput = document.getElementById('upload-doc-file');
-            const fileName = fileInput.files[0] ? fileInput.files[0].name : `${docTitle}.pdf`;
+            const docUrl = document.getElementById('upload-doc-url').value;
+
+            const newEntry = { title: docTitle, desc: docDesc, url: docUrl };
 
             if(category === 'informes') {
-                const container = document.getElementById('informes-list-container');
-                const newCard = document.createElement('a');
-                newCard.href = '#';
-                newCard.onclick = () => { showDownloadAlert(fileName); return false; };
-                newCard.className = 'flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg';
-                newCard.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">${docTitle}</span>
-                            <span class="text-xs text-slate-400">PDF • ${docDesc}</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                `;
-                container.prepend(newCard);
+                appData.informes.unshift(newEntry);
+                renderInformes();
             } else if(category === 'resoluciones') {
-                const container = document.getElementById('resoluciones-list-container');
-                const newCard = document.createElement('div');
-                newCard.className = 'p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between';
-                newCard.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">${docTitle}</span>
-                            <span class="text-xs text-slate-400">PDF • ${docDesc}</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('${fileName}'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                `;
-                container.prepend(newCard);
+                appData.resoluciones.unshift(newEntry);
+                renderResoluciones();
             } else if(category === 'convencion') {
-                if(!conventionData[currentActiveConventionKey].reports) {
-                    conventionData[currentActiveConventionKey].reports = [];
+                if(!appData[currentActiveConventionKey].reports) {
+                    appData[currentActiveConventionKey].reports = [];
                 }
-                conventionData[currentActiveConventionKey].reports.push({
-                    name: fileName,
-                    size: `PDF • ${docDesc}`
-                });
+                appData[currentActiveConventionKey].reports.unshift(newEntry);
                 renderConventionReports(currentActiveConventionKey);
             }
 
+            saveAppData();
             closeUploadModal();
-            showToast(`¡Documento "${docTitle}" subido exitosamente!`);
+            showToast(`¡Documento "${docTitle}" vinculado con éxito!`);
         }
 
-        function showDownloadAlert(fileName) {
-            showToast(`Iniciando descarga de: ${fileName}`);
+        function deleteItem(category, index) {
+            if(confirm("¿Estás seguro de eliminar este enlace?")) {
+                appData[category].splice(index, 1);
+                saveAppData();
+                if(category === 'informes') renderInformes();
+                if(category === 'resoluciones') renderResoluciones();
+                showToast("Documento eliminado correctamente.");
+            }
+        }
+
+        function deleteConventionReport(key, index) {
+            if(confirm("¿Estás seguro de eliminar este archivo de la convención?")) {
+                appData[key].reports.splice(index, 1);
+                saveAppData();
+                renderConventionReports(key);
+                showToast("Documento eliminado correctamente.");
+            }
         }
 
         function showToast(message) {
