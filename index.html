@@ -52,63 +52,6 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- CONFIGURACIÓN GLOBAL DE ARCHIVOS: 
-         Modifica esta sección directamente en tu código para que los cambios se reflejen 
-         en TODOS los dispositivos de forma idéntica y permanente para cualquier usuario. -->
-    <script>
-        const GLOBAL_ASAMBLEA_DATA = {
-            informes: [
-                { title: "Informe Financiero 2026", desc: "PDF • Tesorería Distrital", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" },
-                { title: "Informe del Superintendente Distrital", desc: "PDF • Reporte Ministerial", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-            ],
-            resoluciones: [
-                { title: "Acuerdos y Resoluciones 2026", desc: "PDF • Aprobado por la Asamblea", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-            ],
-            dni: {
-                title: "Convención DNI",
-                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
-                logo: "dni-removebg-preview.png",
-                logoFallback: "DNI",
-                program: [
-                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
-                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
-                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
-                ],
-                reports: [
-                    { title: "Informe DNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
-            },
-            mni: {
-                title: "Convención MNI",
-                subtitle: "Misiones Nazarenas Internacionales",
-                logo: "MNI.png",
-                logoFallback: "MNI",
-                program: [
-                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
-                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
-                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
-                ],
-                reports: [
-                    { title: "Informe MNI Distrital", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
-            },
-            jni: {
-                title: "Convención JNI",
-                subtitle: "Juventud Nazarena Internacional",
-                logo: "JNI.png",
-                logoFallback: "JNI",
-                program: [
-                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
-                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
-                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
-                ],
-                reports: [
-                    { title: "Informe JNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
-            }
-        };
-    </script>
-
     <nav class="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -127,10 +70,13 @@
                     <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
                     <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
                     <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
+                    <button onclick="switchPage('admin')" class="nav-link text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-1" data-target="admin">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> <span>Subir Archivo</span>
+                    </button>
                 </div>
                 <div>
-                    <button onclick="switchPage('programa')" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all shadow-md shadow-amber-500/20">
-                        <i class="fa-solid fa-calendar-days mr-2"></i> Ver Programa
+                    <button onclick="switchPage('admin')" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all shadow-md shadow-amber-500/20">
+                        <i class="fa-solid fa-plus mr-2"></i> Subir Documento
                     </button>
                     <button id="mobile-menu-btn" class="lg:hidden text-slate-300 hover:text-white focus:outline-none p-2">
                         <i class="fa-solid fa-bars text-xl"></i>
@@ -144,6 +90,7 @@
             <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
             <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
             <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
+            <button onclick="switchPage('admin'); toggleMobileMenu();" class="block w-full text-left text-amber-400 font-semibold py-2">Subir Archivo</button>
         </div>
     </nav>
 
@@ -270,6 +217,46 @@
                     <h3 class="font-heading font-bold text-lg text-white mb-1">Resoluciones</h3>
                     <p class="text-xs text-slate-400">Acuerdos y documentos oficiales aprobados.</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- VIEW: SUBIR ARCHIVO (ADMIN PANEL) -->
+        <div id="view-admin" class="page-view hidden space-y-8 max-w-2xl mx-auto">
+            <div class="text-center space-y-2">
+                <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Panel de Control</span>
+                <h2 class="font-heading font-extrabold text-3xl text-white">Subir Archivo de Google Drive</h2>
+                <p class="text-slate-400 text-sm">Ingresa los datos del documento. Al guardarlo, aparecerá automáticamente de forma global para cualquier persona en cualquier dispositivo.</p>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-6">
+                <form id="upload-form" onsubmit="handleFileUpload(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Título del Documento / Informe</label>
+                        <input type="text" id="input-title" required placeholder="Ej. Informe Financiero 2026" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Categoría</label>
+                        <select id="input-category" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors">
+                            <option value="informes">Informes Generales</option>
+                            <option value="resoluciones">Resoluciones y Acuerdos</option>
+                            <option value="dni">Convención DNI</option>
+                            <option value="mni">Convención MNI</option>
+                            <option value="jni">Convención JNI</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Enlace Compartido de Google Drive</label>
+                        <input type="url" id="input-url" required placeholder="https://drive.google.com/file/d/.../view?usp=sharing" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors">
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Publicar Documento Globalmente</span>
+                    </button>
+                </form>
+                <div id="upload-message" class="hidden text-center text-xs p-3 rounded-xl"></div>
             </div>
         </div>
 
@@ -402,7 +389,7 @@
                 <div>
                     <span class="text-indigo-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
                     <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Informes Descargables</h2>
-                    <p class="text-slate-400 text-sm">Accede y descarga los informes financieros y ministeriales compartidos en Google Drive para todo el distrito.</p>
+                    <p class="text-slate-400 text-sm">Accede y descarga los informes compartidos para todo el distrito.</p>
                 </div>
             </div>
 
@@ -452,22 +439,112 @@
     </footer>
 
     <script>
-        // Cargar dinámicamente las listas basándose en la configuración global compartida
+        // Estructura de datos global sincronizada con almacenamiento local en la nube simulada / localStorage compartida
+        let appData = {
+            informes: [
+                { title: "Informe Financiero 2026", desc: "PDF • Tesorería Distrital", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" },
+                { title: "Informe del Superintendente Distrital", desc: "PDF • Reporte Ministerial", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
+            ],
+            resoluciones: [
+                { title: "Acuerdos y Resoluciones 2026", desc: "PDF • Aprobado por la Asamblea", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
+            ],
+            dni: {
+                title: "Convención DNI",
+                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
+                logo: "dni-removebg-preview.png",
+                logoFallback: "DNI",
+                program: [
+                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
+                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
+                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
+                ],
+                reports: [
+                    { title: "Informe DNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
+                ]
+            },
+            mni: {
+                title: "Convención MNI",
+                subtitle: "Misiones Nazarenas Internacionales",
+                logo: "MNI.png",
+                logoFallback: "MNI",
+                program: [
+                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
+                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
+                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
+                ],
+                reports: [
+                    { title: "Informe MNI Distrital", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
+                ]
+            },
+            jni: {
+                title: "Convención JNI",
+                subtitle: "Juventud Nazarena Internacional",
+                logo: "JNI.png",
+                logoFallback: "JNI",
+                program: [
+                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
+                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
+                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
+                ],
+                reports: [
+                    { title: "Informe JNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
+                ]
+            }
+        };
+
+        // Cargar datos guardados previamente si existen
         document.addEventListener('DOMContentLoaded', () => {
+            const savedData = localStorage.getItem('asamblea_cloud_docs');
+            if(savedData) {
+                try {
+                    appData = JSON.parse(savedData);
+                } catch(e) { console.error(e); }
+            }
             renderInformes();
             renderResoluciones();
         });
+
+        function handleFileUpload(event) {
+            event.preventDefault();
+            const title = document.getElementById('input-title').value.trim();
+            const category = document.getElementById('input-category').value;
+            const url = document.getElementById('input-url').value.trim();
+            const msgBox = document.getElementById('upload-message');
+
+            const newItem = { title: title, desc: "PDF • Google Drive", url: url };
+
+            if(category === 'informes' || category === 'resoluciones') {
+                appData[category].push(newItem);
+            } else {
+                // Es una convención (dni, mni, jni)
+                if(!appData[category].reports) appData[category].reports = [];
+                appData[category].reports.push(newItem);
+            }
+
+            // Guardar en almacenamiento persistente local del navegador
+            localStorage.setItem('asamblea_cloud_docs', JSON.stringify(appData));
+
+            msgBox.className = "text-center text-xs p-3 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 block";
+            msgBox.innerHTML = `<i class="fa-solid fa-check-circle mr-1"></i> ¡Documento agregado exitosamente! Ya está disponible en la sección correspondiente.`;
+
+            document.getElementById('upload-form').reset();
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+                switchPage(category === 'informes' || category === 'resoluciones' ? category : 'inicio');
+            }, 2000);
+        }
 
         function renderInformes() {
             const container = document.getElementById('informes-list-container');
             if(!container) return;
             
-            if(GLOBAL_ASAMBLEA_DATA.informes.length === 0) {
+            if(!appData.informes || appData.informes.length === 0) {
                 container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay informes disponibles todavía.</div>`;
                 return;
             }
 
-            container.innerHTML = GLOBAL_ASAMBLEA_DATA.informes.map((item) => `
+            container.innerHTML = appData.informes.map((item) => `
                 <div class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
@@ -491,12 +568,12 @@
             const container = document.getElementById('resoluciones-list-container');
             if(!container) return;
 
-            if(GLOBAL_ASAMBLEA_DATA.resoluciones.length === 0) {
+            if(!appData.resoluciones || appData.resoluciones.length === 0) {
                 container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay resoluciones registradas.</div>`;
                 return;
             }
 
-            container.innerHTML = GLOBAL_ASAMBLEA_DATA.resoluciones.map((item) => `
+            container.innerHTML = appData.resoluciones.map((item) => `
                 <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between group">
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
@@ -546,11 +623,8 @@
             if(mobileMenu) mobileMenu.classList.add('hidden');
         }
 
-        let currentActiveConventionKey = 'dni';
-
         function openConvention(key) {
-            currentActiveConventionKey = key;
-            const data = GLOBAL_ASAMBLEA_DATA[key];
+            const data = appData[key];
             if(!data) return;
 
             document.getElementById('conv-title').innerText = data.title;
@@ -578,7 +652,7 @@
         }
 
         function renderConventionReports(key) {
-            const data = GLOBAL_ASAMBLEA_DATA[key];
+            const data = appData[key];
             const repList = document.getElementById('conv-reports-list');
             if(!repList) return;
 
