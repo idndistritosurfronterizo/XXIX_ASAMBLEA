@@ -1,961 +1,386 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XXIX Asamblea - Distrito Sur Fronterizo</title>
-    <!-- Tailwind CSS for modern, responsive utility-first styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for modern icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter and Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#4f46e5',
-                            600: '#4338ca',
-                            900: '#1e1b4b',
-                            dark: '#0f172a',
-                            gold: '#fbbf24',
-                            goldlight: '#fef3c7',
-                            golddark: '#d97706'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+        :root {
+            --primary-color: #0b2545;
+            --secondary-color: #134074;
+            --accent-gold: #ffd700;
+            --accent-glow: rgba(255, 215, 0, 0.7);
+            --bg-light: #f8f9fa;
+            --text-dark: #212529;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .glow-effect {
-            box-shadow: 0 0 25px -5px rgba(79, 70, 229, 0.4);
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-gold);
+            position: relative;
         }
-        .gold-glow {
-            color: #fde047;
-            text-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 0 40px rgba(234, 179, 8, 0.3), 0 0 60px rgba(251, 191, 36, 0.2);
-            background: linear-gradient(180deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 70px;
+            height: 70px;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Estilo de letras con color dorado y efecto de luz */
+        header h1, header h2 {
+            margin: 0;
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow), 0 0 30px var(--accent-glow);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        /* Secciones de Convenciones (Logotipos) */
+        .conventions-section {
+            margin: 2.5rem 0;
+        }
+
+        .conventions-section h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .conventions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .convention-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .convention-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .convention-card img {
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Secciones principales */
+        .main-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .section-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        /* Módulos de carga de archivos */
+        .upload-box {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .file-list li {
+            background: white;
+            padding: 6px 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* Calendario Sincronizado de Google */
+        .calendar-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .calendar-responsive {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin-top: 1rem;
+        }
+
+        .calendar-responsive iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 3rem;
+            border-top: 4px solid var(--accent-gold);
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+<body>
 
-    <nav class="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('inicio')">
-                    <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center p-1 shadow-lg">
-                        <img src="NAZ-removebg-preview.png" alt="Logo Nazareno" class="w-full h-full object-contain filter brightness-125" onerror="this.src='https://placehold.co/100x100/1e1b4b/ffffff?text=NAZ'">
-                    </div>
-                    <div>
-                        <span class="block font-heading font-bold text-lg text-white leading-tight">Distrito Sur Fronterizo</span>
-                        <span class="block text-xs text-amber-400 font-medium tracking-wider uppercase">Iglesia del Nazareno</span>
-                    </div>
-                </div>
-                <!-- Desktop Nav Links -->
-                <div class="hidden lg:flex items-center space-x-6 font-medium text-sm">
-                    <button onclick="switchPage('inicio')" class="nav-link text-amber-300 font-semibold transition-colors" data-target="inicio">Inicio</button>
-                    <button onclick="switchPage('programa')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="programa">Programa</button>
-                    <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
-                    <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
-                    <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
-                </div>
-                <div>
-                    <button onclick="switchPage('programa')" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all shadow-md shadow-amber-500/20">
-                        <i class="fa-solid fa-calendar-days mr-2"></i> Ver Programa
-                    </button>
-                    <button id="mobile-menu-btn" class="lg:hidden text-slate-300 hover:text-white focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
+<header>
+    <div class="logo-container">
+        <!-- Logo de la Iglesia del Nazareno -->
+        <img src="NAZ-removebg-preview.png" alt="Logo Iglesia del Nazareno">
+    </div>
+    <h1>XXIX ASAMBLEA</h1>
+    <h2>DISTRITO SUR FRONTERIZO</h2>
+    <p>Unidos en fe, visión y propósito para inspirar a las nuevas generaciones.</p>
+</header>
+
+<div class="container">
+
+    <!-- Tarjeta de Bienvenida y Fechas -->
+    <div class="welcome-card">
+        <h3>Bienvenida a la Asamblea Distrital</h3>
+        <p><strong>Fechas del evento:</strong> 23 y 24 de Noviembre de 2026</p>
+        <p><strong>Lugar:</strong> C.C.R.N. (Centro de Convenciones y Recreaciones del Nazareno)</p>
+    </div>
+
+    <!-- Sección de Convenciones con Logotipos -->
+    <div class="conventions-section">
+        <h3>Convenciones</h3>
+        <div class="conventions-grid">
+            <div class="convention-card">
+                <img src="dni-removebg-preview.png" alt="Logo DNI">
+                <h4>DNI</h4>
+                <p>Discipulado Nazareno Internacional</p>
+                <button class="btn" onclick="openSection('dni')">Ver Convención</button>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 bg-slate-900 border-b border-slate-800">
-            <button onclick="switchPage('inicio'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Inicio</button>
-            <button onclick="switchPage('programa'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Programa</button>
-            <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
-            <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
-            <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
-        </div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-        <!-- VIEW: INICIO -->
-        <div id="view-inicio" class="page-view space-y-20">
-            <header class="relative hero-gradient overflow-hidden py-16 lg:py-24 rounded-3xl border border-slate-800 shadow-2xl">
-                <div class="absolute -top-40 -left-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute top-1/2 -right-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div class="lg:col-span-7 text-center lg:text-left space-y-6">
-                            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wider uppercase">
-                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                                <span>Evento Oficial Distrital</span>
-                            </div>
-                            <h1 class="font-heading font-black text-4xl sm:text-6xl tracking-tight leading-none gold-glow">
-                                XXIX ASAMBLEA
-                            </h1>
-                            <p class="font-heading font-bold text-xl sm:text-2xl text-amber-200/90 tracking-wide gold-glow">
-                                DISTRITO SUR FRONTERIZO
-                            </p>
-                            <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
-                                Unidos en fe, visión y propósito para inspirar a las nuevas generaciones.
-                            </p>
-                            
-                            <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                                <div class="flex items-center space-x-3 bg-slate-900/90 border border-slate-800 px-4 py-3 rounded-2xl">
-                                    <div class="text-amber-400 text-xl"><i class="fa-solid fa-calendar-days"></i></div>
-                                    <div class="text-left">
-                                        <span class="block text-xs text-slate-400 uppercase font-semibold">Fechas</span>
-                                        <span class="text-sm font-bold text-white">23 y 24 Noviembre, 2026</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-3 bg-slate-900/90 border border-slate-800 px-4 py-3 rounded-2xl">
-                                    <div class="text-amber-400 text-xl"><i class="fa-solid fa-location-dot"></i></div>
-                                    <div class="text-left">
-                                        <span class="block text-xs text-slate-400 uppercase font-semibold">Lugar</span>
-                                        <span class="text-sm font-bold text-white">C.C.R.N.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Convenciones / Departamentos -->
-                        <div class="lg:col-span-5 flex flex-col items-center justify-center">
-                            <div class="w-full glass-card p-8 rounded-3xl glow-effect space-y-6 text-center">
-                                <h3 class="font-heading font-bold text-sm tracking-widest text-amber-300 uppercase">Convenciones</h3>
-                                <div class="grid grid-cols-1 gap-4">
-                                    <!-- DNI Convencion Button -->
-                                    <button onclick="openConvention('dni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
-                                                <img src="dni-removebg-preview.png" alt="DNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/4f46e5/ffffff?text=DNI'">
-                                            </div>
-                                            <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">DNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
-                                            </div>
-                                        </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
-
-                                    <!-- MNI Convencion Button -->
-                                    <button onclick="openConvention('mni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
-                                                <img src="MNI.png" alt="MNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/06b6d4/ffffff?text=MNI'">
-                                            </div>
-                                            <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">MNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
-                                            </div>
-                                        </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
-
-                                    <!-- JNI Convencion Button -->
-                                    <button onclick="openConvention('jni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
-                                                <img src="JNI.png" alt="JNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/ec4899/ffffff?text=JNI'">
-                                            </div>
-                                            <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">JNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
-                                            </div>
-                                        </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Quick Access Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div onclick="switchPage('programa')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-calendar-check"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-lg text-white mb-1">Programa Oficial</h3>
-                    <p class="text-xs text-slate-400">Consulta los horarios y actividades de la asamblea.</p>
-                </div>
-                <div onclick="switchPage('informes')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-file-pdf"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-lg text-white mb-1">Informes PDF</h3>
-                    <p class="text-xs text-slate-400">Descarga los reportes ministeriales y financieros.</p>
-                </div>
-                <div onclick="switchPage('calendario')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-calendar-days"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-lg text-white mb-1">Calendario 2027</h3>
-                    <p class="text-xs text-slate-400">Planeación anual y creación de actividades.</p>
-                </div>
-                <div onclick="switchPage('resoluciones')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
-                    <div class="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-scale-balanced"></i>
-                    </div>
-                    <h3 class="font-heading font-bold text-lg text-white mb-1">Resoluciones</h3>
-                    <p class="text-xs text-slate-400">Acuerdos y documentos oficiales aprobados.</p>
-                </div>
+            <div class="convention-card">
+                <img src="MNI.png" alt="Logo MNI">
+                <h4>MNI</h4>
+                <p>Misiones Nazarenas Internacionales</p>
+                <button class="btn" onclick="openSection('mni')">Ver Convención</button>
             </div>
-        </div>
-
-        <!-- VIEW: CONVENCION DETALLE (DNI, MNI, JNI) -->
-        <div id="view-convencion" class="page-view hidden space-y-8">
-            <div class="flex items-center justify-between">
-                <button onclick="switchPage('inicio')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-sm font-medium transition-colors flex items-center space-x-2">
-                    <i class="fa-solid fa-arrow-left"></i> <span>Volver al Inicio</span>
-                </button>
+            <div class="convention-card">
+                <img src="JNI.png" alt="Logo JNI">
+                <h4>JNI</h4>
+                <p>Juventud Nazarena Internacional</p>
+                <button class="btn" onclick="openSection('jni')">Ver Convención</button>
             </div>
-
-            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8">
-                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-800">
-                    <div id="conv-logo-box" class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shadow-lg">
-                        <!-- Dynamic Logo -->
-                    </div>
-                    <div class="text-center sm:text-left">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Convención Distrital Oficial</span>
-                        <h2 id="conv-title" class="font-heading font-black text-3xl sm:text-4xl text-white mt-1">Convención</h2>
-                        <p id="conv-subtitle" class="text-slate-400 text-sm mt-1">Programa especial e informes específicos de la convención.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Convencion Program -->
-                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-6 space-y-4">
-                        <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-list-check text-amber-400"></i>
-                            <span>Programa de la Convención</span>
-                        </h3>
-                        <div id="conv-program-list" class="space-y-3">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-
-                    <!-- Convencion Reports & Upload -->
-                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-6 space-y-6">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                                <i class="fa-solid fa-file-arrow-down text-indigo-400"></i>
-                                <span>Informes y Descargas</span>
-                            </h3>
-                            <button onclick="openUploadModal('convencion')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold transition-all flex items-center space-x-1">
-                                <i class="fa-solid fa-upload"></i> <span>Subir Archivo</span>
-                            </button>
-                        </div>
-                        <div id="conv-reports-list" class="space-y-3">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW: PROGRAMA ASAMBLEA -->
-        <div id="view-programa" class="page-view hidden space-y-8">
-            <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Agenda Oficial</span>
-                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Programa de la Asamblea</h2>
-                <p class="text-slate-400">Actividades programadas para los días de asamblea en el Distrito Sur Fronterizo.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Day 1 Card -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-heading font-bold text-lg">
-                                23
-                            </div>
-                            <div>
-                                <span class="block text-xs font-semibold text-amber-400 uppercase tracking-wider">Día Uno</span>
-                                <h3 class="font-heading font-bold text-xl text-white">Lunes, 23 Noviembre 2026</h3>
-                            </div>
-                        </div>
-                        <span class="px-3 py-1 bg-amber-600/20 text-amber-300 text-xs rounded-full font-medium border border-amber-500/30">Inauguración</span>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">08:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Registro e Inscripciones</h4>
-                                <p class="text-xs text-slate-400">Recepción de delegados y entrega de acreditaciones en C.C.R.N.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">10:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Sesión Plenaria de Apertura</h4>
-                                <p class="text-xs text-slate-400">Devocional inaugural, constitución de la asamblea y mensaje principal.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">15:30 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Informes del Superintendente y Distritales</h4>
-                                <p class="text-xs text-slate-400">Presentación de reportes ministeriales y estadísticas generales.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Day 2 Card -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-heading font-bold text-lg">
-                                24
-                            </div>
-                            <div>
-                                <span class="block text-xs font-semibold text-cyan-400 uppercase tracking-wider">Día Dos</span>
-                                <h3 class="font-heading font-bold text-xl text-white">Martes, 24 Noviembre 2026</h3>
-                            </div>
-                        </div>
-                        <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 text-xs rounded-full font-medium border border-cyan-500/30">Clausura</span>
-                    </div>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">09:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Devocional Matutino</h4>
-                                <p class="text-xs text-slate-400">Momento de adoración espiritual y palabra de aliento ministerial.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">11:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Elecciones y Propuestas</h4>
-                                <p class="text-xs text-slate-400">Elección de mesas directivas, comités y votación de iniciativas.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">16:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Servicio de Clausura y Ordenación</h4>
-                                <p class="text-xs text-slate-400">Ordenación de ministros y cierre oficial de la XXIX asamblea.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW: INFORMES PDF -->
-        <div id="view-informes" class="page-view hidden space-y-8 max-w-4xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-                <div>
-                    <span class="text-indigo-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
-                    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Informes Descargables</h2>
-                    <p class="text-slate-400 text-sm">Descarga los informes financieros, reportes de superintendencia y guías.</p>
-                </div>
-                <button onclick="openUploadModal('informes')" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-upload"></i> <span>Subir Nuevo Informe</span>
-                </button>
-            </div>
-
-            <div id="informes-list-container" class="grid grid-cols-1 gap-4">
-                <a href="#" onclick="showDownloadAlert('Informe Financiero Anual 2026.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Informe Financiero 2026</span>
-                            <span class="text-xs text-slate-400">PDF • Tesorería Distrital</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
-
-                <a href="#" onclick="showDownloadAlert('Informe de Superintendencia.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Informe del Superintendente Distrital</span>
-                            <span class="text-xs text-slate-400">PDF • Reporte Ministerial</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
-
-                <a href="#" onclick="showDownloadAlert('Programa Oficial Impresion.pdf'); return false;" class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">Cuadernillo de Programa Oficial</span>
-                            <span class="text-xs text-slate-400">PDF • Guía de Delegados</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                </a>
-            </div>
-        </div>
-
-        <!-- VIEW: CALENDARIO Y ADMINISTRADOR DE ACTIVIDADES -->
-        <div id="view-calendario" class="page-view hidden space-y-8 max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div>
-                    <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Planeación Anual</span>
-                    <h2 class="font-heading font-extrabold text-3xl text-white">Calendario de Actividades 2027</h2>
-                </div>
-                <button onclick="toggleEventModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-plus"></i> <span>Crear Actividad</span>
-                </button>
-            </div>
-
-            <!-- Month Selector Tabs -->
-            <div class="flex flex-wrap gap-2 justify-center" id="calendar-tabs">
-                <!-- Populated by JS -->
-            </div>
-
-            <!-- Calendar Card -->
-            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                    <h3 id="calendar-month-title" class="font-heading font-bold text-2xl text-white">Enero 2027</h3>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="prevMonth()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-semibold transition-colors"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button onclick="nextMonth()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-semibold transition-colors"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-7 gap-2 text-center font-semibold text-xs sm:text-sm text-slate-400 mb-2">
-                    <span class="text-red-400">Dom</span>
-                    <span>Lun</span>
-                    <span>Mar</span>
-                    <span>Mié</span>
-                    <span>Jue</span>
-                    <span>Vie</span>
-                    <span class="text-cyan-400">Sáb</span>
-                </div>
-
-                <div id="calendar-grid" class="grid grid-cols-7 gap-2 text-center text-sm">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <!-- Event Creation Modal (Embedded) -->
-            <div id="event-modal" class="hidden bg-slate-900/95 border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-                <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                    <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                        <i class="fa-solid fa-calendar-plus text-amber-400"></i>
-                        <span>Registrar Nueva Actividad en el Calendario</span>
-                    </h3>
-                    <button onclick="toggleEventModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-                </div>
-
-                <form id="new-event-form" onsubmit="handleCreateEvent(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Mes</label>
-                        <select id="event-month" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                            <!-- Options generated by JS -->
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Día del Mes</label>
-                        <input type="number" id="event-day" min="1" max="31" value="1" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Nombre de la Actividad</label>
-                        <input type="text" id="event-title" placeholder="Ej. Reunión Distrital de Pastores" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                    </div>
-                    <div class="sm:col-span-2 flex justify-end space-x-3 pt-2">
-                        <button type="button" onclick="toggleEventModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-medium transition-colors">Cancelar</button>
-                        <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-sm font-bold transition-colors">Guardar Actividad</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- VIEW: RESOLUCIONES -->
-        <div id="view-resoluciones" class="page-view hidden space-y-8 max-w-4xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-                <div>
-                    <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
-                    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Resoluciones de la Asamblea</h2>
-                    <p class="text-slate-400 text-sm">Documentos oficiales, acuerdos y nombramientos aprobados durante la asamblea distrital.</p>
-                </div>
-                <button onclick="openUploadModal('resoluciones')" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 rounded-xl text-sm font-bold shadow-lg transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-upload"></i> <span>Subir Resolución</span>
-                </button>
-            </div>
-
-            <div id="resoluciones-list-container" class="grid grid-cols-1 gap-4">
-                <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">Acuerdos y Resoluciones 2026</span>
-                            <span class="text-xs text-slate-400">PDF • Aprobado por la Asamblea</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('Acuerdos y Resoluciones 2026.pdf'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                </div>
-
-                <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">Actas Oficiales Distritales</span>
-                            <span class="text-xs text-slate-400">PDF • Registro Oficial</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('Actas Oficiales Distritales.pdf'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Generic Document Upload Modal -->
-    <div id="upload-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
-        <div class="bg-slate-900 border border-amber-500/50 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-6">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                    <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i>
-                    <span id="upload-modal-title">Subir Documento</span>
-                </h3>
-                <button onclick="closeUploadModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-
-            <form id="upload-form" onsubmit="handleUploadDocument(event)" class="space-y-4">
-                <input type="hidden" id="upload-category" value="informes">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Título del Documento</label>
-                    <input type="text" id="upload-doc-title" placeholder="Ej. Informe de Tesorería 2026" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Descripción Breve o Categoría</label>
-                    <input type="text" id="upload-doc-desc" placeholder="Ej. PDF • Reporte Financiero" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Seleccionar Archivo (PDF)</label>
-                    <input type="file" id="upload-doc-file" accept=".pdf" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-400 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 focus:outline-none">
-                </div>
-                <div class="flex justify-end space-x-3 pt-2">
-                    <button type="button" onclick="closeUploadModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-sm font-medium transition-colors">Cancelar</button>
-                    <button type="submit" class="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-sm font-bold transition-colors">Subir y Guardar</button>
-                </div>
-            </form>
         </div>
     </div>
 
-    <!-- Custom Notification Toast -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 border border-amber-500/50 px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 text-white text-sm">
-        <i class="fa-solid fa-circle-check text-amber-400 text-lg"></i>
-        <span id="toast-message">Notificación</span>
-    </div>
-
-    <footer class="bg-slate-950 border-t border-slate-900 py-12 mt-24 text-slate-400 text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <div>
-                <p class="font-heading font-bold text-white text-base">XXIX Asamblea - Distrito Sur Fronterizo</p>
-                <p class="text-xs text-slate-500 mt-1">Iglesia del Nazareno • C.C.R.N.</p>
-            </div>
-            <p class="text-xs text-slate-600">© 2026 Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Navigation View Switcher
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            const targetView = document.getElementById(`view-${pageId}`);
-            if(targetView) {
-                targetView.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            
-            // Update nav link highlights
-            document.querySelectorAll('.nav-link').forEach(btn => {
-                if(btn.dataset.target === pageId) {
-                    btn.classList.add('text-amber-300', 'font-semibold');
-                    btn.classList.remove('text-slate-300');
-                } else {
-                    btn.classList.remove('text-amber-300', 'font-semibold');
-                    btn.classList.add('text-slate-300');
-                }
-            });
-        }
-
-        // Toggle mobile menu
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if(menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-        function toggleMobileMenu() {
-            if(mobileMenu) mobileMenu.classList.add('hidden');
-        }
-
-        // Convention Data and Views
-        let currentActiveConventionKey = 'dni';
-        const conventionData = {
-            dni: {
-                title: "Convención DNI",
-                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
-                logo: "dni-removebg-preview.png",
-                logoFallback: "DNI",
-                program: [
-                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
-                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
-                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
-                ],
-                reports: [
-                    { name: "Informe DNI 2026.pdf", size: "PDF • 1.4 MB" },
-                    { name: "Proyectos y Metas DNI.pdf", size: "PDF • 850 KB" }
-                ]
-            },
-            mni: {
-                title: "Convención MNI",
-                subtitle: "Misiones Nazarenas Internacionales",
-                logo: "MNI.png",
-                logoFallback: "MNI",
-                program: [
-                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
-                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
-                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
-                ],
-                reports: [
-                    { name: "Informe MNI Distrital.pdf", size: "PDF • 2.1 MB" },
-                    { name: "Guia Ofrendas MNI.pdf", size: "PDF • 950 KB" }
-                ]
-            },
-            jni: {
-                title: "Convención JNI",
-                subtitle: "Juventud Nazarena Internacional",
-                logo: "JNI.png",
-                logoFallback: "JNI",
-                program: [
-                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
-                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
-                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
-                ],
-                reports: [
-                    { name: "Informe JNI 2026.pdf", size: "PDF • 1.8 MB" },
-                    { name: "Plan de Trabajo JNI.pdf", size: "PDF • 1.2 MB" }
-                ]
-            }
-        };
-
-        function openConvention(key) {
-            currentActiveConventionKey = key;
-            const data = conventionData[key];
-            if(!data) return;
-
-            document.getElementById('conv-title').innerText = data.title;
-            document.getElementById('conv-subtitle').innerText = data.subtitle;
-            
-            const logoBox = document.getElementById('conv-logo-box');
-            logoBox.innerHTML = `<img src="${data.logo}" alt="${data.title}" class="max-h-14 object-contain" onerror="this.src='https://placehold.co/100x60/4f46e5/ffffff?text=${data.logoFallback}'">`;
-
-            renderConventionReports(key);
-
-            // Render program
-            const progList = document.getElementById('conv-program-list');
-            progList.innerHTML = data.program.map(item => `
-                <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
-                    <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded">${item.time}</span>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">${item.title}</h4>
-                        <p class="text-xs text-slate-400">${item.desc}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            document.getElementById('view-convencion').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderConventionReports(key) {
-            const data = conventionData[key];
-            const repList = document.getElementById('conv-reports-list');
-            if(!repList) return;
-            repList.innerHTML = data.reports.map(rep => `
-                <a href="#" onclick="showDownloadAlert('${rep.name}'); return false;" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 transition-all group">
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-file-pdf text-red-400 text-lg"></i>
-                        <div class="text-left">
-                            <span class="block text-sm font-semibold text-white group-hover:text-amber-300 transition-colors">${rep.name}</span>
-                            <span class="text-xs text-slate-400">${rep.size}</span>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-download text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                </a>
-            `).join('');
-        }
-
-        // Document Upload Modal Management
-        function openUploadModal(category) {
-            const modal = document.getElementById('upload-modal');
-            const catInput = document.getElementById('upload-category');
-            const titleEl = document.getElementById('upload-modal-title');
-            if(modal && catInput) {
-                catInput.value = category;
-                if(category === 'informes') titleEl.innerText = 'Subir Nuevo Informe de Asamblea';
-                else if(category === 'resoluciones') titleEl.innerText = 'Subir Nueva Resolución Oficial';
-                else if(category === 'convencion') titleEl.innerText = `Subir Archivo para ${conventionData[currentActiveConventionKey].title}`;
-                modal.classList.remove('hidden');
-            }
-        }
-
-        function closeUploadModal() {
-            const modal = document.getElementById('upload-modal');
-            if(modal) {
-                modal.classList.add('hidden');
-                document.getElementById('upload-form').reset();
-            }
-        }
-
-        function handleUploadDocument(event) {
-            event.preventDefault();
-            const category = document.getElementById('upload-category').value;
-            const docTitle = document.getElementById('upload-doc-title').value;
-            const docDesc = document.getElementById('upload-doc-desc').value;
-            const fileInput = document.getElementById('upload-doc-file');
-            const fileName = fileInput.files[0] ? fileInput.files[0].name : `${docTitle}.pdf`;
-
-            if(category === 'informes') {
-                const container = document.getElementById('informes-list-container');
-                const newCard = document.createElement('a');
-                newCard.href = '#';
-                newCard.onclick = () => { showDownloadAlert(fileName); return false; };
-                newCard.className = 'flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg';
-                newCard.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white group-hover:text-amber-300 transition-colors">${docTitle}</span>
-                            <span class="text-xs text-slate-400">PDF • ${docDesc}</span>
-                        </div>
-                    </div>
-                    <span class="px-4 py-2 bg-slate-800 group-hover:bg-amber-500 group-hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </span>
-                `;
-                container.prepend(newCard);
-            } else if(category === 'resoluciones') {
-                const container = document.getElementById('resoluciones-list-container');
-                const newCard = document.createElement('div');
-                newCard.className = 'p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between';
-                newCard.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </div>
-                        <div class="text-left">
-                            <span class="block text-base font-semibold text-white">${docTitle}</span>
-                            <span class="text-xs text-slate-400">PDF • ${docDesc}</span>
-                        </div>
-                    </div>
-                    <a href="#" onclick="showDownloadAlert('${fileName}'); return false;" class="px-4 py-2 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-1">
-                        <i class="fa-solid fa-download mr-1"></i> Descargar
-                    </a>
-                `;
-                container.prepend(newCard);
-            } else if(category === 'convencion') {
-                if(!conventionData[currentActiveConventionKey].reports) {
-                    conventionData[currentActiveConventionKey].reports = [];
-                }
-                conventionData[currentActiveConventionKey].reports.push({
-                    name: fileName,
-                    size: `PDF • ${docDesc}`
-                });
-                renderConventionReports(currentActiveConventionKey);
-            }
-
-            closeUploadModal();
-            showToast(`¡Documento "${docTitle}" subido exitosamente!`);
-        }
-
-        // Calendar 2027 with Custom Event Creator
-        const monthsNames = [
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        ];
+    <!-- Secciones Principales -->
+    <div class="main-sections">
         
-        let currentMonthIndex = 0;
+        <!-- Programa -->
+        <div class="section-card">
+            <h3>Programa de la Asamblea</h3>
+            <p>Conoce los horarios, plenarias y actividades de los 2 días de asamblea (23 y 24 de Noviembre 2026).</p>
+            <ul>
+                <li>Día 1: Registro, Apertura e Informes</li>
+                <li>Día 2: Talleres, Plenarias y Clausura</li>
+            </ul>
+        </div>
 
-        let sampleEvents2027 = {
-            0: [{day: 15, title: "Reunión Distrital"}, {day: 16, title: "Ayuno Pastores"}],
-            2: [{day: 10, title: "Capacitación MNI"}],
-            4: [{day: 5, title: "Retiro JNI"}, {day: 6, title: "Retiro JNI"}],
-            7: [{day: 12, title: "Convivio Ministerial"}],
-            10: [{day: 23, title: "XXIX Asamblea Día 1"}, {day: 24, title: "XXIX Asamblea Día 2"}]
-        };
+        <!-- Informes con Carga Local/Nube -->
+        <div class="section-card">
+            <h3>Informes de Asamblea</h3>
+            <p>Descarga y consulta los informes oficiales del distrito.</p>
+            <div class="upload-box">
+                <input type="file" id="fileInforme" accept=".pdf" onchange="uploadFile('informes', 'fileInforme', 'listInformes')">
+                <label for="fileInforme" style="display:block; margin-top:5px; font-size:0.85rem; color:#64748b;">Subir documento PDF</label>
+            </div>
+            <ul id="listInformes" class="file-list"></ul>
+        </div>
 
-        function renderCalendar(monthIndex) {
-            currentMonthIndex = monthIndex;
-            const titleEl = document.getElementById('calendar-month-title');
-            const gridEl = document.getElementById('calendar-grid');
-            
-            titleEl.innerText = `${monthsNames[monthIndex]} 2027`;
-            gridEl.innerHTML = '';
+        <!-- Resoluciones -->
+        <div class="section-card">
+            <h3>Resoluciones</h3>
+            <p>Documentos y acuerdos oficiales aprobados tras la asamblea.</p>
+            <div class="upload-box">
+                <input type="file" id="fileResolucion" accept=".pdf" onchange="uploadFile('resoluciones', 'fileResolucion', 'listResoluciones')">
+                <label for="fileResolucion" style="display:block; margin-top:5px; font-size:0.85rem; color:#64748b;">Subir resolución PDF</label>
+            </div>
+            <ul id="listResoluciones" class="file-list"></ul>
+        </div>
 
-            const firstDay = new Date(2027, monthIndex, 1).getDay();
-            const totalDays = new Date(2027, monthIndex + 1, 0).getDate();
+    </div>
 
-            for(let i = 0; i < firstDay; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = 'h-12 sm:h-16';
-                gridEl.appendChild(emptyCell);
-            }
+    <!-- Calendario 2027 Sincronizado (Google Calendar) -->
+    <div class="calendar-container">
+        <h3>Calendario de Actividades 2027</h3>
+        <p>Consulte las actividades programadas del distrito sincronizadas en tiempo real.</p>
+        
+        <div class="calendar-responsive">
+            <!-- PEGA TU CODIGO DE GOOGLE CALENDAR AQUI (Sustituye este iframe de ejemplo o pega el tuyo) -->
+            <iframe src="https://calendar.google.com/calendar/embed?src=idn.distrito.surfronterizo%40gmail.com&ctz=America%2FMexico_City" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
 
-            const monthEvents = sampleEvents2027[monthIndex] || [];
+</div>
 
-            for(let day = 1; day <= totalDays; day++) {
-                const dayCell = document.createElement('div');
-                const eventsOnThisDay = monthEvents.filter(e => e.day === day);
-                const hasEvent = eventsOnThisDay.length > 0;
+<footer>
+    <p>&copy; 2026 - Distrito Sur Fronterizo - Iglesia del Nazareno</p>
+    <p>Centro de Convenciones y Recreaciones del Nazareno (C.C.R.N.)</p>
+</footer>
 
-                dayCell.className = `h-12 sm:h-16 flex flex-col items-center justify-start p-1 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                    hasEvent 
-                    ? 'bg-amber-500/20 border border-amber-500/50 text-white font-bold shadow-md shadow-amber-500/10' 
-                    : 'bg-slate-950/60 text-slate-300 hover:bg-slate-800'
-                }`;
-                
-                let eventsHtml = eventsOnThisDay.map(ev => `<span class="text-[9px] bg-amber-500 text-slate-950 font-bold px-1 rounded truncate w-full mt-0.5" title="${ev.title}">${ev.title}</span>`).join('');
+<script>
+    function openSection(type) {
+        alert("Sección de la convención " + type.toUpperCase() + ": Aquí visualizará los programas e informes específicos.");
+    }
 
-                dayCell.innerHTML = `<span class="text-xs">${day}</span>${eventsHtml}`;
-                gridEl.appendChild(dayCell);
-            }
+    document.addEventListener("DOMContentLoaded", () => {
+        loadFiles('informes', 'listInformes');
+        loadFiles('resoluciones', 'listResoluciones');
+    });
 
-            updateMonthTabs();
+    function uploadFile(category, inputId, listId) {
+        const input = document.getElementById(inputId);
+        if(input.files && input.files[0]) {
+            const fileName = input.files[0].name;
+            let files = JSON.parse(localStorage.getItem('distrito_' + category)) || [];
+            files.push(fileName);
+            localStorage.setItem('distrito_' + category, JSON.stringify(files));
+            input.value = '';
+            loadFiles(category, listId);
+        }
+    }
+
+    function loadFiles(category, listId) {
+        const list = document.getElementById(listId);
+        if(!list) return;
+        list.innerHTML = '';
+        let files = JSON.parse(localStorage.getItem('distrito_' + category)) || [];
+
+        if(files.length === 0) {
+            list.innerHTML = '<li style="color:#888; font-size:0.8rem; justify-content:center;">No hay archivos subidos.</li>';
+            return;
         }
 
-        function updateMonthTabs() {
-            const tabsContainer = document.getElementById('calendar-tabs');
-            if(!tabsContainer) return;
-            tabsContainer.innerHTML = '';
+        files.forEach((file, index) => {
+            list.innerHTML += `
+                <li>
+                    <span>📄 ${file}</span>
+                    <button onclick="deleteFile('${category}', ${index}, '${listId}')" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold;">×</button>
+                </li>
+            `;
+        });
+    }
 
-            monthsNames.forEach((name, index) => {
-                const btn = document.createElement('button');
-                btn.className = `px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                    index === currentMonthIndex 
-                    ? 'bg-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/25' 
-                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
-                }`;
-                btn.innerText = name;
-                btn.onclick = () => renderCalendar(index);
-                tabsContainer.appendChild(btn);
-            });
+    function deleteFile(category, index, listId) {
+        let files = JSON.parse(localStorage.getItem('distrito_' + category)) || [];
+        files.splice(index, 1);
+        localStorage.setItem('distrito_' + category, JSON.stringify(files));
+        loadFiles(category, listId);
+    }
+</script>
 
-            // Populate select dropdown in modal
-            const selectEl = document.getElementById('event-month');
-            if(selectEl && selectEl.children.length === 0) {
-                selectEl.innerHTML = monthsNames.map((name, idx) => `<option value="${idx}">${name} 2027</option>`).join('');
-            }
-        }
-
-        function prevMonth() {
-            currentMonthIndex = (currentMonthIndex - 1 + 12) % 12;
-            renderCalendar(currentMonthIndex);
-        }
-
-        function nextMonth() {
-            currentMonthIndex = (currentMonthIndex + 1) % 12;
-            renderCalendar(currentMonthIndex);
-        }
-
-        function toggleEventModal() {
-            const modal = document.getElementById('event-modal');
-            if(modal) {
-                modal.classList.toggle('hidden');
-                modal.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        function handleCreateEvent(event) {
-            event.preventDefault();
-            const monthIdx = parseInt(document.getElementById('event-month').value);
-            const dayNum = parseInt(document.getElementById('event-day').value);
-            const titleText = document.getElementById('event-title').value;
-
-            if(!sampleEvents2027[monthIdx]) {
-                sampleEvents2027[monthIdx] = [];
-            }
-            sampleEvents2027[monthIdx].push({ day: dayNum, title: titleText });
-
-            renderCalendar(monthIdx);
-            toggleEventModal();
-            document.getElementById('new-event-form').reset();
-            showToast(`¡Actividad "${titleText}" creada exitosamente!`);
-        }
-
-        function showDownloadAlert(fileName) {
-            showToast(`Iniciando descarga de: ${fileName}`);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const msgEl = document.getElementById('toast-message');
-            if(toast && msgEl) {
-                msgEl.innerText = message;
-                toast.classList.remove('translate-y-24', 'opacity-0');
-                setTimeout(() => {
-                    toast.classList.add('translate-y-24', 'opacity-0');
-                }, 3500);
-            }
-        }
-
-        // Initialize calendar on window load
-        window.onload = function() {
-            renderCalendar(0);
-        };
-    </script>
 </body>
 </html>
