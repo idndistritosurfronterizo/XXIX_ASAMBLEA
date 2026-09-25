@@ -223,9 +223,9 @@
         <!-- VIEW: SUBIR ARCHIVO (ADMIN PANEL) -->
         <div id="view-admin" class="page-view hidden space-y-8 max-w-2xl mx-auto">
             <div class="text-center space-y-2">
-                <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Panel de Control</span>
-                <h2 class="font-heading font-extrabold text-3xl text-white">Subir Archivo de Google Drive</h2>
-                <p class="text-slate-400 text-sm">Ingresa los datos del documento. Al guardarlo, aparecerá automáticamente de forma global para cualquier persona en cualquier dispositivo.</p>
+                <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Panel de Control Firebase</span>
+                <h2 class="font-heading font-extrabold text-3xl text-white">Subir Archivo a la Nube</h2>
+                <p class="text-slate-400 text-sm">Ingresa los datos del documento. Se guardará en Firebase Firestore y aparecerá en tiempo real de forma global.</p>
             </div>
 
             <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-6">
@@ -253,7 +253,7 @@
 
                     <button type="submit" id="submit-btn" class="w-full py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>Publicar Documento Globalmente</span>
+                        <span>Publicar Documento en Firebase</span>
                     </button>
                 </form>
                 <div id="upload-message" class="hidden text-center text-xs p-3 rounded-xl"></div>
@@ -389,7 +389,7 @@
                 <div>
                     <span class="text-indigo-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
                     <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Informes Descargables</h2>
-                    <p class="text-slate-400 text-sm">Accede y descarga los informes compartidos para todo el distrito.</p>
+                    <p class="text-slate-400 text-sm">Accede y descarga los informes sincronizados desde Firebase Firestore.</p>
                 </div>
             </div>
 
@@ -419,7 +419,7 @@
                 <div>
                     <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Documentación Oficial</span>
                     <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Resoluciones de la Asamblea</h2>
-                    <p class="text-slate-400 text-sm">Documentos oficiales, acuerdos y nombramientos aprobados durante la asamblea distrital.</p>
+                    <p class="text-slate-400 text-sm">Documentos oficiales, acuerdos y nombramientos sincronizados en tiempo real.</p>
                 </div>
             </div>
 
@@ -438,16 +438,35 @@
         </div>
     </footer>
 
-    <script>
-        // Estructura de datos global sincronizada con almacenamiento local en la nube simulada / localStorage compartida
-        let appData = {
-            informes: [
-                { title: "Informe Financiero 2026", desc: "PDF • Tesorería Distrital", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" },
-                { title: "Informe del Superintendente Distrital", desc: "PDF • Reporte Ministerial", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-            ],
-            resoluciones: [
-                { title: "Acuerdos y Resoluciones 2026", desc: "PDF • Aprobado por la Asamblea", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-            ],
+    <!-- CONFIGURACIÓN DE FIREBASE E INICIALIZACIÓN -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxUU30fphltoxpcTFL7qBxi2eXdx9Tdao",
+            authDomain: "xxix-asamblea.firebaseapp.com",
+            projectId: "xxix-asamblea",
+            storageBucket: "xxix-asamblea.firebasestorage.app",
+            messagingSenderId: "586837010393",
+            appId: "1:586837010393:web:61413468bc7e024b541bc8",
+            measurementId: "G-F8X7FVVEZE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Autenticación anónima para permitir lectura/escritura en Firestore
+        signInAnonymously(auth).catch((error) => {
+            console.error("Error de autenticación anónima en Firebase:", error);
+        });
+
+        // Estructura base completa (Convenciones estáticas + Datos dinámicos desde Firestore)
+        window.appData = {
+            informes: [],
+            resoluciones: [],
             dni: {
                 title: "Convención DNI",
                 subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
@@ -458,9 +477,7 @@
                     { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
                     { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
                 ],
-                reports: [
-                    { title: "Informe DNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
+                reports: []
             },
             mni: {
                 title: "Convención MNI",
@@ -472,9 +489,7 @@
                     { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
                     { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
                 ],
-                reports: [
-                    { title: "Informe MNI Distrital", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
+                reports: []
             },
             jni: {
                 title: "Convención JNI",
@@ -486,65 +501,99 @@
                     { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
                     { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
                 ],
-                reports: [
-                    { title: "Informe JNI 2026", desc: "PDF • Google Drive", url: "https://drive.google.com/file/d/TU_ENLACE_AQUI/view?usp=sharing" }
-                ]
+                reports: []
             }
         };
 
-        // Cargar datos guardados previamente si existen
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedData = localStorage.getItem('asamblea_cloud_docs');
-            if(savedData) {
-                try {
-                    appData = JSON.parse(savedData);
-                } catch(e) { console.error(e); }
-            }
+        // Escuchar en tiempo real los documentos almacenados en Firestore (Colección "documentos")
+        onSnapshot(collection(db, "documentos"), (snapshot) => {
+            // Limpiar listas dinámicas antes de actualizar con datos de Firestore
+            window.appData.informes = [];
+            window.appData.resoluciones = [];
+            window.appData.dni.reports = [];
+            window.appData.mni.reports = [];
+            window.appData.jni.reports = [];
+
+            snapshot.forEach((docSnap) => {
+                const docData = docSnap.data();
+                const item = { 
+                    id: docSnap.id, 
+                    title: docData.title, 
+                    desc: docData.desc || "PDF • Google Drive", 
+                    url: docData.url 
+                };
+
+                const cat = docData.category;
+                if (cat === 'informes' || cat === 'resoluciones') {
+                    window.appData[cat].push(item);
+                } else if (window.appData[cat] && window.appData[cat].reports) {
+                    window.appData[cat].reports.push(item);
+                }
+            });
+
+            // Re-renderizar las vistas actuales si están activas
             renderInformes();
             renderResoluciones();
         });
 
-        function handleFileUpload(event) {
+        // Función global para manejar la subida del formulario hacia Firebase Firestore
+        window.handleFileUpload = async function(event) {
             event.preventDefault();
             const title = document.getElementById('input-title').value.trim();
             const category = document.getElementById('input-category').value;
             const url = document.getElementById('input-url').value.trim();
             const msgBox = document.getElementById('upload-message');
+            const submitBtn = document.getElementById('submit-btn');
 
-            const newItem = { title: title, desc: "PDF • Google Drive", url: url };
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>Guardando en Firebase...</span>`;
 
-            if(category === 'informes' || category === 'resoluciones') {
-                appData[category].push(newItem);
-            } else {
-                // Es una convención (dni, mni, jni)
-                if(!appData[category].reports) appData[category].reports = [];
-                appData[category].reports.push(newItem);
+            try {
+                await addDoc(collection(db, "documentos"), {
+                    title: title,
+                    category: category,
+                    url: url,
+                    desc: category === 'resoluciones' ? "PDF • Aprobado por la Asamblea" : "PDF • Google Drive",
+                    createdAt: serverTimestamp()
+                });
+
+                msgBox.className = "text-center text-xs p-3 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 block";
+                msgBox.innerHTML = `<i class="fa-solid fa-check-circle mr-1"></i> ¡Documento guardado exitosamente en Firebase y sincronizado globalmente!`;
+
+                document.getElementById('upload-form').reset();
+
+                setTimeout(() => {
+                    msgBox.classList.add('hidden');
+                    switchPage(category === 'informes' || category === 'resoluciones' ? category : 'inicio');
+                }, 2000);
+            } catch (error) {
+                console.error("Error al guardar en Firestore:", error);
+                msgBox.className = "text-center text-xs p-3 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30 block";
+                msgBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Error al guardar. Verifica los permisos de Firestore.`;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> <span>Publicar Documento en Firebase</span>`;
             }
+        };
+    </script>
 
-            // Guardar en almacenamiento persistente local del navegador
-            localStorage.setItem('asamblea_cloud_docs', JSON.stringify(appData));
-
-            msgBox.className = "text-center text-xs p-3 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 block";
-            msgBox.innerHTML = `<i class="fa-solid fa-check-circle mr-1"></i> ¡Documento agregado exitosamente! Ya está disponible en la sección correspondiente.`;
-
-            document.getElementById('upload-form').reset();
-
-            setTimeout(() => {
-                msgBox.classList.add('hidden');
-                switchPage(category === 'informes' || category === 'resoluciones' ? category : 'inicio');
-            }, 2000);
-        }
+    <script>
+        // Funciones de renderizado de la interfaz de usuario
+        document.addEventListener('DOMContentLoaded', () => {
+            renderInformes();
+            renderResoluciones();
+        });
 
         function renderInformes() {
             const container = document.getElementById('informes-list-container');
             if(!container) return;
             
-            if(!appData.informes || appData.informes.length === 0) {
-                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay informes disponibles todavía.</div>`;
+            if(!window.appData.informes || window.appData.informes.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay informes disponibles en la base de datos todavía.</div>`;
                 return;
             }
 
-            container.innerHTML = appData.informes.map((item) => `
+            container.innerHTML = window.appData.informes.map((item) => `
                 <div class="flex items-center justify-between p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-400 transition-all group shadow-lg">
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
@@ -568,12 +617,12 @@
             const container = document.getElementById('resoluciones-list-container');
             if(!container) return;
 
-            if(!appData.resoluciones || appData.resoluciones.length === 0) {
-                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay resoluciones registradas.</div>`;
+            if(!window.appData.resoluciones || window.appData.resoluciones.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800">No hay resoluciones registradas en la base de datos.</div>`;
                 return;
             }
 
-            container.innerHTML = appData.resoluciones.map((item) => `
+            container.innerHTML = window.appData.resoluciones.map((item) => `
                 <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-center justify-between group">
                     <div class="flex items-center space-x-4">
                         <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-lg">
@@ -624,7 +673,7 @@
         }
 
         function openConvention(key) {
-            const data = appData[key];
+            const data = window.appData[key];
             if(!data) return;
 
             document.getElementById('conv-title').innerText = data.title;
@@ -652,7 +701,7 @@
         }
 
         function renderConventionReports(key) {
-            const data = appData[key];
+            const data = window.appData[key];
             const repList = document.getElementById('conv-reports-list');
             if(!repList) return;
 
