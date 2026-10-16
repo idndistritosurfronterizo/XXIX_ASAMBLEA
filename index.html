@@ -517,23 +517,43 @@
                 <p class="text-slate-400 text-sm">Directorio telefónico directo de Ministros</p>
             </div>
 
-            <!-- Pestañas de Navegación del Directorio -->
-            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 border-b border-slate-800 pb-4">
-                <button onclick="switchDirectoryTab('pbros')" id="btn-tab-pbros" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-user-tie mr-1"></i> Presbítero
-                </button>
-                <button onclick="switchDirectoryTab('lic')" id="btn-tab-lic" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-user-graduate mr-1"></i> Ministros Licenciados
-                </button>
-                <button onclick="switchDirectoryTab('laicos')" id="btn-tab-laicos" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-users mr-1"></i> Ministros Laicos
-                </button>
+            <!-- Buscador Global de Ministros -->
+            <div class="relative max-w-xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text" id="directory-search" oninput="filterDirectory()" placeholder="Buscar en Presbíteros, Licenciados y Laicos..." class="w-full bg-slate-900 border border-slate-800 rounded-2xl pl-11 pr-4 py-3.5 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors shadow-lg">
             </div>
 
-            <!-- Contenedores de las Listas -->
-            <div id="dir-container-pbros" class="directory-section space-y-3"></div>
-            <div id="dir-container-lic" class="directory-section hidden space-y-3"></div>
-            <div id="dir-container-laicos" class="directory-section hidden space-y-3"></div>
+            <!-- Contenedor de Resultados de Búsqueda Global (Oculto por defecto) -->
+            <div id="global-search-results" class="hidden space-y-4">
+                <div class="border-b border-slate-800 pb-2 flex items-center justify-between">
+                    <h3 class="font-heading font-bold text-amber-400 text-sm uppercase tracking-wider">Resultados de la Búsqueda Global</h3>
+                    <span id="search-count" class="text-xs text-slate-400"></span>
+                </div>
+                <div id="search-results-container" class="space-y-3"></div>
+            </div>
+
+            <!-- Contenedor de Pestañas Normales -->
+            <div id="tabs-wrapper" class="space-y-6">
+                <!-- Pestañas de Navegación del Directorio -->
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-4 border-b border-slate-800 pb-4">
+                    <button onclick="switchDirectoryTab('pbros')" id="btn-tab-pbros" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-user-tie mr-1"></i> Presbítero
+                    </button>
+                    <button onclick="switchDirectoryTab('lic')" id="btn-tab-lic" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
+                        <i class="fa-solid fa-user-graduate mr-1"></i> Ministros Licenciados
+                    </button>
+                    <button onclick="switchDirectoryTab('laicos')" id="btn-tab-laicos" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
+                        <i class="fa-solid fa-users mr-1"></i> Ministros Laicos
+                    </button>
+                </div>
+
+                <!-- Contenedores de las Listas por Pestaña -->
+                <div id="dir-container-pbros" class="directory-section space-y-3"></div>
+                <div id="dir-container-lic" class="directory-section hidden space-y-3"></div>
+                <div id="dir-container-laicos" class="directory-section hidden space-y-3"></div>
+            </div>
         </div>
 
         <!-- VIEW: INFORMES PDF -->
@@ -704,120 +724,120 @@
     <script>
         const directoryData = {
             pbros: [
-                { nombre: "REV. JOSUÉ BARRIOS LÓPEZ", iglesia: "SUPERINTENDENTE DE DISTRITO", tel: "9646248029" },
-                { nombre: "PBRO. ADAIA V. ARGUETA GUILLEN", iglesia: "SANTA CLARA", tel: "9621947555" },
-                { nombre: "PBRO. AGUSTÍN QUIROGA ÁVILA", iglesia: "HUANACASTLE", tel: "9622538913" },
-                { nombre: "PBRO. ALEXANDER LÓPEZ TORRES", iglesia: "5ª DE TAPACHULA", tel: "9622170250" },
-                { nombre: "PBRO. AMAURI GUZMÁN NOLASCO", iglesia: "NANCILLAL", tel: "9621847002" },
-                { nombre: "PBRO. ANDREA MARGARITA LÓPEZ MIGUEL", iglesia: "PASTOR ASOCIADA", tel: "9621075058" },
-                { nombre: "PBRO. ANA JOCABED VÁZQUEZ VALLES", iglesia: "CAMINO AL CIELO", tel: "9651194480" },
-                { nombre: "PBRA. ANA VAZQUEZ CRUZ", iglesia: "6ª DE TAPACHULA", tel: "9622092055" },
-                { nombre: "PBRO. ANTONIO RAMIREZ LÓPEZ", iglesia: "EL CAMPITO", tel: "9621481963" },
-                { nombre: "PBRO. BARTOLO ESCOBAR RIZO", iglesia: "9ª DE TAPACHULA", tel: "9813947374" },
-                { nombre: "PBRO. BELIZARIO LÓPEZ BLAS", iglesia: "BETANIA", tel: "9624839852" },
-                { nombre: "PBRO. BELSAÍN GUZMAN NOLASCO", iglesia: "1ª DE ALVARO OBREGÓN", tel: "9622582898" },
-                { nombre: "PBRO. BELSAY LÓPEZ LÓPEZ", iglesia: "PLAYA GRANDE", tel: "9641128725" },
-                { nombre: "PBRO. BERNARDO ELIEZER GONZÁLEZ GONZÁLEZ", iglesia: "HUEHUETÁN ESTACIÓN", tel: "9611319901" },
-                { nombre: "PBRO. BERZAIN ROJAS LÓPEZ", iglesia: "3ª DE HUIXTLA", tel: "9646275465" },
-                { nombre: "PBRO. CLAUDIO SANTIAGO DESALES", iglesia: "SIN ASIGNACION", tel: "9181034088" },
-                { nombre: "PBRO. CLAUDIA INÉS ROMÁN LÓPEZ", iglesia: "SIN ASIGNACIÓN", tel: "9621468340" },
-                { nombre: "PBRO. ECDAR PARRAZALEZ GÓMEZ", iglesia: "PASTOR ASOCIADO", tel: "9621261574" },
-                { nombre: "PBRO. EDGAR DANIEL SANTIAGO ENRÍQUEZ", iglesia: "CACAHOATAN", tel: "9625135448" },
-                { nombre: "PBRO. ELMER CELAYA ESCOBAR", iglesia: "2ª DE CIUDAD HIDALGO", tel: "9621412479" },
-                { nombre: "PBRO. EVER MACIAS MEJIA", iglesia: "COLONIA HIDALGO", tel: "9621702476" },
-                { nombre: "PBRO. FABRICIO VÁZQUEZ ARIAS", iglesia: "EMMANUEL", tel: "9621844897" },
-                { nombre: "PBRO. FÉLIX AMÉZTICA MADRID", iglesia: "COLONIA OBRERA", tel: "9622089718" },
-                { nombre: "PBRO. FRANCISCO JAVIER VAZQUEZ VILLALOBOS", iglesia: "PASTOR ASOCIADO", tel: "9624498103" },
-                { nombre: "PBRO. FREDY DE LEÓN JUÁREZ", iglesia: "EL CAPULÍN", tel: "9621685144" },
-                { nombre: "PBRO. GUILLERMO SALDAÑA MORENO", iglesia: "EL ARENAL", tel: "9646240737" },
-                { nombre: "PBRO. JESÚS NOÉ MATÍAS URBINA", iglesia: "1ª DE PUERTO MADERO", tel: "9622120793" },
-                { nombre: "PBRO. JOEL CRUZ ARGUETA", iglesia: "PASTOR ASOCIADO", tel: "9621412619" },
-                { nombre: "PBRO. JORGE BARRIENTOS MÁRQUEZ", iglesia: "1ª DE TAPACHULA", tel: "9641165564" },
-                { nombre: "PBRO. JOSÉ ALFREDO SOLÌS SANTOS", iglesia: "ITM KAIROS", tel: "9621171504" },
-                { nombre: "PBRO. JOSUE MENDEZ ROQUE", iglesia: "VIVA MEXICO", tel: "9681254868" },
-                { nombre: "PBRO. JUDITH PATRICIA JIMÉNEZ SÁNCHEZ", iglesia: "CONGREGACIÓN REFORMA", tel: "9618735206" },
-                { nombre: "PBRO JULIO CESAR LEY", iglesia: "LA GLORIA DE DIOS", tel: "9626956271" },
-                { nombre: "PBRO. KARIN LORENA BARRIOS", iglesia: "1ª DE TUXTLA CHICO", tel: "9621082294" },
-                { nombre: "PBRO. MARCO ANTONIO HERRERA CONSTANTINO", iglesia: "IGNACIO ZARAGOZA", tel: "9621656118" },
-                { nombre: "PBRO. MARCO ANTONIO VERA POSADA", iglesia: "ITM VIDA NUEVA", tel: "9621689410" },
-                { nombre: "PBRO. MARCO TULIO BARRIOS", iglesia: "BUENOS AIRES", tel: "9622739202" },
-                { nombre: "PBRO. MARIO JOSUÉ LÓPEZ ALVARADO", iglesia: "PASTOR ASOCIADO", tel: "9622547040" },
-                { nombre: "PBRO. MIGUEL ANGEL VÁZQUEZ CHALECO", iglesia: "TUZANTÁN ESTACIÓN", tel: "9646246291" },
-                { nombre: "PBRO. MIGUEL GÓMEZ REYES", iglesia: "MAZATÀN", tel: "9621977366" },
-                { nombre: "PBRO. NARCISO GONZÁLEZ GARCÍA", iglesia: "PENIEL", tel: "9621041276" },
-                { nombre: "PBRO. NATANAEL DE LEÓN CIGARROA", iglesia: "GUACHIPILÍN", tel: "9621692787" },
-                { nombre: "PBRO. NESTOR MARROQUIN MALDONADO", iglesia: "ITM ADULAM", tel: "9621512026" },
-                { nombre: "PBRO. NILTON ORFEO GERARDO MORGA", iglesia: "MONTE DE LOS OLIVOS", tel: "9661150845" },
-                { nombre: "PBRO. PABLO ZUNÚN LÓPEZ", iglesia: "ITM MANAHAIN", tel: "9621635546" },
-                { nombre: "PBRO. PEDRO SANTOS CHÁVEZ", iglesia: "3ª DE TAPACHULA", tel: "9651130133" },
-                { nombre: "PBRO. RAQUEL BAUTISTA CHONGO", iglesia: "ITM NUEVO NACIMIENTO", tel: "9641025623" },
-                { nombre: "PBRO. ROBERTO CALEB LÓPEZ ALVARADO", iglesia: "ARCA DE SALVACION", tel: "9621530525" },
-                { nombre: "PBRO. ROBERTO NAJERA ALVAREZ", iglesia: "MONTE HOREB", tel: "9641025346" },
-                { nombre: "PBRO. ROBERTO LOPEZ FAJARDO", iglesia: "1ª DE CIUDAD HIDALGO", tel: "9621336395" },
-                { nombre: "PBRO. RODOLFO LÓPEZ LÓPEZ", iglesia: "SHADAI", tel: "9621229269" },
-                { nombre: "PBRO. RUBBER PÉREZ GUERRERO", iglesia: "KEDUSHÁ", tel: "9625383669" },
-                { nombre: "PBRO. RUSSELL TAMAYO CASTRO", iglesia: "BARRIO LAS FLORES", tel: "9641159260" },
-                { nombre: "PBRO. SALOMÓN ANTONIO MARCOS", iglesia: "RANCHO NUEVO", tel: "9181283020" },
-                { nombre: "PBRO. TEODOMIRO AGUILAR OCHOA", iglesia: "LÁZARO CÁRDENAS", tel: "9622706373" },
-                { nombre: "PBRO. ULISES CAMAS MARROQUIN", iglesia: "ALFA Y OMEGA", tel: "9641833812" }
+                { nombre: "REV. JOSUÉ BARRIOS LÓPEZ", iglesia: "SUPERINTENDENTE DE DISTRITO", tel: "9646248029", tipo: "Presbítero" },
+                { nombre: "PBRO. ADAIA V. ARGUETA GUILLEN", iglesia: "SANTA CLARA", tel: "9621947555", tipo: "Presbítero" },
+                { nombre: "PBRO. AGUSTÍN QUIROGA ÁVILA", iglesia: "HUANACASTLE", tel: "9622538913", tipo: "Presbítero" },
+                { nombre: "PBRO. ALEXANDER LÓPEZ TORRES", iglesia: "5ª DE TAPACHULA", tel: "9622170250", tipo: "Presbítero" },
+                { nombre: "PBRO. AMAURI GUZMÁN NOLASCO", iglesia: "NANCILLAL", tel: "9621847002", tipo: "Presbítero" },
+                { nombre: "PBRO. ANDREA MARGARITA LÓPEZ MIGUEL", iglesia: "PASTOR ASOCIADA", tel: "9621075058", tipo: "Presbítero" },
+                { nombre: "PBRO. ANA JOCABED VÁZQUEZ VALLES", iglesia: "CAMINO AL CIELO", tel: "9651194480", tipo: "Presbítero" },
+                { nombre: "PBRA. ANA VAZQUEZ CRUZ", iglesia: "6ª DE TAPACHULA", tel: "9622092055", tipo: "Presbítero" },
+                { nombre: "PBRO. ANTONIO RAMIREZ LÓPEZ", iglesia: "EL CAMPITO", tel: "9621481963", tipo: "Presbítero" },
+                { nombre: "PBRO. BARTOLO ESCOBAR RIZO", iglesia: "9ª DE TAPACHULA", tel: "9813947374", tipo: "Presbítero" },
+                { nombre: "PBRO. BELIZARIO LÓPEZ BLAS", iglesia: "BETANIA", tel: "9624839852", tipo: "Presbítero" },
+                { nombre: "PBRO. BELSAÍN GUZMAN NOLASCO", iglesia: "1ª DE ALVARO OBREGÓN", tel: "9622582898", tipo: "Presbítero" },
+                { nombre: "PBRO. BELSAY LÓPEZ LÓPEZ", iglesia: "PLAYA GRANDE", tel: "9641128725", tipo: "Presbítero" },
+                { nombre: "PBRO. BERNARDO ELIEZER GONZÁLEZ GONZÁLEZ", iglesia: "HUEHUETÁN ESTACIÓN", tel: "9611319901", tipo: "Presbítero" },
+                { nombre: "PBRO. BERZAIN ROJAS LÓPEZ", iglesia: "3ª DE HUIXTLA", tel: "9646275465", tipo: "Presbítero" },
+                { nombre: "PBRO. CLAUDIO SANTIAGO DESALES", iglesia: "SIN ASIGNACION", tel: "9181034088", tipo: "Presbítero" },
+                { nombre: "PBRO. CLAUDIA INÉS ROMÁN LÓPEZ", iglesia: "SIN ASIGNACIÓN", tel: "9621468340", tipo: "Presbítero" },
+                { nombre: "PBRO. ECDAR PARRAZALEZ GÓMEZ", iglesia: "PASTOR ASOCIADO", tel: "9621261574", tipo: "Presbítero" },
+                { nombre: "PBRO. EDGAR DANIEL SANTIAGO ENRÍQUEZ", iglesia: "CACAHOATAN", tel: "9625135448", tipo: "Presbítero" },
+                { nombre: "PBRO. ELMER CELAYA ESCOBAR", iglesia: "2ª DE CIUDAD HIDALGO", tel: "9621412479", tipo: "Presbítero" },
+                { nombre: "PBRO. EVER MACIAS MEJIA", iglesia: "COLONIA HIDALGO", tel: "9621702476", tipo: "Presbítero" },
+                { nombre: "PBRO. FABRICIO VÁZQUEZ ARIAS", iglesia: "EMMANUEL", tel: "9621844897", tipo: "Presbítero" },
+                { nombre: "PBRO. FÉLIX AMÉZTICA MADRID", iglesia: "COLONIA OBRERA", tel: "9622089718", tipo: "Presbítero" },
+                { nombre: "PBRO. FRANCISCO JAVIER VAZQUEZ VILLALOBOS", iglesia: "PASTOR ASOCIADO", tel: "9624498103", tipo: "Presbítero" },
+                { nombre: "PBRO. FREDY DE LEÓN JUÁREZ", iglesia: "EL CAPULÍN", tel: "9621685144", tipo: "Presbítero" },
+                { nombre: "PBRO. GUILLERMO SALDAÑA MORENO", iglesia: "EL ARENAL", tel: "9646240737", tipo: "Presbítero" },
+                { nombre: "PBRO. JESÚS NOÉ MATÍAS URBINA", iglesia: "1ª DE PUERTO MADERO", tel: "9622120793", tipo: "Presbítero" },
+                { nombre: "PBRO. JOEL CRUZ ARGUETA", iglesia: "PASTOR ASOCIADO", tel: "9621412619", tipo: "Presbítero" },
+                { nombre: "PBRO. JORGE BARRIENTOS MÁRQUEZ", iglesia: "1ª DE TAPACHULA", tel: "9641165564", tipo: "Presbítero" },
+                { nombre: "PBRO. JOSÉ ALFREDO SOLÌS SANTOS", iglesia: "ITM KAIROS", tel: "9621171504", tipo: "Presbítero" },
+                { nombre: "PBRO. JOSUE MENDEZ ROQUE", iglesia: "VIVA MEXICO", tel: "9681254868", tipo: "Presbítero" },
+                { nombre: "PBRO. JUDITH PATRICIA JIMÉNEZ SÁNCHEZ", iglesia: "CONGREGACIÓN REFORMA", tel: "9618735206", tipo: "Presbítero" },
+                { nombre: "PBRO JULIO CESAR LEY", iglesia: "LA GLORIA DE DIOS", tel: "9626956271", tipo: "Presbítero" },
+                { nombre: "PBRO. KARIN LORENA BARRIOS", iglesia: "1ª DE TUXTLA CHICO", tel: "9621082294", tipo: "Presbítero" },
+                { nombre: "PBRO. MARCO ANTONIO HERRERA CONSTANTINO", iglesia: "IGNACIO ZARAGOZA", tel: "9621656118", tipo: "Presbítero" },
+                { nombre: "PBRO. MARCO ANTONIO VERA POSADA", iglesia: "ITM VIDA NUEVA", tel: "9621689410", tipo: "Presbítero" },
+                { nombre: "PBRO. MARCO TULIO BARRIOS", iglesia: "BUENOS AIRES", tel: "9622739202", tipo: "Presbítero" },
+                { nombre: "PBRO. MARIO JOSUÉ LÓPEZ ALVARADO", iglesia: "PASTOR ASOCIADO", tel: "9622547040", tipo: "Presbítero" },
+                { nombre: "PBRO. MIGUEL ANGEL VÁZQUEZ CHALECO", iglesia: "TUZANTÁN ESTACIÓN", tel: "9646246291", tipo: "Presbítero" },
+                { nombre: "PBRO. MIGUEL GÓMEZ REYES", iglesia: "MAZATÀN", tel: "9621977366", tipo: "Presbítero" },
+                { nombre: "PBRO. NARCISO GONZÁLEZ GARCÍA", iglesia: "PENIEL", tel: "9621041276", tipo: "Presbítero" },
+                { nombre: "PBRO. NATANAEL DE LEÓN CIGARROA", iglesia: "GUACHIPILÍN", tel: "9621692787", tipo: "Presbítero" },
+                { nombre: "PBRO. NESTOR MARROQUIN MALDONADO", iglesia: "ITM ADULAM", tel: "9621512026", tipo: "Presbítero" },
+                { nombre: "PBRO. NILTON ORFEO GERARDO MORGA", iglesia: "MONTE DE LOS OLIVOS", tel: "9661150845", tipo: "Presbítero" },
+                { nombre: "PBRO. PABLO ZUNÚN LÓPEZ", iglesia: "ITM MANAHAIN", tel: "9621635546", tipo: "Presbítero" },
+                { nombre: "PBRO. PEDRO SANTOS CHÁVEZ", iglesia: "3ª DE TAPACHULA", tel: "9651130133", tipo: "Presbítero" },
+                { nombre: "PBRO. RAQUEL BAUTISTA CHONGO", iglesia: "ITM NUEVO NACIMIENTO", tel: "9641025623", tipo: "Presbítero" },
+                { nombre: "PBRO. ROBERTO CALEB LÓPEZ ALVARADO", iglesia: "ARCA DE SALVACION", tel: "9621530525", tipo: "Presbítero" },
+                { nombre: "PBRO. ROBERTO NAJERA ALVAREZ", iglesia: "MONTE HOREB", tel: "9641025346", tipo: "Presbítero" },
+                { nombre: "PBRO. ROBERTO LOPEZ FAJARDO", iglesia: "1ª DE CIUDAD HIDALGO", tel: "9621336395", tipo: "Presbítero" },
+                { nombre: "PBRO. RODOLFO LÓPEZ LÓPEZ", iglesia: "SHADAI", tel: "9621229269", tipo: "Presbítero" },
+                { nombre: "PBRO. RUBBER PÉREZ GUERRERO", iglesia: "KEDUSHÁ", tel: "9625383669", tipo: "Presbítero" },
+                { nombre: "PBRO. RUSSELL TAMAYO CASTRO", iglesia: "BARRIO LAS FLORES", tel: "9641159260", tipo: "Presbítero" },
+                { nombre: "PBRO. SALOMÓN ANTONIO MARCOS", iglesia: "RANCHO NUEVO", tel: "9181283020", tipo: "Presbítero" },
+                { nombre: "PBRO. TEODOMIRO AGUILAR OCHOA", iglesia: "LÁZARO CÁRDENAS", tel: "9622706373", tipo: "Presbítero" },
+                { nombre: "PBRO. ULISES CAMAS MARROQUIN", iglesia: "ALFA Y OMEGA", tel: "9641833812", tipo: "Presbítero" }
             ],
             lic: [
-                { nombre: "M. LIC. ABEL BARRIOS RUIZ", iglesia: "CRISTO LA ROCA", tel: "9622417307" },
-                { nombre: "M. LIC. ANA LIDIA ALEGRIA HERNANDEZ", iglesia: "PASTOR ASOCIADA", tel: "9621865304" },
-                { nombre: "M. LIC. BERSABET JIMÉNEZ PÉREZ", iglesia: "ISLAMAPITA", tel: "9641033525" },
-                { nombre: "M. LIC. CARLOS OCEGUERA GONZÁLEZ", iglesia: "GETSEMANI", tel: "9621118522" },
-                { nombre: "M. LIC. CÉSAR OZUNA LÓPEZ", iglesia: "20 DE NOVIEMBRE", tel: "9616264903" },
-                { nombre: "M. LIC. CINDY LIZBETH LÓPEZ MIGUEL", iglesia: "ITM SHALOM", tel: "9622603649" },
-                { nombre: "M. LIC. CIELO VÁZQUEZ HERRERA", iglesia: "TUZANTÁN PUEBLO", tel: "9641005962" },
-                { nombre: "M. LIC. DAVID ZAVALA ESPINOSA", iglesia: "2a DE TAPACHULA", tel: "9621129666" },
-                { nombre: "M. LIC. DEYNER GUTIÉRREZ PONCE", iglesia: "MISIÓN LAS MORENAS", tel: "9623897545" },
-                { nombre: "M. LIC. EDRAS JOSUÉ MENDOZA REYES", iglesia: "MISION RUIZ CORTINEZ", tel: "9622408121" },
-                { nombre: "M. LIC. EDER DE PAZ OSORIO", iglesia: "ITM RAYMUNDO ENRÍQUEZ", tel: "9621446657" },
-                { nombre: "M. LIC. ELISEO GONZÁLEZ GARCÍA", iglesia: "PASTOR ASOCIADA", tel: "9613054675" },
-                { nombre: "M. LIC. HERMELINDO GÓMEZ REYES", iglesia: "MISIÓN METAPA", tel: "9625104294" },
-                { nombre: "M. LIC. INMER FLORES MACÍAS", iglesia: "LLANO LA LIMA", tel: "9621306378" },
-                { nombre: "M. LIC. IRIS FLORES MACIAS", iglesia: "PASTORA ASOCIADA", tel: "9626099062" },
-                { nombre: "M. LIC. ISAAC ESTEBAN ROMERO MEZA", iglesia: "3ª DE CIUDAD HIDALGO", tel: "9621648985" },
-                { nombre: "M. LIC. ITIEL MATEO PÉREZ", iglesia: "4ª DE TAPACHULA", tel: "9621128132" },
-                { nombre: "M. LIC. IVETE SAYURI MÉNDEZ TORRES", iglesia: "MONTE SINAI", tel: "9622312736" },
-                { nombre: "M. LIC. IVÓN YAZMÍN NAVARRO VENTURA", iglesia: "3ª DE MOTOZINTLA", tel: "9622181397" },
-                { nombre: "M. LIC. JESÚS ALBERTO GUILLÉN PEÑA", iglesia: "PUERTA DEL CIELO", tel: "9618740666" },
-                { nombre: "M. LIC. JESÚS ALBERTO GUIZAR LUCAS", iglesia: "BETESDA", tel: "9622631964" },
-                { nombre: "M. LIC. JONATAN AGUILAR CORONEL", iglesia: "MOTOZINTLA CENTRAL", tel: "9641108296" },
-                { nombre: "M. LIC. JONATHAN AGUILAR BARTOLON", iglesia: "LA FE", tel: "9621362641" },
-                { nombre: "M. LIC. JONATAN MATEO PEREZ", iglesia: "BELIZARIO DOMINGUEZ", tel: "9625199624" },
-                { nombre: "M. LIC. JOSUÉ IVÁN HERNÁNDEZ HERNÁNDEZ", iglesia: "1ª DE HUIXTLA", tel: "9641090654" },
-                { nombre: "M. LIC. KEYLA MERARI PEREZ MONTOYA", iglesia: "8ª DE TAPACHULA", tel: "9622763210" },
-                { nombre: "M. LIC. MARÍA DEL ROSARIO ESCOBAR ARROLLO", iglesia: "MISION CASA DE PAZ", tel: "9626247080" },
-                { nombre: "M. LIC. MARTHA EDITH RODRIGUEZ ZAVALA", iglesia: "ITM FRONTERA HIDALGO", tel: "9621392017" },
-                { nombre: "M.LIC. MEDARDO REYES OCHOA", iglesia: "BRISAS DEL MAR", tel: "9621237558" },
-                { nombre: "M. LIC. MERARI ORTIZ LUIS", iglesia: "PASTOR ASOCIADA", tel: "9622028789" },
-                { nombre: "M. LIC. MIGUEL ROMERO CRUZ", iglesia: "ITM 5 DE MAYO", tel: "9621495885" },
-                { nombre: "M. LIC. NEHEMÍAS HERNÁNDEZ GUZMÁN", iglesia: "MONTE DE SANTIDAD", tel: "9641131475" },
-                { nombre: "M. LIC. REBECA MORALES ROBLERO", iglesia: "MARANATHA", tel: "9622701390" },
-                { nombre: "M. LIC. TOMASA CABALLERO VAZQUEZ", iglesia: "PASTOR ASOCIADA", tel: "9641382384" },
-                { nombre: "M. LIC. SERGIO A. GONZÁLEZ MONTERROSA", iglesia: "JESÚS MI REDENTOR", tel: "9622044382" },
-                { nombre: "M. LIC. ABIMAEL LÓPEZ TORRES", iglesia: "MINISTRO JUBILADO", tel: "9641133268" },
-                { nombre: "M. LIC. EVERARDO ZARATE GARCÍA", iglesia: "MINISTRO JUBILADO", tel: "9623827635" }
+                { nombre: "M. LIC. ABEL BARRIOS RUIZ", iglesia: "CRISTO LA ROCA", tel: "9622417307", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. ANA LIDIA ALEGRIA HERNANDEZ", iglesia: "PASTOR ASOCIADA", tel: "9621865304", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. BERSABET JIMÉNEZ PÉREZ", iglesia: "ISLAMAPITA", tel: "9641033525", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. CARLOS OCEGUERA GONZÁLEZ", iglesia: "GETSEMANI", tel: "9621118522", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. CÉSAR OZUNA LÓPEZ", iglesia: "20 DE NOVIEMBRE", tel: "9616264903", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. CINDY LIZBETH LÓPEZ MIGUEL", iglesia: "ITM SHALOM", tel: "9622603649", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. CIELO VÁZQUEZ HERRERA", iglesia: "TUZANTÁN PUEBLO", tel: "9641005962", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. DAVID ZAVALA ESPINOSA", iglesia: "2a DE TAPACHULA", tel: "9621129666", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. DEYNER GUTIÉRREZ PONCE", iglesia: "MISIÓN LAS MORENAS", tel: "9623897545", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. EDRAS JOSUÉ MENDOZA REYES", iglesia: "MISION RUIZ CORTINEZ", tel: "9622408121", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. EDER DE PAZ OSORIO", iglesia: "ITM RAYMUNDO ENRÍQUEZ", tel: "9621446657", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. ELISEO GONZÁLEZ GARCÍA", iglesia: "PASTOR ASOCIADA", tel: "9613054675", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. HERMELINDO GÓMEZ REYES", iglesia: "MISIÓN METAPA", tel: "9625104294", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. INMER FLORES MACÍAS", iglesia: "LLANO LA LIMA", tel: "9621306378", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. IRIS FLORES MACIAS", iglesia: "PASTORA ASOCIADA", tel: "9626099062", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. ISAAC ESTEBAN ROMERO MEZA", iglesia: "3ª DE CIUDAD HIDALGO", tel: "9621648985", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. ITIEL MATEO PÉREZ", iglesia: "4ª DE TAPACHULA", tel: "9621128132", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. IVETE SAYURI MÉNDEZ TORRES", iglesia: "MONTE SINAI", tel: "9622312736", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. IVÓN YAZMÍN NAVARRO VENTURA", iglesia: "3ª DE MOTOZINTLA", tel: "9622181397", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JESÚS ALBERTO GUILLÉN PEÑA", iglesia: "PUERTA DEL CIELO", tel: "9618740666", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JESÚS ALBERTO GUIZAR LUCAS", iglesia: "BETESDA", tel: "9622631964", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JONATAN AGUILAR CORONEL", iglesia: "MOTOZINTLA CENTRAL", tel: "9641108296", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JONATHAN AGUILAR BARTOLON", iglesia: "LA FE", tel: "9621362641", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JONATAN MATEO PEREZ", iglesia: "BELIZARIO DOMINGUEZ", tel: "9625199624", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. JOSUÉ IVÁN HERNÁNDEZ HERNÁNDEZ", iglesia: "1ª DE HUIXTLA", tel: "9641090654", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. KEYLA MERARI PEREZ MONTOYA", iglesia: "8ª DE TAPACHULA", tel: "9622763210", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. MARÍA DEL ROSARIO ESCOBAR ARROLLO", iglesia: "MISION CASA DE PAZ", tel: "9626247080", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. MARTHA EDITH RODRIGUEZ ZAVALA", iglesia: "ITM FRONTERA HIDALGO", tel: "9621392017", tipo: "Ministro Licenciado" },
+                { nombre: "M.LIC. MEDARDO REYES OCHOA", iglesia: "BRISAS DEL MAR", tel: "9621237558", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. MERARI ORTIZ LUIS", iglesia: "PASTOR ASOCIADA", tel: "9622028789", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. MIGUEL ROMERO CRUZ", iglesia: "ITM 5 DE MAYO", tel: "9621495885", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. NEHEMÍAS HERNÁNDEZ GUZMÁN", iglesia: "MONTE DE SANTIDAD", tel: "9641131475", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. REBECA MORALES ROBLERO", iglesia: "MARANATHA", tel: "9622701390", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. TOMASA CABALLERO VAZQUEZ", iglesia: "PASTOR ASOCIADA", tel: "9641382384", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. SERGIO A. GONZÁLEZ MONTERROSA", iglesia: "JESÚS MI REDENTOR", tel: "9622044382", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. ABIMAEL LÓPEZ TORRES", iglesia: "MINISTRO JUBILADO", tel: "9641133268", tipo: "Ministro Licenciado" },
+                { nombre: "M. LIC. EVERARDO ZARATE GARCÍA", iglesia: "MINISTRO JUBILADO", tel: "9623827635", tipo: "Ministro Licenciado" }
             ],
             laicos: [
-                { nombre: "M.L. ARTURO ARMENDARIZ PAZ", iglesia: "ITM CANTÓN LAS VIUDAS", tel: "9622525566" },
-                { nombre: "M. L. DAVID PAZ", iglesia: "ITM JESUS MI SALVADOR", tel: "9641380300" },
-                { nombre: "M.L. ERIC SOLIS GÓMEZ", iglesia: "CANTÓN BODEGAS", tel: "9623172845" },
-                { nombre: "M.L. FRANKLIN MORALES ANTONIO", iglesia: "TORRE FUERTE", tel: "9642178424" },
-                { nombre: "M.L. GABRIELA HERNANDEZ PEREZ", iglesia: "EBENEZER", tel: "9661239564" },
-                { nombre: "M. L. ISSAC GUZMAN MORALES", iglesia: "ADONAI", tel: "9621455979" },
-                { nombre: "M. L. JAIME LOPEZ", iglesia: "CAMINO A LA TIERRA", tel: "9625654227" },
-                { nombre: "M.L. JAIRO VIDAL COLOMO", iglesia: "2ª DE ALVARO OBREGON", tel: "9622108359" },
-                { nombre: "M.L. JONATHAN FRANCO SANTIZO", iglesia: "SHEKINA", tel: "9626955929" },
-                { nombre: "M.L. JOSE IGNACIO GARCIA MEJIA", iglesia: "CHAMULAPA", tel: "9625094615" },
-                { nombre: "M.L. LUCAS VÁZQUEZ CORTES", iglesia: "FILADELFIA", tel: "9641385760" },
-                { nombre: "M.L. MIZAEL CRUZ SOLORZANO", iglesia: "ITM BETHEL", tel: "9641003488" },
-                { nombre: "M. L. OLENA IBARRA BORRALLES", iglesia: "2a DE HUIXTLA", tel: "9641091585" },
-                { nombre: "M.L. OSCAR FERNANDO VICENTE GONZÁLEZ", iglesia: "PLAN DE IGUALA", tel: "9616257915" },
-                { nombre: "M.L. PEDRO ROBERTO ROBLEDO LÓPEZ", iglesia: "ITM LLUVIAS DE GRACIA", tel: "9621220882" },
-                { nombre: "M.L. RAYMUNDO VÁZQUEZ BERNARDO", iglesia: "ITM CAMINO DE SANTIDAD", tel: "9641006697" },
-                { nombre: "M.L. VICTOR MANUEL SANTIS VIDAL", iglesia: "MARTE R. GÓMEZ", tel: "9621392204" }
+                { nombre: "M.L. ARTURO ARMENDARIZ PAZ", iglesia: "ITM CANTÓN LAS VIUDAS", tel: "9622525566", tipo: "Ministro Laico" },
+                { nombre: "M. L. DAVID PAZ", iglesia: "ITM JESUS MI SALVADOR", tel: "9641380300", tipo: "Ministro Laico" },
+                { nombre: "M.L. ERIC SOLIS GÓMEZ", iglesia: "CANTÓN BODEGAS", tel: "9623172845", tipo: "Ministro Laico" },
+                { nombre: "M.L. FRANKLIN MORALES ANTONIO", iglesia: "TORRE FUERTE", tel: "9642178424", tipo: "Ministro Laico" },
+                { nombre: "M.L. GABRIELA HERNANDEZ PEREZ", iglesia: "EBENEZER", tel: "9661239564", tipo: "Ministro Laico" },
+                { nombre: "M. L. ISSAC GUZMAN MORALES", iglesia: "ADONAI", tel: "9621455979", tipo: "Ministro Laico" },
+                { nombre: "M. L. JAIME LOPEZ", iglesia: "CAMINO A LA TIERRA", tel: "9625654227", tipo: "Ministro Laico" },
+                { nombre: "M.L. JAIRO VIDAL COLOMO", iglesia: "2ª DE ALVARO OBREGON", tel: "9622108359", tipo: "Ministro Laico" },
+                { nombre: "M.L. JONATHAN FRANCO SANTIZO", iglesia: "SHEKINA", tel: "9626955929", tipo: "Ministro Laico" },
+                { nombre: "M.L. JOSE IGNACIO GARCIA MEJIA", iglesia: "CHAMULAPA", tel: "9625094615", tipo: "Ministro Laico" },
+                { nombre: "M.L. LUCAS VÁZQUEZ CORTES", iglesia: "FILADELFIA", tel: "9641385760", tipo: "Ministro Laico" },
+                { nombre: "M.L. MIZAEL CRUZ SOLORZANO", iglesia: "ITM BETHEL", tel: "9641003488", tipo: "Ministro Laico" },
+                { nombre: "M. L. OLENA IBARRA BORRALLES", iglesia: "2a DE HUIXTLA", tel: "9641091585", tipo: "Ministro Laico" },
+                { nombre: "M.L. OSCAR FERNANDO VICENTE GONZÁLEZ", iglesia: "PLAN DE IGUALA", tel: "9616257915", tipo: "Ministro Laico" },
+                { nombre: "M.L. PEDRO ROBERTO ROBLEDO LÓPEZ", iglesia: "ITM LLUVIAS DE GRACIA", tel: "9621220882", tipo: "Ministro Laico" },
+                { nombre: "M.L. RAYMUNDO VÁZQUEZ BERNARDO", iglesia: "ITM CAMINO DE SANTIDAD", tel: "9641006697", tipo: "Ministro Laico" },
+                { nombre: "M.L. VICTOR MANUEL SANTIS VIDAL", iglesia: "MARTE R. GÓMEZ", tel: "9621392204", tipo: "Ministro Laico" }
             ]
         };
 
@@ -851,7 +871,10 @@
             return `
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-lg gap-4">
                     <div class="space-y-1 text-left">
-                        <h4 class="font-heading font-bold text-white text-base">${item.nombre}</h4>
+                        <div class="flex items-center space-x-2">
+                            <h4 class="font-heading font-bold text-white text-base">${item.nombre}</h4>
+                            ${item.tipo ? `<span class="px-2 py-0.5 text-[10px] uppercase font-bold rounded bg-slate-800 text-slate-300 border border-slate-700">${item.tipo}</span>` : ''}
+                        </div>
                         <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20">${item.iglesia}</span>
                     </div>
                     <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
@@ -866,6 +889,42 @@
                     </div>
                 </div>
             `;
+        }
+
+        function filterDirectory() {
+            const query = document.getElementById('directory-search').value.toLowerCase().trim();
+            const searchResultsBox = document.getElementById('global-search-results');
+            const searchContainer = document.getElementById('search-results-container');
+            const searchCount = document.getElementById('search-count');
+            const tabsWrapper = document.getElementById('tabs-wrapper');
+
+            if (query === "") {
+                searchResultsBox.classList.add('hidden');
+                tabsWrapper.classList.remove('hidden');
+                searchContainer.innerHTML = "";
+                return;
+            }
+
+            tabsWrapper.classList.add('hidden');
+            searchResultsBox.classList.remove('hidden');
+
+            const allMinisters = [
+                ...directoryData.pbros,
+                ...directoryData.lic,
+                ...directoryData.laicos
+            ];
+
+            const filtered = allMinisters.filter(item => 
+                item.nombre.toLowerCase().includes(query) || item.iglesia.toLowerCase().includes(query)
+            );
+
+            searchCount.innerText = `${filtered.length} resultado(s) encontrado(s)`;
+
+            if (filtered.length === 0) {
+                searchContainer.innerHTML = `<div class="p-8 text-center text-slate-500 bg-slate-900/40 rounded-2xl border border-slate-800 text-xs">No se encontraron ministros que coincidan con "${query}".</div>`;
+            } else {
+                searchContainer.innerHTML = filtered.map(item => createContactCard(item)).join('');
+            }
         }
 
         function switchDirectoryTab(tabKey) {
