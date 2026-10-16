@@ -64,9 +64,10 @@
                         <span class="block text-xs text-amber-400 font-medium tracking-wider uppercase">Iglesia del Nazareno</span>
                     </div>
                 </div>
-                <div class="hidden lg:flex items-center space-x-6 font-medium text-sm">
+                <div class="hidden lg:flex items-center space-x-5 font-medium text-sm">
                     <button onclick="switchPage('inicio')" class="nav-link text-amber-300 font-semibold transition-colors" data-target="inicio">Inicio</button>
                     <button onclick="switchPage('programa')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="programa">Programa</button>
+                    <button onclick="switchPage('agenda')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="agenda">Agenda</button>
                     <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
                     <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
                     <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
@@ -87,6 +88,7 @@
         <div id="mobile-menu" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 bg-slate-900 border-b border-slate-800">
             <button onclick="switchPage('inicio'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Inicio</button>
             <button onclick="switchPage('programa'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Programa</button>
+            <button onclick="switchPage('agenda'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Agenda (Directorio)</button>
             <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
             <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
             <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
@@ -142,44 +144,41 @@
                             <div class="w-full glass-card p-8 rounded-3xl glow-effect space-y-6 text-center">
                                 <h3 class="font-heading font-bold text-sm tracking-widest text-amber-300 uppercase">Convenciones</h3>
                                 <div class="grid grid-cols-1 gap-4">
-                                    <button onclick="openConvention('dni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
+                                    <div class="w-full bg-slate-900/90 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
                                                 <img src="dni-removebg-preview.png" alt="DNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/4f46e5/ffffff?text=DNI'">
                                             </div>
                                             <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">DNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
+                                                <span class="block font-heading font-bold text-white">DNI</span>
+                                                <span class="text-xs text-slate-400">Convención 17/OCT/2026</span>
                                             </div>
                                         </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
+                                    </div>
 
-                                    <button onclick="openConvention('mni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
+                                    <div class="w-full bg-slate-900/90 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
                                                 <img src="MNI.png" alt="MNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/06b6d4/ffffff?text=MNI'">
                                             </div>
                                             <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">MNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
+                                                <span class="block font-heading font-bold text-white">MNI</span>
+                                                <span class="text-xs text-slate-400">Convención 24/OCT/2026</span>
                                             </div>
                                         </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
+                                    </div>
 
-                                    <button onclick="openConvention('jni')" class="w-full bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between transform hover:scale-[1.02] transition-all group">
+                                    <div class="w-full bg-slate-900/90 border border-slate-700/80 p-4 rounded-2xl shadow-lg flex items-center justify-between">
                                         <div class="flex items-center space-x-3">
                                             <div class="w-12 h-12 bg-white/90 rounded-xl p-2 flex items-center justify-center">
                                                 <img src="JNI.png" alt="JNI" class="max-h-8 object-contain" onerror="this.src='https://placehold.co/80x40/ec4899/ffffff?text=JNI'">
                                             </div>
                                             <div class="text-left">
-                                                <span class="block font-heading font-bold text-white group-hover:text-amber-300 transition-colors">JNI</span>
-                                                <span class="text-xs text-slate-400">Convención Distrital</span>
+                                                <span class="block font-heading font-bold text-white">JNI</span>
+                                                <span class="text-xs text-slate-400">Convención 31/OCT/2026</span>
                                             </div>
                                         </div>
-                                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-300 transition-colors"></i>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,13 +187,20 @@
             </header>
 
             <!-- Quick Access Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
                 <div onclick="switchPage('programa')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
                     <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-calendar-check"></i>
                     </div>
                     <h3 class="font-heading font-bold text-lg text-white mb-1">Programa Oficial</h3>
                     <p class="text-xs text-slate-400">Consulta los horarios y actividades de la asamblea.</p>
+                </div>
+                <div onclick="switchPage('agenda')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-white mb-1">Agenda Distrital</h3>
+                    <p class="text-xs text-slate-400">Directorio de presbíteros, licenciados y laicos.</p>
                 </div>
                 <div onclick="switchPage('informes')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
                     <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
@@ -275,9 +281,6 @@
                         <select id="input-category" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors">
                             <option value="informes">Informes de Asamblea</option>
                             <option value="resoluciones">Resoluciones y Acuerdos</option>
-                            <option value="dni">Convención DNI</option>
-                            <option value="mni">Convención MNI</option>
-                            <option value="jni">Convención JNI</option>
                         </select>
                     </div>
 
@@ -299,44 +302,6 @@
                 <h3 class="font-heading font-bold text-lg text-white border-b border-slate-800 pb-3">Documentos Registrados (Opciones de Borrado)</h3>
                 <div id="admin-files-list" class="space-y-3">
                     <p class="text-xs text-slate-500 text-center py-4">Cargando lista de documentos...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW: CONVENCION DETALLE -->
-        <div id="view-convencion" class="page-view hidden space-y-8">
-            <div class="flex items-center justify-between">
-                <button onclick="switchPage('inicio')" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-sm font-medium transition-colors flex items-center space-x-2">
-                    <i class="fa-solid fa-arrow-left"></i> <span>Volver al Inicio</span>
-                </button>
-            </div>
-
-            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8">
-                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-800">
-                    <div id="conv-logo-box" class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shadow-lg"></div>
-                    <div class="text-center sm:text-left">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Convención Distrital Oficial</span>
-                        <h2 id="conv-title" class="font-heading font-black text-3xl sm:text-4xl text-white mt-1">Convención</h2>
-                        <p id="conv-subtitle" class="text-slate-400 text-sm mt-1">Programa especial e informes específicos de la convención.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-6 space-y-4">
-                        <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-list-check text-amber-400"></i>
-                            <span>Programa de la Convención</span>
-                        </h3>
-                        <div id="conv-program-list" class="space-y-3"></div>
-                    </div>
-
-                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-6 space-y-6">
-                        <h3 class="font-heading font-bold text-xl text-white flex items-center space-x-2">
-                            <i class="fa-solid fa-file-arrow-down text-indigo-400"></i>
-                            <span>Informes y Descargas (Drive)</span>
-                        </h3>
-                        <div id="conv-reports-list" class="space-y-3"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -363,25 +328,75 @@
                     </div>
 
                     <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">08:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Registro e Inscripciones</h4>
-                                <p class="text-xs text-slate-400">Recepción de delegados y entrega de acreditaciones en C.C.R.N.</p>
+                        <div class="space-y-3">
+                            <div class="inline-block px-3.5 py-1 bg-amber-600/20 text-amber-300 text-xs rounded-full font-semibold border border-amber-500/30">
+                                Inicio a las 8:00 a.m.
+                            </div>
+                            <div class="space-y-2 text-xs text-slate-300 pl-2">
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-amber-400">A)</span> Registro de asistentes
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-amber-400">B)</span> Devocional
+                                    <p class="text-slate-400 pl-4">Mensaje</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-amber-400">C)</span> Organización de la asamblea
+                                    <div class="pl-4 space-y-0.5 text-slate-400">
+                                        <p>• Bienvenida</p>
+                                        <p>• Reconocimiento del número de delegados</p>
+                                        <p>• Presentación de los ayudantes a la asamblea</p>
+                                        <p>• Establecimiento del área de votación</p>
+                                        <p>• Aprobación del horario de sesiones</p>
+                                        <p>• Presentación del comité de escrutadores</p>
+                                        <p>• Lectura de la carta de autorización del superintendente general</p>
+                                    </div>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-amber-400">D)</span> Presentación de los nuevos pastores asignados y esposas a la asamblea
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-amber-400">E)</span> Representante de Casa Nazarena de Publicaciones
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-amber-400">F)</span> Testimonios de ministros laicos (todos de 2 minutos c/u)
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-amber-400">G)</span> Informe del Comité Nominativo
+                                    <p class="text-slate-400 pl-4">Nomina & Votación</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-amber-400">H)</span> Presentación de los Informes
+                                    <div class="pl-4 space-y-0.5 text-slate-400">
+                                        <p>• Junta de Credenciales (1ª parte)</p>
+                                        <p>• Homenaje a los pastores jubilados</p>
+                                        <p>• Junta de Estudios Ministeriales</p>
+                                        <p>• Comité de Finanzas</p>
+                                        <p>• Junta de Propiedades</p>
+                                        <p>• Compasión</p>
+                                        <p>• Comité de Mejoras del Terreno de C.C.R.N.</p>
+                                        <p>• Directora de Evangelismo</p>
+                                    </div>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-amber-400">I)</span> Testimonio de ministros licenciados (todos 2 minutos c/u)
+                                </div>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">10:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Sesión Plenaria de Apertura</h4>
-                                <p class="text-xs text-slate-400">Devocional inaugural, constitución de la asamblea y mensaje principal.</p>
-                            </div>
+
+                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-amber-950/20 border border-amber-500/30">
+                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950 px-2 py-1 rounded-lg shrink-0">2:00 pm</span>
+                            <p class="text-xs text-amber-200 font-medium">COMIDA regresando a las 3:00 pm</p>
                         </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded-lg">15:30 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Informes del Superintendente y Distritales</h4>
-                                <p class="text-xs text-slate-400">Presentación de reportes ministeriales y estadísticas generales.</p>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1 text-xs text-slate-300">
+                                <span class="font-bold text-amber-400">J)</span> Presentación de resoluciones de los comités de asamblea
+                                <div class="pl-4 space-y-0.5 text-slate-400">
+                                    <p>• Evangelismo</p>
+                                    <p>• Finanzas</p>
+                                    <p>• Estudios Ministeriales</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -400,30 +415,96 @@
                     </div>
 
                     <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">09:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Devocional Matutino</h4>
-                                <p class="text-xs text-slate-400">Momento de adoración espiritual y palabra de aliento ministerial.</p>
+                        <div class="space-y-3">
+                            <div class="inline-block px-3.5 py-1 bg-cyan-600/20 text-cyan-300 text-xs rounded-full font-semibold border border-cyan-500/30">
+                                Inicio 9:00 a.m.
+                            </div>
+                            <div class="space-y-2 text-xs text-slate-300 pl-2">
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-cyan-400">A)</span> Devocional
+                                    <p class="text-slate-400 pl-4">Mensaje</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">B)</span> Llamamiento al orden y organización de la asamblea
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-cyan-400">C)</span> Informe del Superintendente de Distrito: Rev. Josué Barrios López
+                                    <p class="text-slate-400 pl-4">• Presentación del Superintendente y esposa</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">D)</span> Testimonio de los presbíteros (todos 2 minutos c/u)
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-cyan-400">E)</span> Informes 2ª parte
+                                    <div class="pl-4 space-y-0.5 text-slate-400">
+                                        <p>• Junta de Credenciales (2ª parte)</p>
+                                        <p>• Junta Consultora</p>
+                                        <p>• Reporte de Tesorería</p>
+                                        <p>• Reporte de Auditoría</p>
+                                        <p>• Resultados de las votaciones</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">11:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Elecciones y Propuestas</h4>
-                                <p class="text-xs text-slate-400">Elección de mesas directivas, comités y votación de iniciativas.</p>
-                            </div>
+
+                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-cyan-950/20 border border-cyan-500/30">
+                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950 px-2 py-1 rounded-lg shrink-0">2:00 p.m.</span>
+                            <p class="text-xs text-cyan-200 font-medium">COMIDA regresando a las 3:00 p.m.</p>
                         </div>
-                        <div class="flex items-start space-x-4 p-3 rounded-2xl bg-slate-950/60 border border-slate-800/60">
-                            <span class="text-xs font-bold text-cyan-400 mt-1 bg-cyan-950/80 px-2 py-1 rounded-lg">16:00 hrs</span>
-                            <div>
-                                <h4 class="text-sm font-semibold text-white">Servicio de Clausura y Ordenación</h4>
-                                <p class="text-xs text-slate-400">Ordenación de ministros y cierre oficial de la XXIX asamblea.</p>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="space-y-2 text-xs text-slate-300 pl-2">
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60 space-y-1">
+                                    <span class="font-bold text-cyan-400">F)</span> CULTO DE CLAUSURA
+                                    <p class="text-slate-400 pl-4">• Tiempo de Alabanzas</p>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">G)</span> Memorial
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">H)</span> Presentación de Frutos
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">I)</span> Entrega de licencia a Ministros Licenciados
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">J)</span> Consagración del liderazgo del Distrito
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800/60">
+                                    <span class="font-bold text-cyan-400">K)</span> Clausura la asamblea distrital
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- VIEW: AGENDA / DIRECTORIO -->
+        <div id="view-agenda" class="page-view hidden space-y-8 max-w-5xl mx-auto">
+            <div class="text-center space-y-2">
+                <span class="text-emerald-400 font-semibold text-xs tracking-widest uppercase">Directorio Oficial</span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Agenda Ministerial</h2>
+                <p class="text-slate-400 text-sm">Directorio telefónico directo de presbíteros, ministros licenciados y laicos del distrito.</p>
+            </div>
+
+            <!-- Pestañas de Navegación del Directorio -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 border-b border-slate-800 pb-4">
+                <button onclick="switchDirectoryTab('pbros')" id="btn-tab-pbros" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-user-tie mr-1"></i> Presbíteros (PBRO)
+                </button>
+                <button onclick="switchDirectoryTab('lic')" id="btn-tab-lic" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-user-graduate mr-1"></i> Ministros Licenciados (M. Lic.)
+                </button>
+                <button onclick="switchDirectoryTab('laicos')" id="btn-tab-laicos" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-users mr-1"></i> Ministros Laicos (M. L.)
+                </button>
+            </div>
+
+            <!-- Contenedores de las Listas -->
+            <div id="dir-container-pbros" class="directory-section space-y-3"></div>
+            <div id="dir-container-lic" class="directory-section hidden space-y-3"></div>
+            <div id="dir-container-laicos" class="directory-section hidden space-y-3"></div>
         </div>
 
         <!-- VIEW: INFORMES PDF -->
@@ -507,54 +588,14 @@
 
         window.appData = {
             informes: [],
-            resoluciones: [],
-            dni: {
-                title: "Convención DNI",
-                subtitle: "Departamento de Misiones / Nazareno e Iniciativas Distritales",
-                logo: "dni-removebg-preview.png",
-                logoFallback: "DNI",
-                program: [
-                    { time: "09:00 hrs", title: "Apertura y Devocional DNI", desc: "Devocional enfocado en la obra misionera global." },
-                    { time: "10:30 hrs", title: "Informe de Proyectos DNI", desc: "Presentación de metas alcanzadas y ofrendas." },
-                    { time: "12:00 hrs", title: "Elección de Directiva DNI", desc: "Votación y nombramiento del nuevo comité." }
-                ],
-                reports: []
-            },
-            mni: {
-                title: "Convención MNI",
-                subtitle: "Misiones Nazarenas Internacionales",
-                logo: "MNI.png",
-                logoFallback: "MNI",
-                program: [
-                    { time: "10:00 hrs", title: "Ceremonia de MNI", desc: "Celebración de los frentes misioneros mundiales." },
-                    { time: "11:30 hrs", title: "Reporte Financiero Misionero", desc: "Informe de ofrendas para la evangelización mundial." },
-                    { time: "13:00 hrs", title: "Mensaje Misionero Especial", desc: "Conferencia y desafío de alcance global." }
-                ],
-                reports: []
-            },
-            jni: {
-                title: "Convención JNI",
-                subtitle: "Juventud Nazarena Internacional",
-                logo: "JNI.png",
-                logoFallback: "JNI",
-                program: [
-                    { time: "15:00 hrs", title: "Plenaria Juvenil JNI", desc: "Adoración juvenil y reporte de ministerios locales." },
-                    { time: "16:30 hrs", title: "Talleres de Liderazgo Joven", desc: "Capacitación para líderes de jóvenes y adolescentes." },
-                    { time: "18:00 hrs", title: "Elección Mesa Directiva JNI", desc: "Selección de representantes juveniles." }
-                ],
-                reports: []
-            }
+            resoluciones: []
         };
 
-        // Arreglo bruto para mostrar todos los documentos en el panel admin con opción de borrar
         window.rawDocuments = [];
 
         onSnapshot(collection(db, "documentos"), (snapshot) => {
             window.appData.informes = [];
             window.appData.resoluciones = [];
-            window.appData.dni.reports = [];
-            window.appData.mni.reports = [];
-            window.appData.jni.reports = [];
             window.rawDocuments = [];
 
             snapshot.forEach((docSnap) => {
@@ -570,10 +611,8 @@
                 window.rawDocuments.push(item);
 
                 const cat = docData.category;
-                if (cat === 'informes' || cat === 'resoluciones') {
+                if (window.appData[cat]) {
                     window.appData[cat].push(item);
-                } else if (window.appData[cat] && window.appData[cat].reports) {
-                    window.appData[cat].reports.push(item);
                 }
             });
 
@@ -620,7 +659,6 @@
             }
         };
 
-        // Función global para borrar documento de Firebase
         window.deleteDocument = async function(docId, docTitle) {
             if(!confirm(`¿Estás seguro de que deseas eliminar el documento "${docTitle}"?`)) return;
 
@@ -635,10 +673,187 @@
     </script>
 
     <script>
+        const directoryData = {
+            pbros: [
+                { nombre: "REV. JOSUÉ BARRIOS LÓPEZ", iglesia: "SUPERINTENDENTE DE DISTRITO", tel: "9646248029" },
+                { nombre: "PBRO. ADAIA V. ARGUETA GUILLEN", iglesia: "SANTA CLARA", tel: "9621947555" },
+                { nombre: "PBRO. AGUSTÍN QUIROGA ÁVILA", iglesia: "HUANACASTLE", tel: "9622538913" },
+                { nombre: "PBRO. ALEXANDER LÓPEZ TORRES", iglesia: "5ª DE TAPACHULA", tel: "9622170250" },
+                { nombre: "PBRO. AMAURI GUZMÁN NOLASCO", iglesia: "NANCILLAL", tel: "9621847002" },
+                { nombre: "PBRO. ANDREA MARGARITA LÓPEZ MIGUEL", iglesia: "PASTOR ASOCIADA", tel: "9621075058" },
+                { nombre: "PBRO. ANA JOCABED VÁZQUEZ VALLES", iglesia: "CAMINO AL CIELO", tel: "9651194480" },
+                { nombre: "PBRA. ANA VAZQUEZ CRUZ", iglesia: "6ª DE TAPACHULA", tel: "9622092055" },
+                { nombre: "PBRO. ANTONIO RAMIREZ LÓPEZ", iglesia: "EL CAMPITO", tel: "9621481963" },
+                { nombre: "PBRO. BARTOLO ESCOBAR RIZO", iglesia: "9ª DE TAPACHULA", tel: "9813947374" },
+                { nombre: "PBRO. BELIZARIO LÓPEZ BLAS", iglesia: "BETANIA", tel: "9624839852" },
+                { nombre: "PBRO. BELSAÍN GUZMAN NOLASCO", iglesia: "1ª DE ALVARO OBREGÓN", tel: "9622582898" },
+                { nombre: "PBRO. BELSAY LÓPEZ LÓPEZ", iglesia: "PLAYA GRANDE", tel: "9641128725" },
+                { nombre: "PBRO. BERNARDO ELIEZER GONZÁLEZ GONZÁLEZ", iglesia: "HUEHUETÁN ESTACIÓN", tel: "9611319901" },
+                { nombre: "PBRO. BERZAIN ROJAS LÓPEZ", iglesia: "3ª DE HUIXTLA", tel: "9646275465" },
+                { nombre: "PBRO. CLAUDIO SANTIAGO DESALES", iglesia: "SIN ASIGNACION", tel: "9181034088" },
+                { nombre: "PBRO. CLAUDIA INÉS ROMÁN LÓPEZ", iglesia: "SIN ASIGNACIÓN", tel: "9621468340" },
+                { nombre: "PBRO. ECDAR PARRAZALEZ GÓMEZ", iglesia: "PASTOR ASOCIADO", tel: "9621261574" },
+                { nombre: "PBRO. EDGAR DANIEL SANTIAGO ENRÍQUEZ", iglesia: "CACAHOATAN", tel: "9625135448" },
+                { nombre: "PBRO. ELMER CELAYA ESCOBAR", iglesia: "2ª DE CIUDAD HIDALGO", tel: "9621412479" },
+                { nombre: "PBRO. EVER MACIAS MEJIA", iglesia: "COLONIA HIDALGO", tel: "9621702476" },
+                { nombre: "PBRO. FABRICIO VÁZQUEZ ARIAS", iglesia: "EMMANUEL", tel: "9621844897" },
+                { nombre: "PBRO. FÉLIX AMÉZTICA MADRID", iglesia: "COLONIA OBRERA", tel: "9622089718" },
+                { nombre: "PBRO. FRANCISCO JAVIER VAZQUEZ VILLALOBOS", iglesia: "PASTOR ASOCIADO", tel: "9624498103" },
+                { nombre: "PBRO. FREDY DE LEÓN JUÁREZ", iglesia: "EL CAPULÍN", tel: "9621685144" },
+                { nombre: "PBRO. GUILLERMO SALDAÑA MORENO", iglesia: "EL ARENAL", tel: "9646240737" },
+                { nombre: "PBRO. JESÚS NOÉ MATÍAS URBINA", iglesia: "1ª DE PUERTO MADERO", tel: "9622120793" },
+                { nombre: "PBRO. JOEL CRUZ ARGUETA", iglesia: "PASTOR ASOCIADO", tel: "9621412619" },
+                { nombre: "PBRO. JORGE BARRIENTOS MÁRQUEZ", iglesia: "1ª DE TAPACHULA", tel: "9641165564" },
+                { nombre: "PBRO. JOSÉ ALFREDO SOLÌS SANTOS", iglesia: "ITM KAIROS", tel: "9621171504" },
+                { nombre: "PBRO. JOSUE MENDEZ ROQUE", iglesia: "VIVA MEXICO", tel: "9681254868" },
+                { nombre: "PBRO. JUDITH PATRICIA JIMÉNEZ SÁNCHEZ", iglesia: "CONGREGACIÓN REFORMA", tel: "9618735206" },
+                { nombre: "PBRO JULIO CESAR LEY", iglesia: "LA GLORIA DE DIOS", tel: "9626956271" },
+                { nombre: "PBRO. KARIN LORENA BARRIOS", iglesia: "1ª DE TUXTLA CHICO", tel: "9621082294" },
+                { nombre: "PBRO. MARCO ANTONIO HERRERA CONSTANTINO", iglesia: "IGNACIO ZARAGOZA", tel: "9621656118" },
+                { nombre: "PBRO. MARCO ANTONIO VERA POSADA", iglesia: "ITM VIDA NUEVA", tel: "9621689410" },
+                { nombre: "PBRO. MARCO TULIO BARRIOS", iglesia: "BUENOS AIRES", tel: "9622739202" },
+                { nombre: "PBRO. MARIO JOSUÉ LÓPEZ ALVARADO", iglesia: "PASTOR ASOCIADO", tel: "9622547040" },
+                { nombre: "PBRO. MIGUEL ANGEL VÁZQUEZ CHALECO", iglesia: "TUZANTÁN ESTACIÓN", tel: "9646246291" },
+                { nombre: "PBRO. MIGUEL GÓMEZ REYES", iglesia: "MAZATÀN", tel: "9621977366" },
+                { nombre: "PBRO. NARCISO GONZÁLEZ GARCÍA", iglesia: "PENIEL", tel: "9621041276" },
+                { nombre: "PBRO. NATANAEL DE LEÓN CIGARROA", iglesia: "GUACHIPILÍN", tel: "9621692787" },
+                { nombre: "PBRO. NESTOR MARROQUIN MALDONADO", iglesia: "ITM ADULAM", tel: "9621512026" },
+                { nombre: "PBRO. NILTON ORFEO GERARDO MORGA", iglesia: "MONTE DE LOS OLIVOS", tel: "9661150845" },
+                { nombre: "PBRO. PABLO ZUNÚN LÓPEZ", iglesia: "ITM MANAHAIN", tel: "9621635546" },
+                { nombre: "PBRO. PEDRO SANTOS CHÁVEZ", iglesia: "3ª DE TAPACHULA", tel: "9651130133" },
+                { nombre: "PBRO. RAQUEL BAUTISTA CHONGO", iglesia: "ITM NUEVO NACIMIENTO", tel: "9641025623" },
+                { nombre: "PBRO. ROBERTO CALEB LÓPEZ ALVARADO", iglesia: "ARCA DE SALVACION", tel: "9621530525" },
+                { nombre: "PBRO. ROBERTO NAJERA ALVAREZ", iglesia: "MONTE HOREB", tel: "9641025346" },
+                { nombre: "PBRO. ROBERTO LOPEZ FAJARDO", iglesia: "1ª DE CIUDAD HIDALGO", tel: "9621336395" },
+                { nombre: "PBRO. RODOLFO LÓPEZ LÓPEZ", iglesia: "SHADAI", tel: "9621229269" },
+                { nombre: "PBRO. RUBBER PÉREZ GUERRERO", iglesia: "KEDUSHÁ", tel: "9625383669" },
+                { nombre: "PBRO. RUSSELL TAMAYO CASTRO", iglesia: "BARRIO LAS FLORES", tel: "9641159260" },
+                { nombre: "PBRO. SALOMÓN ANTONIO MARCOS", iglesia: "RANCHO NUEVO", tel: "9181283020" },
+                { nombre: "PBRO. TEODOMIRO AGUILAR OCHOA", iglesia: "LÁZARO CÁRDENAS", tel: "9622706373" },
+                { nombre: "PBRO. ULISES CAMAS MARROQUIN", iglesia: "ALFA Y OMEGA", tel: "9641833812" }
+            ],
+            lic: [
+                { nombre: "M. LIC. ABEL BARRIOS RUIZ", iglesia: "CRISTO LA ROCA", tel: "9622417307" },
+                { nombre: "M. LIC. ANA LIDIA ALEGRIA HERNANDEZ", iglesia: "PASTOR ASOCIADA", tel: "9621865304" },
+                { nombre: "M. LIC. BERSABET JIMÉNEZ PÉREZ", iglesia: "ISLAMAPITA", tel: "9641033525" },
+                { nombre: "M. LIC. CARLOS OCEGUERA GONZÁLEZ", iglesia: "GETSEMANI", tel: "9621118522" },
+                { nombre: "M. LIC. CÉSAR OZUNA LÓPEZ", iglesia: "20 DE NOVIEMBRE", tel: "9616264903" },
+                { nombre: "M. LIC. CINDY LIZBETH LÓPEZ MIGUEL", iglesia: "ITM SHALOM", tel: "9622603649" },
+                { nombre: "M. LIC. CIELO VÁZQUEZ HERRERA", iglesia: "TUZANTÁN PUEBLO", tel: "9641005962" },
+                { nombre: "M. LIC. DAVID ZAVALA ESPINOSA", iglesia: "2a DE TAPACHULA", tel: "9621129666" },
+                { nombre: "M. LIC. DEYNER GUTIÉRREZ PONCE", iglesia: "MISIÓN LAS MORENAS", tel: "9623897545" },
+                { nombre: "M. LIC. EDRAS JOSUÉ MENDOZA REYES", iglesia: "MISION RUIZ CORTINEZ", tel: "9622408121" },
+                { nombre: "M. LIC. EDER DE PAZ OSORIO", iglesia: "ITM RAYMUNDO ENRÍQUEZ", tel: "9621446657" },
+                { nombre: "M. LIC. ELISEO GONZÁLEZ GARCÍA", iglesia: "PASTOR ASOCIADA", tel: "9613054675" },
+                { nombre: "M. LIC. HERMELINDO GÓMEZ REYES", iglesia: "MISIÓN METAPA", tel: "9625104294" },
+                { nombre: "M. LIC. INMER FLORES MACÍAS", iglesia: "LLANO LA LIMA", tel: "9621306378" },
+                { nombre: "M. LIC. IRIS FLORES MACIAS", iglesia: "PASTORA ASOCIADA", tel: "9626099062" },
+                { nombre: "M. LIC. ISAAC ESTEBAN ROMERO MEZA", iglesia: "3ª DE CIUDAD HIDALGO", tel: "9621648985" },
+                { nombre: "M. LIC. ITIEL MATEO PÉREZ", iglesia: "4ª DE TAPACHULA", tel: "9621128132" },
+                { nombre: "M. LIC. IVETE SAYURI MÉNDEZ TORRES", iglesia: "MONTE SINAI", tel: "9622312736" },
+                { nombre: "M. LIC. IVÓN YAZMÍN NAVARRO VENTURA", iglesia: "3ª DE MOTOZINTLA", tel: "9622181397" },
+                { nombre: "M. LIC. JESÚS ALBERTO GUILLÉN PEÑA", iglesia: "PUERTA DEL CIELO", tel: "9618740666" },
+                { nombre: "M. LIC. JESÚS ALBERTO GUIZAR LUCAS", iglesia: "BETESDA", tel: "9622631964" },
+                { nombre: "M. LIC. JONATAN AGUILAR CORONEL", iglesia: "MOTOZINTLA CENTRAL", tel: "9641108296" },
+                { nombre: "M. LIC. JONATHAN AGUILAR BARTOLON", iglesia: "LA FE", tel: "9621362641" },
+                { nombre: "M. LIC. JONATAN MATEO PEREZ", iglesia: "BELIZARIO DOMINGUEZ", tel: "9625199624" },
+                { nombre: "M. LIC. JOSUÉ IVÁN HERNÁNDEZ HERNÁNDEZ", iglesia: "1ª DE HUIXTLA", tel: "9641090654" },
+                { nombre: "M. LIC. KEYLA MERARI PEREZ MONTOYA", iglesia: "8ª DE TAPACHULA", tel: "9622763210" },
+                { nombre: "M. LIC. MARÍA DEL ROSARIO ESCOBAR ARROLLO", iglesia: "MISION CASA DE PAZ", tel: "9626247080" },
+                { nombre: "M. LIC. MARTHA EDITH RODRIGUEZ ZAVALA", iglesia: "ITM FRONTERA HIDALGO", tel: "9621392017" },
+                { nombre: "M.LIC. MEDARDO REYES OCHOA", iglesia: "BRISAS DEL MAR", tel: "9621237558" },
+                { nombre: "M. LIC. MERARI ORTIZ LUIS", iglesia: "PASTOR ASOCIADA", tel: "9622028789" },
+                { nombre: "M. LIC. MIGUEL ROMERO CRUZ", iglesia: "ITM 5 DE MAYO", tel: "9621495885" },
+                { nombre: "M. LIC. NEHEMÍAS HERNÁNDEZ GUZMÁN", iglesia: "MONTE DE SANTIDAD", tel: "9641131475" },
+                { nombre: "M. LIC. REBECA MORALES ROBLERO", iglesia: "MARANATHA", tel: "9622701390" },
+                { nombre: "M. LIC. TOMASA CABALLERO VAZQUEZ", iglesia: "PASTOR ASOCIADA", tel: "9641382384" },
+                { nombre: "M. LIC. SERGIO A. GONZÁLEZ MONTERROSA", iglesia: "JESÚS MI REDENTOR", tel: "9622044382" },
+                { nombre: "M. LIC. ABIMAEL LÓPEZ TORRES", iglesia: "MINISTRO JUBILADO", tel: "9641133268" },
+                { nombre: "M. LIC. EVERARDO ZARATE GARCÍA", iglesia: "MINISTRO JUBILADO", tel: "9623827635" }
+            ],
+            laicos: [
+                { nombre: "M.L. ARTURO ARMENDARIZ PAZ", iglesia: "ITM CANTÓN LAS VIUDAS", tel: "9622525566" },
+                { nombre: "M. L. DAVID PAZ", iglesia: "ITM JESUS MI SALVADOR", tel: "9641380300" },
+                { nombre: "M.L. ERIC SOLIS GÓMEZ", iglesia: "CANTÓN BODEGAS", tel: "9623172845" },
+                { nombre: "M.L. FRANKLIN MORALES ANTONIO", iglesia: "TORRE FUERTE", tel: "9642178424" },
+                { nombre: "M.L. GABRIELA HERNANDEZ PEREZ", iglesia: "EBENEZER", tel: "9661239564" },
+                { nombre: "M. L. ISSAC GUZMAN MORALES", iglesia: "ADONAI", tel: "9621455979" },
+                { nombre: "M. L. JAIME LOPEZ", iglesia: "CAMINO A LA TIERRA", tel: "9625654227" },
+                { nombre: "M.L. JAIRO VIDAL COLOMO", iglesia: "2ª DE ALVARO OBREGON", tel: "9622108359" },
+                { nombre: "M.L. JONATHAN FRANCO SANTIZO", iglesia: "SHEKINA", tel: "9626955929" },
+                { nombre: "M.L. JOSE IGNACIO GARCIA MEJIA", iglesia: "CHAMULAPA", tel: "9625094615" },
+                { nombre: "M.L. LUCAS VÁZQUEZ CORTES", iglesia: "FILADELFIA", tel: "9641385760" },
+                { nombre: "M.L. MIZAEL CRUZ SOLORZANO", iglesia: "ITM BETHEL", tel: "9641003488" },
+                { nombre: "M. L. OLENA IBARRA BORRALLES", iglesia: "2a DE HUIXTLA", tel: "9641091585" },
+                { nombre: "M.L. OSCAR FERNANDO VICENTE GONZÁLEZ", iglesia: "PLAN DE IGUALA", tel: "9616257915" },
+                { nombre: "M.L. PEDRO ROBERTO ROBLEDO LÓPEZ", iglesia: "ITM LLUVIAS DE GRACIA", tel: "9621220882" },
+                { nombre: "M.L. RAYMUNDO VÁZQUEZ BERNARDO", iglesia: "ITM CAMINO DE SANTIDAD", tel: "9641006697" },
+                { nombre: "M.L. VICTOR MANUEL SANTIS VIDAL", iglesia: "MARTE R. GÓMEZ", tel: "9621392204" }
+            ]
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             renderInformes();
             renderResoluciones();
+            renderDirectoryLists();
         });
+
+        function renderDirectoryLists() {
+            const pbrosContainer = document.getElementById('dir-container-pbros');
+            if(pbrosContainer) {
+                pbrosContainer.innerHTML = directoryData.pbros.map(item => createContactCard(item)).join('');
+            }
+
+            const licContainer = document.getElementById('dir-container-lic');
+            if(licContainer) {
+                licContainer.innerHTML = directoryData.lic.map(item => createContactCard(item)).join('');
+            }
+
+            const laicosContainer = document.getElementById('dir-container-laicos');
+            if(laicosContainer) {
+                laicosContainer.innerHTML = directoryData.laicos.map(item => createContactCard(item)).join('');
+            }
+        }
+
+        function createContactCard(item) {
+            const cleanTel = item.tel.toString().trim();
+            const whatsappMsg = encodeURIComponent(`Hola ${item.nombre}, le saludo desde la aplicación de la XXIX Asamblea del Distrito Sur Fronterizo.`);
+
+            return `
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-lg gap-4">
+                    <div class="space-y-1 text-left">
+                        <h4 class="font-heading font-bold text-white text-base">${item.nombre}</h4>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20">${item.iglesia}</span>
+                    </div>
+                    <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                        <a href="tel:+52${cleanTel}" class="flex-1 sm:flex-none px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-blue-600/20 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>Llamar</span>
+                        </a>
+                        <a href="https://wa.me/52${cleanTel}?text=${whatsappMsg}" target="_blank" class="flex-1 sm:flex-none px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-emerald-600/20 flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function switchDirectoryTab(tabKey) {
+            document.querySelectorAll('.directory-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`dir-container-${tabKey}`).classList.remove('hidden');
+
+            const btnPbros = document.getElementById('btn-tab-pbros');
+            const btnLic = document.getElementById('btn-tab-lic');
+            const btnLaicos = document.getElementById('btn-tab-laicos');
+
+            [btnPbros, btnLic, btnLaicos].forEach(btn => {
+                btn.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all";
+            });
+
+            const activeBtn = document.getElementById(`btn-tab-${tabKey}`);
+            activeBtn.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20";
+        }
 
         function checkAdminAccess() {
             const isLoggedIn = sessionStorage.getItem('admin_logged') === 'true';
@@ -781,62 +996,6 @@
         }
         function toggleMobileMenu() {
             if(mobileMenu) mobileMenu.classList.add('hidden');
-        }
-
-        function openConvention(key) {
-            const data = window.appData[key];
-            if(!data) return;
-
-            document.getElementById('conv-title').innerText = data.title;
-            document.getElementById('conv-subtitle').innerText = data.subtitle;
-            
-            const logoBox = document.getElementById('conv-logo-box');
-            logoBox.innerHTML = `<img src="${data.logo}" alt="${data.title}" class="max-h-14 object-contain" onerror="this.src='https://placehold.co/100x60/4f46e5/ffffff?text=${data.logoFallback}'">`;
-
-            renderConventionReports(key);
-
-            const progList = document.getElementById('conv-program-list');
-            progList.innerHTML = data.program.map(item => `
-                <div class="flex items-start space-x-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
-                    <span class="text-xs font-bold text-amber-400 mt-1 bg-amber-950/80 px-2 py-1 rounded">${item.time}</span>
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">${item.title}</h4>
-                        <p class="text-xs text-slate-400">${item.desc}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-            document.getElementById('view-convencion').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderConventionReports(key) {
-            const data = window.appData[key];
-            const repList = document.getElementById('conv-reports-list');
-            if(!repList) return;
-
-            if(!data.reports || data.reports.length === 0) {
-                repList.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">No hay informes agregados para esta convención.</p>`;
-                return;
-            }
-
-            repList.innerHTML = data.reports.map((rep) => `
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 transition-all group">
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-file-pdf text-red-400 text-lg"></i>
-                        <div class="text-left">
-                            <span class="block text-sm font-semibold text-white group-hover:text-amber-300 transition-colors">${rep.title}</span>
-                            <span class="text-xs text-slate-400">${rep.desc}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <a href="${rep.url}" target="_blank" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-bold transition-colors flex items-center space-x-1">
-                            <i class="fa-solid fa-eye mr-1"></i> Ver
-                        </a>
-                    </div>
-                </div>
-            `).join('');
         }
     </script>
 </body>
