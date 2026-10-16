@@ -67,7 +67,7 @@
                 <div class="hidden lg:flex items-center space-x-5 font-medium text-sm">
                     <button onclick="switchPage('inicio')" class="nav-link text-amber-300 font-semibold transition-colors" data-target="inicio">Inicio</button>
                     <button onclick="switchPage('programa')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="programa">Programa</button>
-                    <button onclick="switchPage('agenda')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="agenda">Agenda</button>
+                    <button onclick="checkAgendaAccess()" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="agenda">Agenda</button>
                     <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
                     <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
                     <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
@@ -88,7 +88,7 @@
         <div id="mobile-menu" class="hidden lg:hidden px-4 pt-2 pb-6 space-y-3 bg-slate-900 border-b border-slate-800">
             <button onclick="switchPage('inicio'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Inicio</button>
             <button onclick="switchPage('programa'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Programa</button>
-            <button onclick="switchPage('agenda'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Agenda (Directorio)</button>
+            <button onclick="checkAgendaAccess(); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Agenda (Directorio)</button>
             <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
             <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
             <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
@@ -195,12 +195,12 @@
                     <h3 class="font-heading font-bold text-lg text-white mb-1">Programa Oficial</h3>
                     <p class="text-xs text-slate-400">Consulta los horarios y actividades de la asamblea.</p>
                 </div>
-                <div onclick="switchPage('agenda')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
+                <div onclick="checkAgendaAccess()" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-address-book"></i>
                     </div>
                     <h3 class="font-heading font-bold text-lg text-white mb-1">Agenda Distrital</h3>
-                    <p class="text-xs text-slate-400">Directorio de presbíteros, licenciados y laicos.</p>
+                    <p class="text-xs text-slate-400">Directorio de Ministros</p>
                 </div>
                 <div onclick="switchPage('informes')" class="bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 p-6 rounded-3xl cursor-pointer transition-all group shadow-xl">
                     <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
@@ -226,7 +226,7 @@
             </div>
         </div>
 
-        <!-- VIEW: LOGIN ADMIN -->
+        <!-- VIEW: LOGIN ADMIN (SUBIR ARCHIVOS) -->
         <div id="view-login" class="page-view hidden space-y-8 max-w-md mx-auto">
             <div class="text-center space-y-2">
                 <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Seguridad Restringida</span>
@@ -252,6 +252,35 @@
                     </button>
                 </form>
                 <div id="login-error" class="hidden text-center text-xs p-3 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30"></div>
+            </div>
+        </div>
+
+        <!-- VIEW: LOGIN AGENDA (ACCESO MINISTROS) -->
+        <div id="view-login-agenda" class="page-view hidden space-y-8 max-w-md mx-auto">
+            <div class="text-center space-y-2">
+                <span class="text-emerald-400 font-semibold text-xs tracking-widest uppercase">Seguridad Restringida</span>
+                <h2 class="font-heading font-extrabold text-3xl text-white">Acceso Exclusivo a Ministros</h2>
+                <p class="text-slate-400 text-sm">Ingresa tus credenciales para acceder a la agenda y directorio ministerial.</p>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-6">
+                <form id="login-agenda-form" onsubmit="handleAgendaLogin(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Usuario</label>
+                        <input type="text" id="login-agenda-user" required placeholder="Usuario" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Contraseña</label>
+                        <input type="password" id="login-agenda-pass" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-emerald-400 transition-colors">
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Ingresar a Directorio</span>
+                    </button>
+                </form>
+                <div id="login-agenda-error" class="hidden text-center text-xs p-3 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30"></div>
             </div>
         </div>
 
@@ -485,19 +514,19 @@
             <div class="text-center space-y-2">
                 <span class="text-emerald-400 font-semibold text-xs tracking-widest uppercase">Directorio Oficial</span>
                 <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Agenda Ministerial</h2>
-                <p class="text-slate-400 text-sm">Directorio telefónico directo de presbíteros, ministros licenciados y laicos del distrito.</p>
+                <p class="text-slate-400 text-sm">Directorio telefónico directo de Ministros</p>
             </div>
 
             <!-- Pestañas de Navegación del Directorio -->
             <div class="flex flex-wrap justify-center gap-2 sm:gap-4 border-b border-slate-800 pb-4">
                 <button onclick="switchDirectoryTab('pbros')" id="btn-tab-pbros" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-user-tie mr-1"></i> Presbíteros (PBRO)
+                    <i class="fa-solid fa-user-tie mr-1"></i> Presbítero
                 </button>
                 <button onclick="switchDirectoryTab('lic')" id="btn-tab-lic" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-user-graduate mr-1"></i> Ministros Licenciados (M. Lic.)
+                    <i class="fa-solid fa-user-graduate mr-1"></i> Ministros Licenciados
                 </button>
                 <button onclick="switchDirectoryTab('laicos')" id="btn-tab-laicos" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-users mr-1"></i> Ministros Laicos (M. L.)
+                    <i class="fa-solid fa-users mr-1"></i> Ministros Laicos
                 </button>
             </div>
 
@@ -853,6 +882,32 @@
 
             const activeBtn = document.getElementById(`btn-tab-${tabKey}`);
             activeBtn.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-slate-950 transition-all shadow-lg shadow-amber-500/20";
+        }
+
+        function checkAgendaAccess() {
+            const isAgendaLogged = sessionStorage.getItem('agenda_logged') === 'true';
+            if (isAgendaLogged) {
+                switchPage('agenda');
+            } else {
+                switchPage('login-agenda');
+            }
+        }
+
+        function handleAgendaLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('login-agenda-user').value.trim();
+            const pass = document.getElementById('login-agenda-pass').value.trim();
+            const errorBox = document.getElementById('login-agenda-error');
+
+            if (user === 'dsf' && pass === 'ad29') {
+                sessionStorage.setItem('agenda_logged', 'true');
+                errorBox.classList.add('hidden');
+                document.getElementById('login-agenda-form').reset();
+                switchPage('agenda');
+            } else {
+                errorBox.classList.remove('hidden');
+                errorBox.innerText = "Usuario o contraseña incorrectos. Inténtalo de nuevo.";
+            }
         }
 
         function checkAdminAccess() {
