@@ -672,7 +672,7 @@
 
         window.rawDocuments = [];
 
-        onSnapshot(collection(db, "documentos"), (snapshot) => {
+       onSnapshot(collection(db, "documentos"), (snapshot) => {
             window.appData.informes = [];
             window.appData.resoluciones = [];
             window.rawDocuments = [];
@@ -694,6 +694,12 @@
                     window.appData[cat].push(item);
                 }
             });
+
+            // 🌟 ORDENAR ALFABÉTICAMENTE POR EL TÍTULO (01, 02, 03...)
+            const sortByTitle = (a, b) => a.title.localeCompare(b.title, 'es', { numeric: true, sensitivity: 'base' });
+            window.appData.informes.sort(sortByTitle);
+            window.appData.resoluciones.sort(sortByTitle);
+            window.rawDocuments.sort(sortByTitle);
 
             renderInformes();
             renderResoluciones();
