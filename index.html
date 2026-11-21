@@ -171,6 +171,34 @@
         }
         footer .text-white { color: var(--ink) !important; }
     </style>
+    <!-- Chart.js + DataLabels -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <!-- Estilos específicos de la vista Estadísticas -->
+    <style id="estadisticas-scoped-styles">
+        #view-estadisticas .card-surface {
+            background: rgba(255, 255, 251, 0.96);
+            border: 1px solid rgba(8, 127, 120, 0.16);
+            box-shadow: 0 14px 38px rgba(23, 63, 59, 0.07);
+        }
+        #view-estadisticas .hero-banner {
+            background:
+                linear-gradient(105deg, rgba(255, 253, 245, 0.90) 0%, rgba(237, 248, 239, 0.82) 55%, rgba(243, 248, 237, 0.72) 100%),
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            border: 1px solid rgba(8, 127, 120, 0.2);
+        }
+        #view-estadisticas .zone-btn.active {
+            background: linear-gradient(135deg, #087f78 0%, #16a49a 100%) !important;
+            color: #ffffff !important;
+            border-color: #087f78 !important;
+            box-shadow: 0 10px 24px rgba(8, 127, 120, 0.28);
+        }
+        #view-estadisticas .zone-btn.active span {
+            color: #ffffff !important;
+        }
+    </style>
+
 </head>
 <body class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 min-h-screen">
 
@@ -193,6 +221,7 @@
                     <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
                     <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
                     <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
+                    <button onclick="switchPage('estadisticas')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="estadisticas">Estadísticas</button>
                     <button onclick="checkAdminAccess()" class="nav-link text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-1" data-target="admin">
                         <i class="fa-solid fa-cloud-arrow-up"></i> <span>Subir Archivo</span>
                     </button>
@@ -211,6 +240,7 @@
             <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
             <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
             <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
+            <button onclick="switchPage('estadisticas'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Estadísticas</button>
             <button onclick="checkAdminAccess(); toggleMobileMenu();" class="block w-full text-left text-amber-400 font-semibold py-2">Subir Archivo</button>
         </div>
     </nav>
@@ -797,6 +827,201 @@
             <div id="resoluciones-list-container" class="grid grid-cols-1 gap-4"></div>
         </div>
 
+
+        <!-- VIEW: ESTADÍSTICAS -->
+        <div id="view-estadisticas" class="page-view hidden space-y-10">
+
+
+        <!-- 2) PRIMERA SECCIÓN DE PRESENTACIÓN -->
+        <header class="hero-banner rounded-3xl p-6 sm:p-10 shadow-xl">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                
+                <!-- Izquierda: Título + 3 Botones de Navegación -->
+                <div class="space-y-6 max-w-2xl">
+                    <div class="space-y-2.5">
+                        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-teal-700/10 border border-teal-700/25 text-teal-800 text-xs font-extrabold uppercase tracking-wider">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Historial Estadístico de Miembros en Plena Comunión</span>
+                        </div>
+                        <h1 class="font-heading font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-none gold-glow">
+                            DISTRITO SUR FRONTERIZO
+                        </h1>
+                    </div>
+
+                    <!-- Tres botones de acceso -->
+                    <div class="flex flex-wrap gap-3 pt-1">
+                        <a href="#seccion-distrito" class="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white font-heading font-extrabold text-sm sm:text-base shadow-lg hover:scale-[1.02] transition-all">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <span>Total Distrito</span>
+                        </a>
+                        <a href="#seccion-zonas" class="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-2xl bg-white hover:bg-teal-50 text-teal-950 border-2 border-teal-700/25 font-heading font-extrabold text-sm sm:text-base shadow-md hover:scale-[1.02] transition-all">
+                            <i class="fa-solid fa-layer-group text-teal-700"></i>
+                            <span>Por Zonas</span>
+                        </a>
+                        <a href="#seccion-iglesias" class="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-2xl bg-white hover:bg-teal-50 text-teal-950 border-2 border-teal-700/25 font-heading font-extrabold text-sm sm:text-base shadow-md hover:scale-[1.02] transition-all">
+                            <i class="fa-solid fa-church text-amber-700"></i>
+                            <span>Iglesias (91)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Derecha: Membresía 2027 / 5,024 / Felicidades Distrito -->
+                <div class="card-surface rounded-3xl px-8 py-7 text-center shrink-0 border-2 border-teal-700/25 shadow-xl bg-white/95">
+                    <span class="block font-heading font-extrabold text-lg sm:text-xl uppercase tracking-wider text-teal-800">
+                        Membresía 2027
+                    </span>
+                    <span class="block font-heading font-black text-6xl sm:text-7xl tracking-tight leading-none my-2 gold-glow">
+                        5,024
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 font-heading font-extrabold text-sm sm:text-base text-amber-800 mt-1">
+                        <i class="fa-solid fa-award text-amber-600"></i>
+                        <span>Felicidades Distrito</span>
+                    </span>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- 3) SECCIÓN: GRÁFICA TOTAL DEL DISTRITO (2022-2027) -->
+        <section id="seccion-distrito" class="card-surface rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-teal-900/10 pb-4">
+                <div>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-amber-700">Historial Estadístico de Miembros en Plena Comunión</span>
+                    <h2 class="font-heading font-black text-2xl sm:text-3xl text-teal-950">Distrito Sur Fronterizo</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">Barras con grandes totales anuales y línea de tendencia indicando crecimiento o descenso año con año.</p>
+                </div>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-100 text-emerald-900 font-bold text-xs sm:text-sm border border-emerald-300">
+                    <i class="fa-solid fa-arrow-trend-up text-emerald-700"></i>
+                    <span>2026 → 2027: +75 miembros (+1.5%)</span>
+                </div>
+            </div>
+
+            <!-- Gráfica Principal Distrito -->
+            <div class="h-80 sm:h-96 w-full">
+                <canvas id="district-chart"></canvas>
+            </div>
+
+            <!-- Tarjetas anuales debajo de la gráfica -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-2" id="district-years-cards"></div>
+        </section>
+
+        <!-- 4) SECCIÓN: MEMBRESÍA POR ZONAS (SIN CUADRO DE BÚSQUEDA AQUÍ) -->
+        <section id="seccion-zonas" class="card-surface rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="space-y-2 border-b border-teal-900/10 pb-4">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-amber-700">Análisis Regional</span>
+                <h2 class="font-heading font-black text-2xl sm:text-3xl text-teal-950">Membresía por Zonas</h2>
+                <p class="text-xs sm:text-sm text-slate-600">Selecciona una zona para ver su gráfica histórica (2022–2027) y las iglesias que la componen.</p>
+            </div>
+
+            <!-- Botones de Acceso Rápido a las 5 Zonas -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="zone-buttons-container">
+                <button type="button" onclick="seleccionarZona(1)" data-zone="1" class="zone-btn active rounded-2xl border-2 border-teal-800/20 bg-white px-4 py-3.5 text-left transition-all cursor-pointer">
+                    <span class="block font-heading font-black text-base sm:text-lg">Zona 1</span>
+                    <span class="block text-xs opacity-85 font-semibold">4 iglesias</span>
+                </button>
+                <button type="button" onclick="seleccionarZona(2)" data-zone="2" class="zone-btn rounded-2xl border-2 border-teal-800/20 bg-white px-4 py-3.5 text-left transition-all cursor-pointer hover:border-teal-600">
+                    <span class="block font-heading font-black text-base sm:text-lg">Zona 2</span>
+                    <span class="block text-xs opacity-85 font-semibold">30 iglesias</span>
+                </button>
+                <button type="button" onclick="seleccionarZona(3)" data-zone="3" class="zone-btn rounded-2xl border-2 border-teal-800/20 bg-white px-4 py-3.5 text-left transition-all cursor-pointer hover:border-teal-600">
+                    <span class="block font-heading font-black text-base sm:text-lg">Zona 3</span>
+                    <span class="block text-xs opacity-85 font-semibold">16 iglesias</span>
+                </button>
+                <button type="button" onclick="seleccionarZona(4)" data-zone="4" class="zone-btn rounded-2xl border-2 border-teal-800/20 bg-white px-4 py-3.5 text-left transition-all cursor-pointer hover:border-teal-600">
+                    <span class="block font-heading font-black text-base sm:text-lg">Zona 4</span>
+                    <span class="block text-xs opacity-85 font-semibold">29 iglesias</span>
+                </button>
+                <button type="button" onclick="seleccionarZona(5)" data-zone="5" class="zone-btn col-span-2 sm:col-span-1 rounded-2xl border-2 border-teal-800/20 bg-white px-4 py-3.5 text-left transition-all cursor-pointer hover:border-teal-600">
+                    <span class="block font-heading font-black text-base sm:text-lg">Zona 5</span>
+                    <span class="block text-xs opacity-85 font-semibold">12 iglesias</span>
+                </button>
+            </div>
+
+            <!-- Panel Activo de la Zona Seleccionada -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
+                <!-- Gráfica de la Zona -->
+                <div class="lg:col-span-7 bg-white rounded-2xl border border-teal-900/15 p-5 shadow-sm space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h3 id="zone-chart-title" class="font-heading font-black text-xl sm:text-2xl text-teal-950">Zona 1 — Totales 2022–2027</h3>
+                            <p id="zone-chart-subtitle" class="text-xs text-slate-500 font-medium">4 congregaciones registradas en esta zona</p>
+                        </div>
+                        <div id="zone-trend-pill" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-rose-100 text-rose-800">
+                            ▼ -17 (-9.4%) vs 2026
+                        </div>
+                    </div>
+                    <div class="h-72 sm:h-80 w-full">
+                        <canvas id="zone-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Lista de Iglesias que componen la Zona -->
+                <div class="lg:col-span-5 bg-white rounded-2xl border border-teal-900/15 p-5 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                        <div>
+                            <h4 id="zone-list-title" class="font-heading font-bold text-base sm:text-lg text-teal-950">Iglesias de la Zona 1 (4)</h4>
+                            <span class="block text-[11px] text-slate-400 font-medium">Variación mostrada respecto al año anterior (2026 → 2027)</span>
+                        </div>
+                        <button type="button" onclick="verIglesiasDeZonaActual()" class="text-xs font-bold text-teal-700 hover:underline shrink-0">
+                            Ver esta zona <i class="fa-solid fa-arrow-down ml-1"></i>
+                        </button>
+                    </div>
+                    <div id="zone-churches-list" class="max-h-80 overflow-y-auto divide-y divide-slate-100 pr-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) SECCIÓN: IGLESIAS LOCALES (CON EL CUADRO DE BÚSQUEDA Y VISTA EXCLUSIVA AL SELECCIONAR) -->
+        <section id="seccion-iglesias" class="space-y-6">
+            <div class="card-surface rounded-3xl p-6 sm:p-8 space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-amber-700">Desglose Individual</span>
+                        <h2 class="font-heading font-black text-2xl sm:text-3xl text-teal-950">Membresía por Iglesia (2022 – 2027)</h2>
+                        <p id="churches-grid-counter" class="text-xs sm:text-sm text-slate-600 font-medium mt-1">Mostrando 91 iglesias • Variación respecto al año anterior (2026 → 2027).</p>
+                    </div>
+                    <button type="button" id="reset-grid-btn" onclick="mostrarTodasLasIglesias()" class="hidden px-4 py-2.5 rounded-xl bg-teal-700 text-white text-xs sm:text-sm font-bold hover:bg-teal-800 transition-colors shadow-sm cursor-pointer">
+                        <i class="fa-solid fa-rotate-left mr-1.5"></i> Ver todas las iglesias (91)
+                    </button>
+                </div>
+
+                <!-- CUADRO DE BÚSQUEDA POR IGLESIA O PASTOR UBICADO AQUÍ EN IGLESIAS LOCALES -->
+                <div class="bg-teal-50/70 rounded-2xl border border-teal-800/15 p-4 sm:p-5 space-y-3 relative">
+                    <label for="local-search-input" class="block text-xs font-extrabold uppercase tracking-wider text-teal-900">
+                        <i class="fa-solid fa-magnifying-glass mr-1.5 text-teal-700"></i> Buscar por Iglesia o Pastor
+                    </label>
+                    <div class="relative">
+                        <input
+                            type="text"
+                            id="local-search-input"
+                            oninput="manejarBuscadorIglesias()"
+                            onkeydown="if(event.key==='Enter'){ event.preventDefault(); seleccionarPrimerResultado(); }"
+                            placeholder="Escribe el nombre de la iglesia (ej. Ignacio Zaragoza, 3a de Tapachula) o del pastor..."
+                            class="w-full rounded-xl border-2 border-teal-800/25 bg-white pl-4 pr-11 py-3.5 text-sm sm:text-base font-semibold text-teal-950 focus:outline-none focus:border-teal-600 shadow-sm"
+                        >
+                        <button
+                            type="button"
+                            id="clear-local-btn"
+                            onclick="mostrarTodasLasIglesias()"
+                            class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-rose-600 text-lg cursor-pointer"
+                            title="Limpiar búsqueda y ver todas"
+                        >
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Lista desplegable de resultados para seleccionar una iglesia o pastor -->
+                    <div id="local-search-results" class="hidden bg-white rounded-xl border border-teal-800/20 shadow-xl divide-y divide-slate-100 max-h-72 overflow-y-auto"></div>
+                </div>
+            </div>
+
+            <!-- Grid de Tarjetas con Gráficas Individuales (cuando se selecciona 1, solo aparece esa sin ninguna otra al lado) -->
+            <div id="churches-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+        </section>
+
+    
+        </div>
+
     </main>
 
     <footer class="bg-slate-950 border-t border-slate-900 py-12 mt-24 text-slate-400 text-sm">
@@ -1312,5 +1537,510 @@
             if(mobileMenu) mobileMenu.classList.add('hidden');
         }
     </script>
+
+    <!-- SCRIPT DE ESTADÍSTICAS DE MEMBRESÍA -->
+    <script>
+
+        Chart.register(ChartDataLabels);
+
+        const years = ['2022', '2023', '2024', '2025', '2026', '2027'];
+        const iglesiasData = [{"iglesia": "1a de Álvaro Obregón", "pastor": "PBRO. BELSAÍN GUZMAN NOLASCO", "zona": 3, "valores": [56, 53, 50, 49, 49, 52]}, {"iglesia": "1a de Ciudad Hidalgo", "pastor": "PBRO. ROBERTO LOPEZ FAJARDO", "zona": 5, "valores": [217, 226, 226, 251, 248, 233]}, {"iglesia": "1a de Huixtla", "pastor": "M. LIC. JOSUÉ IVÁN HERNÁNDEZ HERNÁNDEZ", "zona": 2, "valores": [136, 147, 144, 138, 146, 150]}, {"iglesia": "1a de Puerto Madero", "pastor": "PBRO. JESÚS NOÉ MATÍAS URBINA", "zona": 4, "valores": [78, 88, 98, 99, 97, 60]}, {"iglesia": "1a de Tapachula", "pastor": "PBRO. JORGE BARRIENTOS MÁRQUEZ", "zona": 4, "valores": [109, 96, 83, 85, 97, 117]}, {"iglesia": "20 de Noviembre", "pastor": "M. LIC. CÉSAR OZUNA LÓPEZ", "zona": 5, "valores": [23, 24, 24, 24, 23, 31]}, {"iglesia": "2a de Álvaro Obregón", "pastor": "M.L. JAIRO VIDAL COLOMO", "zona": 3, "valores": [64, 56, 56, 63, 57, 64]}, {"iglesia": "2a de Ciudad Hidalgo", "pastor": "PBRO. ELMER CELAYA ESCOBAR", "zona": 5, "valores": [68, 68, 68, 67, 81, 81]}, {"iglesia": "2a de Huixtla", "pastor": "M. L. OLENA IBARRA BORRALLES", "zona": 2, "valores": [23, 24, 24, 26, 29, 31]}, {"iglesia": "2a de Tapachula", "pastor": "M. LIC. DAVID ZAVALA ESPINOSA", "zona": 4, "valores": [133, 151, 151, 164, 145, 156]}, {"iglesia": "3a de Ciudad Hidalgo", "pastor": "M. LIC. ISAAC ESTEBAN ROMERO MEZA", "zona": 5, "valores": [46, 43, 43, 35, 30, 33]}, {"iglesia": "3a de Huixtla", "pastor": "PBRO. BERZAIN ROJAS LÓPEZ", "zona": 2, "valores": [66, 68, 68, 70, 83, 80]}, {"iglesia": "3a de Motozintla", "pastor": "M. LIC. IVÓN YAZMÍN NAVARRO VENTURA", "zona": 1, "valores": [6, 12, 12, 10, 38, 38]}, {"iglesia": "3a de Tapachula", "pastor": "PBRO. PEDRO SANTOS CHÁVEZ", "zona": 4, "valores": [306, 309, 309, 286, 304, 317]}, {"iglesia": "4a de Tapachula", "pastor": "M. LIC. ITIEL MATEO PÉREZ", "zona": 4, "valores": [68, 76, 76, 81, 72, 79]}, {"iglesia": "5 de Mayo", "pastor": "M. LIC. MIGUEL ROMERO CRUZ", "zona": 5, "valores": [0, 9, 9, 16, 24, 27]}, {"iglesia": "5a de Tapachula", "pastor": "PBRO. ALEXANDER LÓPEZ TORRES", "zona": 4, "valores": [74, 69, 69, 94, 98, 104]}, {"iglesia": "6a de Tapachula", "pastor": "PBRA. ANA VAZQUEZ CRUZ", "zona": 4, "valores": [34, 37, 37, 34, 42, 47]}, {"iglesia": "8a de Tapachula", "pastor": "M. LIC. KEYLA MERARI PEREZ MONTOYA", "zona": 4, "valores": [23, 17, 17, 20, 14, 12]}, {"iglesia": "9a de Tapachula", "pastor": "PBRO. BARTOLO ESCOBAR RIZO", "zona": 4, "valores": [48, 48, 48, 45, 35, 35]}, {"iglesia": "Adonai", "pastor": "M. L. ISSAC GUZMAN MORALES", "zona": 4, "valores": [63, 67, 67, 61, 50, 58]}, {"iglesia": "Adulam", "pastor": "PBRO. NESTOR MARROQUIN MALDONADO", "zona": 2, "valores": [21, 21, 21, 28, 29, 35]}, {"iglesia": "Alfa y Omega", "pastor": "PBRO. ULISES CAMAS MARROQUIN", "zona": 2, "valores": [15, 19, 19, 45, 50, 45]}, {"iglesia": "Arca de Salvación", "pastor": "PBRO. ROBERTO CALEB LÓPEZ ALVARADO", "zona": 3, "valores": [60, 42, 42, 46, 50, 58]}, {"iglesia": "Barra de San José", "pastor": "M. LIC. SERGIO A. GONZÁLEZ MONTERROSA", "zona": 3, "valores": [6, 10, 10, 10, 34, 33]}, {"iglesia": "Barrio Las Flores", "pastor": "PBRO. RUSSELL TAMAYO CASTRO", "zona": 1, "valores": [40, 40, 40, 38, 41, 41]}, {"iglesia": "Betania", "pastor": "PBRO. BELIZARIO LÓPEZ BLAS", "zona": 2, "valores": [23, 26, 26, 26, 27, 27]}, {"iglesia": "Bethel", "pastor": "M.L. MIZAEL CRUZ SOLORZANO", "zona": 2, "valores": [38, 35, 35, 38, 39, 36]}, {"iglesia": "Brisas del Mar", "pastor": "M.LIC. MEDARDO REYES OCHOA", "zona": 5, "valores": [15, 13, 13, 8, 10, 12]}, {"iglesia": "Buenos Aires", "pastor": "PBRO. MARCO TULIO BARRIOS", "zona": 3, "valores": [84, 87, 87, 108, 109, 111]}, {"iglesia": "Cacahoatán", "pastor": "PBRO. EDGAR DANIEL SANTIAGO ENRÍQUEZ", "zona": 4, "valores": [34, 33, 33, 29, 28, 31]}, {"iglesia": "Camino a la Tierra", "pastor": "M. L. JAIME LOPEZ", "zona": 4, "valores": [9, 9, 9, 19, 15, 17]}, {"iglesia": "Camino al Cielo", "pastor": "PBRO. ANA JOCABED VÁZQUEZ VALLES", "zona": 2, "valores": [26, 23, 23, 30, 33, 31]}, {"iglesia": "Camino de Santidad", "pastor": "M.L. RAYMUNDO VÁZQUEZ BERNARDO", "zona": 2, "valores": [15, 15, 15, 15, 15, 15]}, {"iglesia": "Cantón Bodegas", "pastor": "M.L. ERIC SOLIS GÓMEZ", "zona": 5, "valores": [4, 2, 2, 12, 14, 24]}, {"iglesia": "Cantón Las Viudas", "pastor": "M.L. ARTURO ARMENDARIZ PAZ", "zona": 5, "valores": [13, 14, 14, 21, 30, 29]}, {"iglesia": "Chamulapa", "pastor": "M.L. JOSE IGNACIO GARCIA MEJIA", "zona": 3, "valores": [7, 7, 7, 8, 5, 5]}, {"iglesia": "Colonia Hidalgo", "pastor": "PBRO. EVER MACIAS MEJIA", "zona": 4, "valores": [65, 63, 63, 75, 84, 86]}, {"iglesia": "Colonia Obrera", "pastor": "PBRO. FÉLIX AMÉZTICA MADRID", "zona": 2, "valores": [49, 54, 54, 54, 62, 71]}, {"iglesia": "Congregación Reforma", "pastor": "PBRO. JUDITH PATRICIA JIMÉNEZ SÁNCHEZ", "zona": 4, "valores": [43, 43, 43, 50, 48, 49]}, {"iglesia": "Cristo la Roca", "pastor": "M. LIC. ABEL BARRIOS RUIZ", "zona": 4, "valores": [3, 23, 23, 26, 18, 14]}, {"iglesia": "Ebenezer", "pastor": "M.L. GABRIELA HERNANDEZ PEREZ", "zona": 3, "valores": [38, 35, 35, 38, 42, 35]}, {"iglesia": "El Ángel de Jehová", "pastor": "Sin pastor asignado", "zona": 4, "valores": [0, 0, 0, 0, 5, 0]}, {"iglesia": "El Arenal", "pastor": "PBRO. GUILLERMO SALDAÑA MORENO", "zona": 2, "valores": [76, 73, 73, 78, 85, 87]}, {"iglesia": "El Campito", "pastor": "PBRO. ANTONIO RAMIREZ LÓPEZ", "zona": 5, "valores": [50, 61, 61, 59, 61, 59]}, {"iglesia": "El Capulín", "pastor": "PBRO. FREDY DE LEÓN JUÁREZ", "zona": 2, "valores": [57, 55, 55, 62, 62, 65]}, {"iglesia": "Emmanuel", "pastor": "PBRO. FABRICIO VÁZQUEZ ARIAS", "zona": 4, "valores": [96, 94, 94, 106, 110, 115]}, {"iglesia": "Filadelfia", "pastor": "M.L. LUCAS VÁZQUEZ CORTES", "zona": 2, "valores": [38, 39, 39, 39, 39, 39]}, {"iglesia": "Frontera Hidalgo", "pastor": "M. LIC. MARTHA EDITH RODRIGUEZ ZAVALA", "zona": 5, "valores": [2, 14, 14, 17, 15, 15]}, {"iglesia": "Getsemani", "pastor": "M. LIC. CARLOS OCEGUERA GONZÁLEZ", "zona": 2, "valores": [4, 6, 6, 15, 20, 22]}, {"iglesia": "Guachipilín", "pastor": "PBRO. NATANAEL DE LEÓN CIGARROA", "zona": 3, "valores": [39, 41, 41, 50, 51, 53]}, {"iglesia": "Huanacastle", "pastor": "PBRO. AGUSTÍN QUIROGA ÁVILA", "zona": 2, "valores": [56, 56, 56, 63, 57, 56]}, {"iglesia": "Huehuetán Estación", "pastor": "PBRO. BERNARDO ELIEZER GONZÁLEZ GONZÁLEZ", "zona": 3, "valores": [156, 147, 147, 133, 149, 162]}, {"iglesia": "Ignacio Zaragoza", "pastor": "PBRO. MARCO ANTONIO HERRERA CONSTANTINO", "zona": 5, "valores": [15, 17, 17, 18, 18, 25]}, {"iglesia": "Islamapita", "pastor": "M. LIC. BERSABET JIMÉNEZ PÉREZ", "zona": 2, "valores": [49, 49, 49, 42, 37, 40]}, {"iglesia": "Jesús el Salvador", "pastor": "M. L. DAVID PAZ", "zona": 2, "valores": [0, 3, 3, 31, 23, 20]}, {"iglesia": "Jesús es el Camino", "pastor": "Sin pastor asignado", "zona": 4, "valores": [13, 19, 19, 9, 9, 0]}, {"iglesia": "Kairos", "pastor": "PBRO. JOSÉ ALFREDO SOLÌS SANTOS", "zona": 5, "valores": [8, 11, 11, 19, 23, 17]}, {"iglesia": "Kedusha", "pastor": "PBRO. RUBBER PÉREZ GUERRERO", "zona": 3, "valores": [0, 25, 25, 25, 29, 24]}, {"iglesia": "La Fe", "pastor": "M. LIC. JONATHAN AGUILAR BARTOLON", "zona": 4, "valores": [17, 19, 19, 29, 30, 35]}, {"iglesia": "La Gloria de Dios", "pastor": "PBRO JULIO CESAR LEY", "zona": 4, "valores": [12, 21, 21, 86, 96, 84]}, {"iglesia": "Lázaro Cárdenas", "pastor": "PBRO. TEODOMIRO AGUILAR OCHOA", "zona": 2, "valores": [87, 94, 94, 83, 95, 95]}, {"iglesia": "Llano la Lima", "pastor": "M. LIC. INMER FLORES MACÍAS", "zona": 4, "valores": [28, 33, 33, 26, 30, 30]}, {"iglesia": "Lluvias de Gracia", "pastor": "M.L. PEDRO ROBERTO ROBLEDO LÓPEZ", "zona": 4, "valores": [10, 16, 16, 20, 12, 11]}, {"iglesia": "Mahanaìn", "pastor": "PBRO. PABLO ZUNÚN LÓPEZ", "zona": 2, "valores": [4, 23, 23, 14, 42, 44]}, {"iglesia": "Maranatha", "pastor": "M. LIC. REBECA MORALES ROBLERO", "zona": 2, "valores": [0, 3, 3, 33, 31, 31]}, {"iglesia": "Marte R. Gómez", "pastor": "M.L. VICTOR MANUEL SANTIS VIDAL", "zona": 3, "valores": [11, 12, 12, 13, 15, 15]}, {"iglesia": "Mazatán", "pastor": "PBRO. MIGUEL GÓMEZ REYES", "zona": 3, "valores": [13, 22, 22, 24, 26, 32]}, {"iglesia": "Monte de los Olivos", "pastor": "PBRO. NILTON ORFEO GERARDO MORGA", "zona": 4, "valores": [82, 89, 89, 105, 116, 122]}, {"iglesia": "Monte de Santidad", "pastor": "M. LIC. NEHEMÍAS HERNÁNDEZ GUZMÁN", "zona": 2, "valores": [11, 11, 11, 29, 28, 28]}, {"iglesia": "Monte Horeb", "pastor": "PBRO. ROBERTO NAJERA ALVAREZ", "zona": 2, "valores": [0, 1, 1, 44, 46, 45]}, {"iglesia": "Monte Sinaí", "pastor": "M. LIC. IVETE SAYURI MÉNDEZ TORRES", "zona": 2, "valores": [54, 43, 43, 67, 60, 60]}, {"iglesia": "Motozintla Central", "pastor": "M. LIC. JONATAN AGUILAR CORONEL", "zona": 1, "valores": [76, 80, 80, 77, 74, 54]}, {"iglesia": "Nancillal", "pastor": "PBRO. AMAURI GUZMÁN NOLASCO", "zona": 2, "valores": [34, 30, 30, 39, 44, 45]}, {"iglesia": "Nuevo Nacimiento", "pastor": "PBRO. RAQUEL BAUTISTA CHONGO", "zona": 2, "valores": [6, 7, 7, 20, 25, 26]}, {"iglesia": "Peniel", "pastor": "PBRO. NARCISO GONZÁLEZ GARCÍA", "zona": 3, "valores": [63, 65, 65, 92, 98, 112]}, {"iglesia": "Plan de Iguala", "pastor": "M.L. OSCAR FERNANDO VICENTE GONZÁLEZ", "zona": 3, "valores": [49, 46, 46, 30, 30, 30]}, {"iglesia": "Playa Grande", "pastor": "PBRO. BELSAY LÓPEZ LÓPEZ", "zona": 2, "valores": [37, 39, 39, 38, 35, 36]}, {"iglesia": "Puerta del Cielo", "pastor": "M. LIC. JESÚS ALBERTO GUILLÉN PEÑA", "zona": 4, "valores": [5, 32, 32, 34, 46, 44]}, {"iglesia": "Rancho Nuevo", "pastor": "PBRO. SALOMÓN ANTONIO MARCOS", "zona": 2, "valores": [110, 108, 108, 124, 124, 129]}, {"iglesia": "Rivera Morelos", "pastor": "M. L. ADONAI ARAIM ROBLERO MEJIA", "zona": 1, "valores": [21, 21, 21, 31, 28, 31]}, {"iglesia": "Santa Clara", "pastor": "PBRO. ADAIA V. ARGUETA GUILLEN", "zona": 3, "valores": [25, 28, 28, 38, 38, 38]}, {"iglesia": "Shadai", "pastor": "PBRO. RODOLFO LÓPEZ LÓPEZ", "zona": 4, "valores": [91, 91, 91, 93, 90, 87]}, {"iglesia": "Shalom", "pastor": "M. LIC. CINDY LIZBETH LÓPEZ MIGUEL", "zona": 4, "valores": [5, 4, 4, 3, 3, 10]}, {"iglesia": "Shekiná", "pastor": "M.L. JONATHAN FRANCO SANTIZO", "zona": 3, "valores": [1, 1, 1, 44, 52, 49]}, {"iglesia": "Torre Fuerte", "pastor": "M.L. FRANKLIN MORALES ANTONIO", "zona": 2, "valores": [0, 0, 0, 0, 4, 8]}, {"iglesia": "Tuxtla Chico", "pastor": "PBRO. KARIN LORENA BARRIOS", "zona": 4, "valores": [36, 38, 38, 38, 44, 27]}, {"iglesia": "Tuzantán Estación", "pastor": "PBRO. MIGUEL ANGEL VÁZQUEZ CHALECO", "zona": 2, "valores": [83, 83, 83, 93, 94, 95]}, {"iglesia": "Tuzantán Pueblo", "pastor": "M. LIC. CIELO VÁZQUEZ HERRERA", "zona": 2, "valores": [36, 37, 37, 36, 46, 50]}, {"iglesia": "Vida Nueva", "pastor": "PBRO. MARCO ANTONIO VERA POSADA", "zona": 4, "valores": [8, 12, 12, 65, 70, 73]}, {"iglesia": "Viva México", "pastor": "PBRO. JOSUE MENDEZ ROQUE", "zona": 4, "valores": [18, 21, 21, 30, 39, 39]}];
+
+        let districtChartInstance = null;
+        let zoneChartInstance = null;
+        let currentZone = 1;
+        let churchChartsMap = {};
+
+        function normalizarTexto(txt) {
+            return (txt || "")
+                .toString()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/(\d+)[ª°]/g, "$1a")
+                .trim();
+        }
+
+        function calcularTotales(lista) {
+            return years.map((_, idx) => lista.reduce((sum, item) => sum + (item.valores[idx] || 0), 0));
+        }
+
+        // Variación respecto al año anterior (2026 vs 2027)
+        function formatearVariacionAnual(anterior, actual) {
+            const diff = actual - anterior;
+            const pct = anterior > 0 ? ((diff / anterior) * 100).toFixed(1) : (actual > 0 ? "100.0" : "0.0");
+            const signo = diff > 0 ? "+" : "";
+            return {
+                diff,
+                soloNumero: `${signo}${diff.toLocaleString('es-MX')}`,
+                texto: `${signo}${diff.toLocaleString('es-MX')} (${signo}${pct}%)`,
+                subio: diff >= 0
+            };
+        }
+
+        // 1. RENDERIZAR GRÁFICA TOTAL DEL DISTRITO
+        function renderDistrictChart() {
+            const totales = calcularTotales(iglesiasData);
+
+            const cardsContainer = document.getElementById('district-years-cards');
+            cardsContainer.innerHTML = years.map((yr, i) => {
+                const val = totales[i];
+                let badgeHtml = `<span class="text-[11px] font-semibold text-slate-400">Año base</span>`;
+                if (i > 0) {
+                    const prev = totales[i - 1];
+                    const d = val - prev;
+                    if (d > 0) {
+                        badgeHtml = `<span class="text-[11px] font-extrabold text-emerald-700"><i class="fa-solid fa-caret-up"></i> +${d.toLocaleString('es-MX')}</span>`;
+                    } else if (d < 0) {
+                        badgeHtml = `<span class="text-[11px] font-extrabold text-rose-600"><i class="fa-solid fa-caret-down"></i> ${d.toLocaleString('es-MX')}</span>`;
+                    } else {
+                        badgeHtml = `<span class="text-[11px] font-bold text-slate-500">Sin cambio (0)</span>`;
+                    }
+                }
+                return `
+                    <div class="rounded-2xl bg-white border border-teal-900/15 p-3.5 text-center shadow-sm">
+                        <span class="block text-xs font-extrabold text-teal-800">${yr}</span>
+                        <span class="block font-heading font-black text-xl sm:text-2xl text-teal-950 my-0.5">${val.toLocaleString('es-MX')}</span>
+                        ${badgeHtml}
+                    </div>
+                `;
+            }).join('');
+
+            const ctx = document.getElementById('district-chart').getContext('2d');
+            if (districtChartInstance) districtChartInstance.destroy();
+
+            districtChartInstance = new Chart(ctx, {
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Línea de Tendencia (Crecimiento / Descenso)',
+                            data: totales,
+                            borderColor: '#d97706',
+                            backgroundColor: '#d97706',
+                            borderWidth: 3.5,
+                            tension: 0.25,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: totales.map((v, i) => i === 0 ? '#087f78' : (v >= totales[i - 1] ? '#059669' : '#e11d48')),
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            datalabels: {
+                                align: 'top',
+                                offset: 6,
+                                color: '#173f3b',
+                                font: { weight: 'bold', size: 12 },
+                                formatter: (val) => val.toLocaleString('es-MX')
+                            }
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Membresía Total Distrital',
+                            data: totales,
+                            backgroundColor: 'rgba(8, 127, 120, 0.22)',
+                            borderColor: '#087f78',
+                            borderWidth: 2,
+                            borderRadius: 10,
+                            barPercentage: 0.55,
+                            datalabels: { display: false }
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { top: 28 } },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Inter', weight: 'bold', size: 12 }, color: '#173f3b' }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const idx = context.dataIndex;
+                                    if (idx === 0) return 'Año inicial de referencia';
+                                    const diff = totales[idx] - totales[idx - 1];
+                                    return diff >= 0
+                                        ? `Crecimiento vs ${years[idx - 1]}: +${diff} miembros`
+                                        : `Descenso vs ${years[idx - 1]}: ${diff} miembros`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMin: Math.min(...totales) - 300,
+                            suggestedMax: Math.max(...totales) + 350,
+                            grid: { color: 'rgba(8, 127, 120, 0.08)' },
+                            ticks: { font: { weight: '600' }, color: '#496762' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { weight: 'bold', size: 13 }, color: '#173f3b' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. SELECCIONAR Y RENDERIZAR ZONA
+        function seleccionarZona(zonaNum) {
+            currentZone = Number(zonaNum);
+
+            document.querySelectorAll('.zone-btn').forEach(btn => {
+                if (Number(btn.dataset.zone) === currentZone) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const iglesiasZona = iglesiasData.filter(i => i.zona === currentZone);
+            const totalesZona = calcularTotales(iglesiasZona);
+            const variacionAnual = formatearVariacionAnual(totalesZona[4], totalesZona[5]);
+
+            document.getElementById('zone-chart-title').innerText = `Zona ${currentZone} — Totales 2022–2027`;
+            document.getElementById('zone-chart-subtitle').innerText = `${iglesiasZona.length} iglesias pertenecen a esta zona`;
+            document.getElementById('zone-list-title').innerText = `Iglesias de la Zona ${currentZone} (${iglesiasZona.length})`;
+
+            const pill = document.getElementById('zone-trend-pill');
+            pill.innerText = `${variacionAnual.subio ? '▲' : '▼'} ${variacionAnual.texto} vs 2026`;
+            pill.className = variacionAnual.subio
+                ? 'px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200'
+                : 'px-3 py-1.5 rounded-xl text-xs font-extrabold bg-rose-100 text-rose-800 border border-rose-200';
+
+            const listEl = document.getElementById('zone-churches-list');
+            listEl.innerHTML = iglesiasZona.map(ig => {
+                const v = formatearVariacionAnual(ig.valores[4], ig.valores[5]);
+                return `
+                    <div class="py-2.5 flex items-center justify-between gap-2 hover:bg-teal-50/60 px-2 rounded-lg transition-colors">
+                        <div class="min-w-0">
+                            <button type="button" onclick="mostrarSoloUnaIglesia('${ig.iglesia.replace(/'/g, "\\'")}')" class="text-left font-bold text-sm text-teal-950 hover:text-teal-600 truncate block cursor-pointer">
+                                ${ig.iglesia}
+                            </button>
+                            <span class="block text-[11px] text-slate-500 truncate">${ig.pastor}</span>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <span class="block font-heading font-extrabold text-sm text-teal-900">${ig.valores[5]} <span class="text-[10px] font-normal text-slate-400">(2027)</span></span>
+                            <span class="block text-xs font-extrabold ${v.subio ? 'text-emerald-700' : 'text-rose-600'}">${v.soloNumero}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const ctx = document.getElementById('zone-chart').getContext('2d');
+            if (zoneChartInstance) zoneChartInstance.destroy();
+
+            zoneChartInstance = new Chart(ctx, {
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Tendencia Zona ' + currentZone,
+                            data: totalesZona,
+                            borderColor: '#e98068',
+                            backgroundColor: '#e98068',
+                            borderWidth: 3,
+                            tension: 0.25,
+                            pointRadius: 5,
+                            pointBackgroundColor: totalesZona.map((v, i) => i === 0 ? '#087f78' : (v >= totalesZona[i - 1] ? '#059669' : '#e11d48')),
+                            datalabels: {
+                                align: 'top',
+                                offset: 4,
+                                color: '#173f3b',
+                                font: { weight: 'bold', size: 11 },
+                                formatter: (val) => val.toLocaleString('es-MX')
+                            }
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Miembros Zona ' + currentZone,
+                            data: totalesZona,
+                            backgroundColor: 'rgba(37, 185, 174, 0.28)',
+                            borderColor: '#087f78',
+                            borderWidth: 1.5,
+                            borderRadius: 8,
+                            barPercentage: 0.55,
+                            datalabels: { display: false }
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { top: 24 } },
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMin: Math.max(0, Math.min(...totalesZona) - 40),
+                            suggestedMax: Math.max(...totalesZona) + 50,
+                            grid: { color: 'rgba(8, 127, 120, 0.08)' },
+                            ticks: { font: { size: 11 }, color: '#496762' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { weight: 'bold', size: 12 }, color: '#173f3b' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 3. BUSCADOR EN LA ÚLTIMA SECCIÓN DE IGLESIAS LOCALES
+        function manejarBuscadorIglesias() {
+            const input = document.getElementById('local-search-input');
+            const clearBtn = document.getElementById('clear-local-btn');
+            const resultsBox = document.getElementById('local-search-results');
+            const raw = input.value;
+
+            if (raw.trim().length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                resultsBox.classList.add('hidden');
+                resultsBox.innerHTML = '';
+                mostrarTodasLasIglesias();
+                return;
+            }
+
+            const query = normalizarTexto(raw);
+            const palabras = query.split(/\s+/).filter(Boolean);
+            const coincidencias = iglesiasData.filter(item => {
+                const combinado = `${normalizarTexto(item.iglesia)} ${normalizarTexto(item.pastor)}`;
+                return palabras.every(p => combinado.includes(p));
+            });
+
+            resultsBox.classList.remove('hidden');
+
+            if (coincidencias.length === 0) {
+                resultsBox.innerHTML = `
+                    <div class="p-4 text-xs sm:text-sm text-slate-500 text-center">
+                        No se encontró ninguna iglesia o pastor con "${raw.trim()}"
+                    </div>
+                `;
+                return;
+            }
+
+            resultsBox.innerHTML = coincidencias.map(ig => {
+                const v = formatearVariacionAnual(ig.valores[4], ig.valores[5]);
+                return `
+                    <button
+                        type="button"
+                        onclick="mostrarSoloUnaIglesia('${ig.iglesia.replace(/'/g, "\\'")}')"
+                        class="w-full text-left px-4 py-3 hover:bg-teal-50 transition-colors flex items-center justify-between gap-3 cursor-pointer"
+                    >
+                        <div class="min-w-0">
+                            <span class="font-heading font-bold text-sm text-teal-950 block truncate">${ig.iglesia}</span>
+                            <span class="text-xs text-slate-500 block truncate">${ig.pastor} • Zona ${ig.zona}</span>
+                        </div>
+                        <div class="text-right shrink-0 flex items-center gap-3">
+                            <div>
+                                <span class="block font-heading font-extrabold text-sm text-teal-900">${ig.valores[5]} (2027)</span>
+                                <span class="block text-xs font-extrabold ${v.subio ? 'text-emerald-700' : 'text-rose-600'}">${v.soloNumero}</span>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg bg-teal-700 text-white text-[11px] font-bold">
+                                Seleccionar <i class="fa-solid fa-check ml-1"></i>
+                            </span>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function seleccionarPrimerResultado() {
+            const raw = document.getElementById('local-search-input').value;
+            const query = normalizarTexto(raw);
+            if (!query) return;
+            const palabras = query.split(/\s+/).filter(Boolean);
+            const primera = iglesiasData.find(item => {
+                const combinado = `${normalizarTexto(item.iglesia)} ${normalizarTexto(item.pastor)}`;
+                return palabras.every(p => combinado.includes(p));
+            });
+            if (primera) {
+                mostrarSoloUnaIglesia(primera.iglesia);
+            }
+        }
+
+        // MUESTRA ÚNICAMENTE LA GRÁFICA DE LA IGLESIA/PASTOR SELECCIONADO SIN NINGUNA OTRA AL LADO
+        function mostrarSoloUnaIglesia(nombreIglesia) {
+            const ig = iglesiasData.find(i => i.iglesia === nombreIglesia);
+            if (!ig) return;
+
+            const input = document.getElementById('local-search-input');
+            const clearBtn = document.getElementById('clear-local-btn');
+            const resultsBox = document.getElementById('local-search-results');
+
+            input.value = `${ig.iglesia} — ${ig.pastor}`;
+            clearBtn.classList.remove('hidden');
+            resultsBox.classList.add('hidden');
+
+            renderChurchesGrid(
+                [ig],
+                `Mostrando únicamente: ${ig.iglesia} (Zona ${ig.zona}) • Variación respecto a 2026.`,
+                true,
+                true // modo exclusivo de 1 sola tarjeta centrada
+            );
+
+            document.getElementById('seccion-iglesias').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function verIglesiasDeZonaActual() {
+            const filtradas = iglesiasData.filter(i => i.zona === currentZone);
+            document.getElementById('local-search-input').value = '';
+            document.getElementById('clear-local-btn').classList.add('hidden');
+            document.getElementById('local-search-results').classList.add('hidden');
+
+            renderChurchesGrid(
+                filtradas,
+                `Mostrando ${filtradas.length} iglesias de la Zona ${currentZone} • Variación respecto al año anterior (2026 → 2027).`,
+                true,
+                false
+            );
+            document.getElementById('seccion-iglesias').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function mostrarTodasLasIglesias() {
+            document.getElementById('local-search-input').value = '';
+            document.getElementById('clear-local-btn').classList.add('hidden');
+            document.getElementById('local-search-results').classList.add('hidden');
+
+            renderChurchesGrid(
+                iglesiasData,
+                `Mostrando 91 iglesias • Variación respecto al año anterior (2026 → 2027).`,
+                false,
+                false
+            );
+        }
+
+        // 4. RENDERIZAR TARJETAS INDIVIDUALES DE IGLESIAS
+        function renderChurchesGrid(listaFiltrada, textoContador = null, mostrarBotonReset = false, modoUnica = false) {
+            const grid = document.getElementById('churches-grid');
+            const counter = document.getElementById('churches-grid-counter');
+            const resetBtn = document.getElementById('reset-grid-btn');
+
+            Object.values(churchChartsMap).forEach(ch => ch.destroy());
+            churchChartsMap = {};
+
+            counter.innerText = textoContador || `Mostrando ${listaFiltrada.length} iglesia(s) • Variación respecto al año anterior (2026 → 2027).`;
+            if (mostrarBotonReset) {
+                resetBtn.classList.remove('hidden');
+            } else {
+                resetBtn.classList.add('hidden');
+            }
+
+            // Si es modoUnica (solo 1 iglesia seleccionada), quitamos las columnas múltiples para que se vea sola y centrada sin ninguna otra al lado
+            if (modoUnica && listaFiltrada.length === 1) {
+                grid.className = "max-w-3xl mx-auto w-full";
+            } else {
+                grid.className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6";
+            }
+
+            grid.innerHTML = listaFiltrada.map((ig, index) => {
+                const v = formatearVariacionAnual(ig.valores[4], ig.valores[5]);
+                const canvasId = `church-canvas-${index}`;
+                const badgeClass = v.subio
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                    : 'bg-rose-100 text-rose-800 border-rose-200';
+                const chartHeightClass = modoUnica ? 'h-64 sm:h-72' : 'h-44';
+
+                return `
+                    <article class="card-surface rounded-3xl ${modoUnica ? 'p-6 sm:p-8 border-2 border-teal-700/30 shadow-xl' : 'p-5'} flex flex-col justify-between space-y-4 hover:border-teal-600/40 transition-all">
+                        <div class="space-y-1.5">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase bg-teal-700/10 text-teal-800">
+                                    Zona ${ig.zona}
+                                </span>
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold border ${badgeClass}" title="Variación respecto a 2026">
+                                    ${v.subio ? '▲' : '▼'} ${v.texto} vs 2026
+                                </span>
+                            </div>
+                            <h3 class="font-heading font-black ${modoUnica ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'} text-teal-950 leading-snug pt-1">
+                                ${ig.iglesia}
+                            </h3>
+                            <p class="${modoUnica ? 'text-sm' : 'text-xs'} font-medium text-slate-600">
+                                <i class="fa-solid fa-user-tie text-teal-700 mr-1.5"></i> ${ig.pastor}
+                            </p>
+                        </div>
+
+                        <div class="${chartHeightClass} w-full bg-white rounded-2xl border border-slate-100 p-3">
+                            <canvas id="${canvasId}"></canvas>
+                        </div>
+
+                        <div class="grid grid-cols-6 gap-1.5 text-center pt-1 border-t border-slate-100">
+                            ${years.map((yr, i) => `
+                                <div class="rounded-xl bg-slate-50 py-1.5">
+                                    <span class="block text-[11px] font-bold text-slate-400">${yr}</span>
+                                    <span class="block ${modoUnica ? 'text-base' : 'text-xs'} font-extrabold text-teal-950">${ig.valores[i]}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            listaFiltrada.forEach((ig, index) => {
+                const canvasEl = document.getElementById(`church-canvas-${index}`);
+                if (!canvasEl) return;
+                const v = formatearVariacionAnual(ig.valores[4], ig.valores[5]);
+                const lineColor = v.subio ? '#087f78' : '#e11d48';
+                const fillColor = v.subio ? 'rgba(8, 127, 120, 0.14)' : 'rgba(225, 29, 72, 0.12)';
+
+                churchChartsMap[index] = new Chart(canvasEl.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [{
+                            data: ig.valores,
+                            borderColor: lineColor,
+                            backgroundColor: fillColor,
+                            fill: true,
+                            borderWidth: modoUnica ? 3 : 2.5,
+                            tension: 0.25,
+                            pointRadius: modoUnica ? 5.5 : 4,
+                            pointBackgroundColor: ig.valores.map((val, i) => i === 0 ? '#087f78' : (val >= ig.valores[i - 1] ? '#059669' : '#e11d48')),
+                            datalabels: {
+                                align: 'top',
+                                offset: 3,
+                                color: '#173f3b',
+                                font: { weight: 'bold', size: modoUnica ? 12 : 10 },
+                                formatter: (val) => val
+                            }
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { top: 22, right: 12, left: 12 } },
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                suggestedMax: Math.max(...ig.valores, 10) * 1.22,
+                                grid: { color: 'rgba(0,0,0,0.04)' },
+                                ticks: { display: modoUnica, font: { size: 11 }, color: '#496762' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: modoUnica ? 12 : 10, weight: 'bold' }, color: '#496762' }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDistrictChart();
+            seleccionarZona(1);
+            renderChurchesGrid(iglesiasData);
+        });
+    
+    </script>
+
 </body>
 </html>
