@@ -221,7 +221,7 @@
                     <button onclick="switchPage('informes')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="informes">Informes</button>
                     <button onclick="switchPage('calendario')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="calendario">Calendario</button>
                     <button onclick="switchPage('resoluciones')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="resoluciones">Resoluciones</button>
-                    <button onclick="switchPage('estadisticas')" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="estadisticas">Estadísticas</button>
+                    <button onclick="checkEstadisticasAccess()" class="nav-link text-slate-300 hover:text-amber-300 transition-colors" data-target="estadisticas">Estadísticas</button>
                     <button onclick="checkAdminAccess()" class="nav-link text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-1" data-target="admin">
                         <i class="fa-solid fa-cloud-arrow-up"></i> <span>Subir Archivo</span>
                     </button>
@@ -240,7 +240,7 @@
             <button onclick="switchPage('informes'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Informes</button>
             <button onclick="switchPage('calendario'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Calendario</button>
             <button onclick="switchPage('resoluciones'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Resoluciones</button>
-            <button onclick="switchPage('estadisticas'); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Estadísticas</button>
+            <button onclick="checkEstadisticasAccess(); toggleMobileMenu();" class="block w-full text-left text-slate-300 hover:text-amber-300 py-2">Estadísticas</button>
             <button onclick="checkAdminAccess(); toggleMobileMenu();" class="block w-full text-left text-amber-400 font-semibold py-2">Subir Archivo</button>
         </div>
     </nav>
@@ -450,6 +450,35 @@
                     </button>
                 </form>
                 <div id="login-agenda-error" class="hidden text-center text-xs p-3 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30"></div>
+            </div>
+        </div>
+
+        <!-- VIEW: LOGIN ESTADÍSTICAS -->
+        <div id="view-login-estadisticas" class="page-view hidden space-y-8 max-w-md mx-auto">
+            <div class="text-center space-y-2">
+                <span class="text-teal-700 font-semibold text-xs tracking-widest uppercase">Seguridad Restringida</span>
+                <h2 class="font-heading font-extrabold text-3xl text-white">Acceso a Estadísticas</h2>
+                <p class="text-slate-400 text-sm">Ingresa tus credenciales para consultar el historial estadístico de membresía del distrito.</p>
+            </div>
+
+            <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-6">
+                <form id="login-estadisticas-form" onsubmit="handleEstadisticasLogin(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Usuario</label>
+                        <input type="text" id="login-estadisticas-user" required placeholder="Usuario" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-600 transition-colors">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Contraseña</label>
+                        <input type="password" id="login-estadisticas-pass" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-600 transition-colors">
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Ingresar a Estadísticas</span>
+                    </button>
+                </form>
+                <div id="login-estadisticas-error" class="hidden text-center text-xs p-3 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30"></div>
             </div>
         </div>
 
@@ -1394,6 +1423,32 @@
                 errorBox.classList.add('hidden');
                 document.getElementById('login-agenda-form').reset();
                 switchPage('agenda');
+            } else {
+                errorBox.classList.remove('hidden');
+                errorBox.innerText = "Usuario o contraseña incorrectos. Inténtalo de nuevo.";
+            }
+        }
+
+        function checkEstadisticasAccess() {
+            const isEstadisticasLogged = sessionStorage.getItem('estadisticas_logged') === 'true';
+            if (isEstadisticasLogged) {
+                switchPage('estadisticas');
+            } else {
+                switchPage('login-estadisticas');
+            }
+        }
+
+        function handleEstadisticasLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('login-estadisticas-user').value.trim();
+            const pass = document.getElementById('login-estadisticas-pass').value.trim();
+            const errorBox = document.getElementById('login-estadisticas-error');
+
+            if (user === 'super' && pass === '2720') {
+                sessionStorage.setItem('estadisticas_logged', 'true');
+                errorBox.classList.add('hidden');
+                document.getElementById('login-estadisticas-form').reset();
+                switchPage('estadisticas');
             } else {
                 errorBox.classList.remove('hidden');
                 errorBox.innerText = "Usuario o contraseña incorrectos. Inténtalo de nuevo.";
